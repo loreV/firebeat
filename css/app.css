@@ -1,0 +1,58 @@
+section[role="region"] > header:first-child h1 {
+    font-family: "FiraSans";
+}
+
+section[role="region"].page {
+    position: absolute;
+    /*transition: all 2s ease 0s;*/
+}
+
+body {
+    position: relative;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    /*opacity:;*/
+    position: absolute;
+    z-index: 5;
+    /*display:none;*/
+}
+
+#menu {
+    z-index: 10;
+}
+
+.visible-page {
+    left: 0px;
+    top: 0px;
+    display: inline;
+    z-index: 1000;
+}
+
+.right {
+    transform: translateX(100%);
+}
+
+.to-left {
+    animation: currentToLeft 0.4s forwards;
+}
+
+.from-right {
+    animation: rightToCurrent 0.4s forwards;
+}
+
+.from-left {
+    animation: leftToCurrent 0.4s forwards;
+}
+
+.to-right {
+    animation: currentToRight 0.4s forwards;
+}
+
+
+
+
