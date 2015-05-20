@@ -48,34 +48,106 @@ F = {
             } else {
                 throw new Error("Screen does not exist");
             }
+        },
+        changeOrientation: function(){
+            try{
+                if (window.screen.mozLockOrientation('landscape')) {
+                    // orientation was locked
+                    screen.lockOrientation('portrait');
+                } else {
+                    screen.lockOrientation('landscape');
+                }
+            } catch (e){
+                console.warn("No firefox OS")
+            }
         }
+
+
+
+
     },
 
     editor: {
+
+        look:{
+            x:0,
+            y:0
+        },
+
         c: {},
         co: {},
         grid: {},
 
+
+
         init: function () {
-            F.editor.c = document.getElementById("editor-main");
-            F.editor.c.width = window.innerWidth;
-            F.editor.c.height = window.innerHeight;
-            F.editor.co = F.editor.c.getContext("2d");
+
+            // TODO -> turn the screen & lock it
+            this.c = document.getElementById("editor-main");
+            this.c.width = window.innerWidth;
+            this.c.height = window.innerHeight;
+            this.co = F.editor.c.getContext("2d");
+
+            //F.ui.changeOrientation();
+
+            console.log(screen.orientation);
             F.editor.newGrid();
+
+            //screen.addEventListener("orientationchange",
+            //    function(){
+            //      },
+            //    false);
+
         },
 
         newGrid: function () {
-            var nrRows = 3;
+            var x =window.innerWidth;
+            var y =window.innerHeight;
+
+            var row_min_height = 60;
+            var min_row_number = 4;
+            // assume the height is at least 320px;
+
+            // first count how many rows can fit in the screen
+            var sizeOfScreen = y - (row_min_height*min_row_number) ;
+            var actualNrRows = min_row_number;
+                while(sizeOfScreen >= row_min_height){
+                sizeOfScreen -= row_min_height;
+                actualNrRows ++;
+            }
+
+
+            var row_height = y /actualNrRows;
+
+            // then count how many columns we are going to have;
+            var min_num_columns = 12;
+            var column_size = x / 12;
+
+
             // rows should be high enough to fill up the space
             //if(window.innerHeight > 320) nrRows = window.innerHeight  ;
 
+            var color1 = "#fff3e0";
+            var color2= "#f9fbe7";
+
             var diffBackground = true;
-            for (var i = 0; i < nrRows; i++) {
-                F.editor.co.fillStyle = diffBackground ? "#ffd8c9" : "#FFFFFF";
-                F.editor.co.fillRect(0, 0 + (i * 106), F.editor.c.width, 106);
+            var diffBackground2 = true;
+            for (var i = 0; i < actualNrRows; i++) {
+                F.editor.co.fillStyle = diffBackground ? color1 : color2;
+                F.editor.co.fillRect(0, (i * row_height), x , row_height);
+
+                for(var z = 0 ; z < min_num_columns; z++){
+                    // Render the controller
+                    // if z == 0;
+                    F.editor.co.fillStyle = diffBackground2 ? color2 : color1 ;
+                    F.editor.co.fillRect((z * column_size), (i*row_height) , column_size , row_height);
+                    diffBackground2 = !diffBackground2;
+                }
+
 
 
                 diffBackground = !diffBackground;
+                diffBackground2 = !diffBackground2;
             }
 
 
@@ -84,6 +156,15 @@ F = {
 
         newBeat: function () {
 
+        },
+
+        /***
+         * Clean objects around and quit the editor
+         */
+        exit : function(){
+            // clean
+            F.ui.changeScreen("menu", "back");
+            F.ui.changeOrientation();
         }
 
     },
@@ -95,7 +176,7 @@ F = {
                 F.editor.init();
             });
             $('.exit-screen').click(function () {
-                F.changeScreen("menu", "back")
+                F.editor.exit();
             });
         }
 
