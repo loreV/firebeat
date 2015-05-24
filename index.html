@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Privileged app</title>
-    <meta name="description" content="A privileged app stub">
+    <meta name="description" content="Firebeat">
 
     <!--
       viewport allows you to control how mobile browsers will render your content.
@@ -13,7 +13,8 @@
       Read more about it here:
       https://developer.mozilla.org/Mozilla/Mobile/Viewport_meta_tag
     -->
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="css/app.css">
 
     <!--
@@ -28,7 +29,12 @@
     execute the deferred files.
     Read about defer: https://developer.mozilla.org/Web/HTML/Element/script#attr-defer
     -->
+    <!--Libraries-->
+    <script type="text/javascript" src="js/libs/howler.min.js" defer></script>
     <script type="text/javascript" src="js/libs/Zepto.js" defer></script>
+
+    <!--Code-->
+    <script type="text/javascript" src="js/classes/Track.js" defer></script>
     <script type="text/javascript" src="js/app.js" defer></script>
 
     <!--
@@ -113,27 +119,106 @@
 
 
 </section>
+    <section id="results" hidden></section>
+        <section role="region" id="editor" class="page right">
+            <div id="app-container">
+                <!--Light blue decoration on top-->
+                <div id="timer-decor">
 
-<section id="results" hidden></section>
+                </div>
+                <!--Side Tracks controls -->
+                <div id="side-controls" class="control-color-bg">
+                    <ul id="mu-list">
 
 
-<section role="region" id="editor" class="page right">
-    <!--<header>-->
-        <!--&lt;!&ndash; Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) &ndash;&gt;-->
-        <!--<menu type="toolbar">-->
 
-        <!--</menu>-->
-        <!--<h1 data-l10n-id="app-heading" class="exit-screen">-->
-            <!--Editing-->
-        <!--</h1>-->
-    <!--</header>-->
+                    <!--<section class="mu-controller mu-controller-red" id="mu-0">-->
+                        <!--<span class="mu-title">Track 1</span>-->
+                        <!--<div class="option" id="mu-op-0">-->
+                            <!--<img src="css/player/icons/left_controls.png" class="mu-settings" />-->
+                        <!--</div>-->
+                    <!--</section>-->
 
-    <div class="app-container">
-        <canvas id="editor-main">
-        </canvas>
-        <section id="control-panel">
+
+                    </ul>
+                    <section class="mu-controller" id="mu-last">
+                        <span class="mu-title giant">+</span>
+
+
+
+
+
+
+                    </section>
+                </div>
+                <!-- End of side controls -->
+                <!--Tracks Setting-->
+                <div class="blueBackground hiddenElement" id="mu-settings-panel">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <label>Volume</label>
+                                </td>
+                                <td>
+                                    <input name="vol" id="volume" max="5" min="1" type="range">
+                                </td>
+                                <td>
+                                    <button>
+                                        Mute
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr><td>
+                                <label>Balance</label>
+                            </td>
+                                <td>
+                                    <input name="vol"  max="5" min="1" type="range">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <input name="type" value="Audio Track" type="radio">
+                                </td>
+                                <td>
+                                    <select name="track">
+                                        <option>Sound1</option>
+                                        <option>Sound2</option>
+                                        <option>Sound3</option>
+                                        <option>Sound4</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="type" value="Recording" type="radio">
+                                </td>
+                                <td>
+                                    <button>Hold to record</button>
+                                </td>
+                                <td>
+                                    <button>Play</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                </div>
+                <!--Editor-->
+                <div id="scroll-editor-main">
+                <canvas id="editor-main">
+                </canvas>
+                </div>
+                <!--Right Controller-->
+                <div id="right-side-controls">
+                    <div class="control-color-bg round" id="control-menu"></div>
+                    <div class="control-color-bg round" id="control-play"></div>
+                </div>
+
+            </div>
+
         </section>
-    </div>
-</section>
-</body>
+    </body>
 </html>

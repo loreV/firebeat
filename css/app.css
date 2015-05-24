@@ -57,9 +57,156 @@ body {
     animation: currentToRight 0.4s forwards;
 }
 
-.app-container{
+#editor #app-container{
     overflow: scroll;
     width: 100%;
     height: 100%;
+    position: relative;
+
 }
+#editor{
+    position: relative;
+}
+
+#editor #editor-main{
+    width:100%;
+    height: 100%;
+
+}
+
+.control-color-bg{
+    background-color: #ff8712;
+}
+
+#editor #side-controls{
+    float:left;
+    left:0px;
+    height: 100%;
+    width:20%;
+}
+
+#app-container #timer-decor{
+    width: 100%;
+    height:3px;
+    position: fixed;
+    top:0px;
+    background-color: #12d0ff;
+}
+
+#right-side-controls{
+    position: fixed;
+    bottom: 90px;
+    right:5px;
+}
+
+.mu-last:active{
+    background:red;
+}
+
+.round{
+    border-radius: 2000px;
+    background-position: center;
+    padding:15px;
+}
+
+.hiddenElement{
+    display: none;
+    opacity: 0;
+}
+
+
+
+#right-side-controls #control-play{
+    /*Width is decided by JS*/
+    background-image: url("player/icons/play_btn.png");
+    background-repeat: no-repeat;
+    /*padding:10px;*/
+    float:left;
+    margin:5px;
+    /*padding-left: 0px;*/
+
+}
+
+
+#right-side-controls #control-menu{
+    /*Width is decided by JS*/
+    background-image: url("player/icons/menu_btn.png");
+    background-repeat: no-repeat;
+    /*padding:10px;*/
+    margin:5px;
+    float:left;
+}
+
+.mu-title{
+    width: 90%;
+    font-size:14px;
+    margin:10px 0px 0px 20px;
+    /*font-weight: 800;*/
+    float: left;
+    color:white;
+}
+
+.giant {
+    font-size: 48px;
+    text-align: center;
+    margin:10px 0px 0px 0px;
+}
+
+.mu-controller{
+    width:100%;
+    float:left;
+    margin:0px;
+}
+
+.mu-controller-red{
+    background-color: #ff5812;
+}
+
+
+/* Icon */
+.mu-settings {
+    float:left;
+    width: 25%;
+    margin:5px 0px 0px 20px;
+}
+
+/* Panel */
+#mu-settings-panel
+{
+    width: 100%;
+    height: 100%;
+    left:0px;
+    position: absolute;
+    z-index: 2;
+}
+
+.blueBackground
+{
+    background-color: #12d0ff;
+}
+
+.visibleElement{
+    display: inline;
+}
+
+#scroll-editor-main{
+    overflow: hidden;
+    float:left;
+    width:80%;
+}
+
+
+
+
+
+/***
+
+The panels should somehow keep the interface visible
+-Semitransparent
+-Dropdown
+
+
+
+
+
 
