@@ -19,6 +19,7 @@ body {
     /*opacity:;*/
     position: absolute;
     z-index: 5;
+    overflow-x:hidden;
     /*display:none;*/
 }
 
@@ -28,13 +29,18 @@ body {
 
 #menu {
     z-index: 10;
+    display: inline;
 }
 
-.visible-page {
+.visiblePage {
     left: 0px;
     top: 0px;
-    display: inline;
+    /*display: inline;*/
     z-index: 1000;
+}
+
+#mainContainer{
+    overflow:hidden;
 }
 
 .right {
@@ -59,10 +65,10 @@ body {
 
 #editor #app-container{
     overflow: scroll;
+    overflow-y: hidden;
     width: 100%;
     height: 100%;
     position: relative;
-
 }
 #editor{
     position: relative;
@@ -173,7 +179,7 @@ body {
 /* Panel */
 #mu-settings-panel
 {
-    width: 100%;
+    width: 80%;
     height: 100%;
     left:0px;
     position: absolute;

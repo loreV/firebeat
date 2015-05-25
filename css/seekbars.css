@@ -37,7 +37,7 @@ input[type="range"]::-moz-range-track {
 
 [role="slider"] progress::-moz-progress-bar,
 input[type=range]::-moz-range-progress {
-    background: #01c5ed;
+    background: white;
     height: 0.6rem;
 }
 
@@ -50,7 +50,7 @@ input[type=range]::-moz-range-progress {
     font-size: 1.5rem;
     line-height: 3.8rem;
     font-family: sans-serif;
-    color: #00aacb;
+    color: white;
     float: right;
     padding: 0 0 0 1rem;
     height: 3.5rem;
@@ -97,9 +97,14 @@ input[type="range"]::-moz-range-thumb {
 
 [role="slider"] button:active,
 input[type=range]:active::-moz-range-thumb {
-    border: solid 0.5rem #01c5ed;
+    border: solid 0.5rem white;
 }
 
 input[type=range]::-moz-focus-outer {
     border: none;
+}
+
+input[type=range]{
+    border: 0px solid;
+    background: none;
 }

@@ -88,7 +88,7 @@ F = {
              * @param trackNr
              */
             removeTrack: function(trackNr){
-
+                //TODO
             },
 
             /**
@@ -104,7 +104,7 @@ F = {
                 // move from the left the control panel
                 // enough pixels to still have everything showing
                 $('#mu-settings-panel').removeClass('hiddenElement');
-                $('#mu-settings-panel').css('left', F.editor.col_size*2);
+                $('#mu-settings-panel').css('left', $('#side-controls').css('width'));
                 // hide non usable controls (play and so)
                 $('#right-side-controls').addClass('hiddenElement');
             },
@@ -146,32 +146,75 @@ F = {
                 }
 
                 F.editor.co.fillRect((eX * F.editor.col_size), (eY* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
+            },
+
+            cursor: {
+
+                drawNext : function(cursor, gridMatrix){
+                    var columnIndexToRepaint = (cursor > 0) ? (cursor-1) : gridMatrix.length-1;
+                    this.erase(columnIndexToRepaint, gridMatrix);
+                    F.editor.co.globalAlpha = 0.2;
+                    F.editor.co.fillStyle = "#12d0ff";
+                    F.editor.co.fillRect((cursor * F.editor.col_size), 0 , F.editor.col_size , F.editor.c.height);
+                    F.editor.co.globalAlpha = 1;
+                },
+                /***
+                 * Should repaint only the last two rows
+                 * @param {int} columnIndexToRepaint
+                 * @param {Array} gridMatrix
+                 */
+                erase: function(columnIndexToRepaint, gridMatrix){
+                    // the column to repaint is the previous one
+                    var color1= "#f9fbe7";
+                    var color2 = "#fff3e0";
+                    var colorToFill = "";
+                    for(var i = 0; i < gridMatrix[columnIndexToRepaint].length; i++)
+                    {
+                        if(gridMatrix[columnIndexToRepaint][i] != undefined){
+                            colorToFill = "#FF0000";
+                        } else {
+                            if (columnIndexToRepaint % 2 === 0) {
+                                if (i % 2 === 0) {
+                                    colorToFill = color1;
+                                } else {
+                                    colorToFill = color2;
+                                }
+                            } else {
+                                if (i % 2 === 0) {
+                                    colorToFill = color2;
+                                } else {
+                                    colorToFill = color1;
+                                }
+                            }
+                        }
+                        F.editor.co.fillStyle = colorToFill;
+                        F.editor.co.fillRect((columnIndexToRepaint * F.editor.col_size), (i* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
+                    }
+                }
+            },
+
+            togglePlay : function(){
+                var button = $('#control-play');
+                var p = "url('css/player/icons/"; var pe = "')";
+                button.css('background-image', (F.editor.controls.stop) ? p+"play_btn.png"+pe : p+"pause_btn.png"+pe );
+            },
+            refreshUI: function(){
+                $('.mu-controller').css("height", F.editor.row_size);
+                //todo way more should actually go in this method!
+                var play_btn = document.getElementById("control-play");
+                play_btn.style.width = F.editor.col_size/1.1 +"px";
+                play_btn.style.height = F.editor.col_size/1.1 +"px";
+
+                var menu_btn = document.getElementById('control-menu');
+                menu_btn.style.width = F.editor.col_size/2 + "px";
+                menu_btn.style.height = F.editor.col_size/2 + "px";
+
+                var controllerBox = document.getElementById('right-side-controls');
+                controllerBox.style.width = (play_btn.width*3) + " px";
+                controllerBox.style.height = (controllerBox.style.width / 3);
             }
-
-
-        },
-
-
-
-
-        refreshUI: function(){
-            $('.mu-controller').css("height", F.editor.row_size);
-
-            //todo way more should actually go in this method!
-            var play_btn = document.getElementById("control-play");
-            play_btn.style.width = F.editor.col_size/1.1 +"px";
-            play_btn.style.height = F.editor.col_size/1.1 +"px";
-
-            var menu_btn = document.getElementById('control-menu');
-            menu_btn.style.width = F.editor.col_size/2 + "px";
-            menu_btn.style.height = F.editor.col_size/2 + "px";
-
-            var controllerBox = document.getElementById('right-side-controls');
-            controllerBox.style.width = (play_btn.width*3) + " px";
-            controllerBox.style.height = (controllerBox.style.width / 3);
-
-
         }
+
     },
 
     editor: {
@@ -214,9 +257,9 @@ F = {
             muLast.addEventListener('click', function(){ F.editor.addTrack(); });
             this.c.addEventListener('click', function(e){F.editor.select(e); });
             //$('#editor-main').click(function(e){F.editor.select(e); });
-            $('#control-play').click(function(){ F.editor.controls.play(); });
+            document.getElementById('control-play').addEventListener('click', function(){F.editor.controls.play();});
 
-            F.ui.refreshUI();
+            F.ui.editor.refreshUI();
             this.controls.init();
             //this.addListener();
         },
@@ -276,7 +319,7 @@ F = {
             }
         },
         // Creates a new beat
-        newBeat:function(){
+        openBeat:function(){
 
         },
         /**
@@ -293,9 +336,13 @@ F = {
             var eX = parseInt(x / F.editor.col_size);
             var eY = parseInt(y / F.editor.row_size);
 
+            console.log(eX, eY);
             if(this.controls.tracks.length > eY){
                 var isToADD = (this.controls.grid[eX][eY]==undefined) ? true : false;
                 F.ui.editor.addTile(eX,eY, isToADD);
+                // Add
+                this.controls.grid[eX][eY] = (isToADD) ? 1 : undefined;
+                console.log(this.controls.grid);
             }
         },
         addTrack: function(){
@@ -319,51 +366,103 @@ F = {
          * Contains
          */
         controls : {
-            stop : false,
+            stop : true,
             cursor : 0,
             grid: [],
             tracks : [],
             interval: 500,
-
+            /**
+             * Initiates
+             */
             init: function(){
                 for(var i = 0;  i < F.editor.col_number ; i++)
                 {
                     this.grid[i] = new Array(F.editor.row_number);
                 }
-                console.log(this.grid);
             },
-
+            /**
+             * Do a check before loading
+             */
             play: function () {
                 if (this.tracks.length == 0) {
                     alert('No tracks added');
                 } else {
-                    if(!this.stop){
+                    if(this.stop){
+                        this.stop = false;
                         this.load();
+                    } else {
+                        this.stop = true;
+                        // TODO -> stopsTheSound
                     }
+                    F.ui.editor.togglePlay();
                 }
             },
+            /**
+             * Loads all the remaining unbuffered songs.
+             */
             load: function(){
-
                 if(this.cursor < this.tracks.length){
                     // load next sound
                     //var obj = this.tracks[this.cursor].getAudioObj();
                     this.cursor++;
-                    this.load();
+                    F.editor.controls.load();
                 } else {
                     // play
                     this.cursor = 0;
-                    this.playSound();
+                    F.editor.controls.playSound();
                 }
             },
+            /**
+             * Get the audio object in the two dimensional matrix and
+             * plays it. Recurse as long as the sound plays.
+             */
             playSound: function () {
-                // Play right sound
-                setTimeout(this.playSound, this.interval);
+                if (F.editor.controls.stop === false) {
+
+                    // Draw the cursor;
+                    F.ui.editor.cursor.drawNext(F.editor.controls.cursor, F.editor.controls.grid);
+
+                    // Selects the right column to play for
+                    for (var i = 0; i < F.editor.controls.grid[F.editor.controls.cursor].length; i++) {
+                        if (F.editor.controls.grid[F.editor.controls.cursor][i] != undefined) {
+                            F.editor.controls.tracks[i].getAudioObj().play();
+                        }
+                    }
+
+                    // Starts back if the end is reached
+                    if (F.editor.controls.cursor + 1 < F.editor.controls.grid.length) {
+                        F.editor.controls.cursor++;
+                    } else {
+                        F.editor.controls.cursor = 0;
+                    }
+                    // Recurse
+                    setTimeout(F.editor.controls.playSound, F.editor.controls.interval);
+                } else {
+                    var columnIndexToRepaint = (F.editor.controls.cursor > 0) ? (F.editor.controls.cursor-1) : F.editor.controls.grid.length-1;
+                    F.ui.editor.cursor.erase(columnIndexToRepaint, F.editor.controls.grid);
+                    F.editor.controls.cursor = 0;
+                }
             }
         },
         /**
          * Settings
          */
         trackSettings : {
+            /**
+             * Change Volume
+             */
+            setVolume: function(trackId){
+
+            },
+            setBalance: function(trackId){
+
+            },
+            selectAudioType: function(trackId){
+
+            },
+            recordAudio: function(trackId){
+
+            }
 
 
         },
@@ -383,6 +482,8 @@ F = {
 
     menu: {
         init: function () {
+            $('#mainContainer').css('width', window.innerWidth);
+            $('#mainContainer').css('height', window.innerHeight);
             $('.new-btn').click(function () {
                 F.ui.changeScreen("editor", "deeper");
                 F.editor.init();

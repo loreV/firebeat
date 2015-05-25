@@ -50,11 +50,14 @@
     <link rel="stylesheet" type="text/css" href="css/headers.css"/>
     <link rel="stylesheet" type="text/css" href="css/animation.css"/>
     <link rel="stylesheet" type="text/css" href="css/lists.css"/>
+    <link rel="stylesheet" type="text/css" href="css/seekbars.css"/>
+    <link rel="stylesheet" type="text/css" href="css/input_areas.css"/>
+    <link rel="stylesheet" type="text/css" href="css/buttons.css"/>
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
 </head>
 <body>
-
-<section role="region" id="menu" class="page">
+<div id="mainContainer">
+<section role="region" id="menu" class="page visible-page">
     <header>
         <!-- Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) -->
         <menu type="toolbar">
@@ -154,6 +157,7 @@
                 <!-- End of side controls -->
                 <!--Tracks Setting-->
                 <div class="blueBackground hiddenElement" id="mu-settings-panel">
+                    <form>
                         <table>
                             <tbody>
                             <tr>
@@ -204,7 +208,7 @@
                             </tr>
                             </tbody>
                         </table>
-
+                    </form>
                 </div>
                 <!--Editor-->
                 <div id="scroll-editor-main">
@@ -220,5 +224,6 @@
             </div>
 
         </section>
+</div>
     </body>
 </html>

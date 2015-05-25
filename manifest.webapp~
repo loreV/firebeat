@@ -27,6 +27,9 @@
     "device-storage:sdcard":{
         "description": "Save your beats in the sd-card"
     },
+    "storage":{
+        "description": "Save your beats in the sd-card" 
+      },
     "browser":{
         "description": "Call out the browser to receive news" 
       }
