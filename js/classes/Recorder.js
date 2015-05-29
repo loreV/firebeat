@@ -81,7 +81,6 @@
     };
 
     Recorder.forceDownload = function (blob, filename) {
-        console.log(blob);
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
         var link = window.document.createElement('a');
         link.href = url;

@@ -9,7 +9,10 @@
 var F;
 
 F = {
+    utils:{
+        io : null
 
+    },
     // Everything concerning the ui
     ui: {
 
@@ -313,8 +316,20 @@ F = {
                 controllerBox.style.width = (play_btn.width*3) + " px";
                 controllerBox.style.height = (controllerBox.style.width / 3);
             }
+        },
+        menu : {
+            init: function(){
+                $('#mainContainer').css('width', window.innerWidth);
+                $('#mainContainer').css('height', window.innerHeight);
+                $('.new-btn').click(function () {
+                    F.ui.changeScreen("editor", "deeper");
+                    F.editor.init();
+                });
+                $('.exit-screen').click(function () {
+                    F.editor.exit();
+                });
+            }
         }
-
     },
 
     editor: {
@@ -377,8 +392,6 @@ F = {
             script.type = 'text/javascript';
             script.src = 'js/classes/Recorder.js';
             $('head').append(script);
-
-            this.sdcard = navigator.getDeviceStorage("sdcard");
             // -------------------------
         },
 
@@ -605,19 +618,11 @@ F = {
                                 F.editor.trackSettings.recorder.exportWAV(function (e) {
                                     //Recorder.forceDownload(e, "b.wav");
                                     console.log("saving...");
+                                    F.utils.io.saveRecording(e, function(path){
+                                        F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setPath(path);
+                                        console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
+                                    } );
 
-
-                                    // TODO - rename this file
-                                    var req = F.editor.sdcard.addNamed(e, "test/test1.wav");
-
-                                    req.onsuccess = function () {
-                                        var name = this.result;
-                                        console.log("Done" + name);
-                                    }
-                                    req.onerror = function () {
-                                        console.warn('Unable to write the file: ' + this.error);
-                                    }
-                                    // Recorder.forceDownload(e, 'hello.wav');
                                 });
 
                             }, 2000);
@@ -629,8 +634,6 @@ F = {
                 } else {
                     console.log("getUserMedia not supported");
                 }
-
-
             },
             /***
              * Loads the track settings
@@ -647,9 +650,6 @@ F = {
             }
 
         },
-
-
-
         /***
          * Clean objects around and quit the editor
          */
@@ -662,16 +662,10 @@ F = {
     },
 
     menu: {
-        init: function () {
-            $('#mainContainer').css('width', window.innerWidth);
-            $('#mainContainer').css('height', window.innerHeight);
-            $('.new-btn').click(function () {
-                F.ui.changeScreen("editor", "deeper");
-                F.editor.init();
-            });
-            $('.exit-screen').click(function () {
-                F.editor.exit();
-            });
+        init: function (IO) {
+            F.utils.io = IO;
+            F.ui.menu.init();
+            F.utils.io.initDatabase();
         }
 
     }
@@ -683,8 +677,9 @@ window.addEventListener('DOMContentLoaded', function () {
     // We'll ask the browser to use strict code to help us catch errors earlier.
     // https://developer.mozilla.org/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
     'use strict';
+    var IO = new FIO();
+    F.menu.init(IO);
 
-    F.menu.init();
 
 
     //alert("das");

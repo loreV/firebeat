@@ -18,6 +18,16 @@ Track.prototype.getName = function(){
     return this.name;
 };
 
+Track.prototype.setPath = function(path){
+    this.path = path;
+};
+
+Track.prototype.getPath = function(){
+    console.log(this.path);
+    return this.path;
+};
+
+
 Track.prototype.setType = function(type){
     if(type != "audio" && type != "recording"){
         throw new Error("Track should be either 'audio' or 'recording'");
