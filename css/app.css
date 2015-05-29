@@ -201,8 +201,13 @@ body {
     width:80%;
 }
 
+form[name="audioTrack"] {
+    margin: 10% 0% 0% 15%;
+}
 
-
+img.mu-settings {
+    max-width: 18%;
+}
 
 
 /***

@@ -64,12 +64,46 @@ F = {
                 console.warn("No firefox OS")
             }
         },
-        prepareGrid: function(){
-
-
-        },
-
         editor: {
+            /***
+             * Initialize the user interface
+             */
+            init: function () {
+
+                var radios = document.forms["audioTrack"].elements["type"];
+                for (var i = 0; i < radios.length; i++) {
+                    radios[i].addEventListener('click', function (e) {
+                        F.ui.editor.trackSettings.toggleSelector("type");
+                        F.ui.editor.trackSettings.toggleAudioType(e.target.value);
+                    })
+                }
+                $('form button').click(function (e) {
+                    e.preventDefault();
+                });
+
+                $('form[name="audioTrack"] button[name=record-choice]').mousedown(function (e) {
+                    F.ui.editor.trackSettings.recordAudio.start();
+                    F.editor.trackSettings.recordAudio(F.editor.trackSettings.currentSettingsIndex);
+                });
+                var controlVolume = document.forms["audioTrack"].elements["vol"];
+                controlVolume.addEventListener("change", function (e) {
+                    F.ui.editor.trackSettings.toggleSelector('volume');
+                });
+                var balanceVolume = document.forms["audioTrack"].elements["bal"];
+                balanceVolume.addEventListener("change", function () {
+                    F.ui.editor.trackSettings.toggleSelector('balance');
+                });
+
+            },
+
+            exit: function () {
+                var radios = document.forms["audioTrack"].elements["type"];
+                for (var i = 0; i < radios.length; i++) {
+                    radios[i].removeEventListener('click', function (e) {
+                        F.ui.editor.trackSettings.toggleAudioType(e.target.value);
+                    })
+                }
+            },
             /**
              * Adds a new track
              * @param trackNr
@@ -77,11 +111,22 @@ F = {
             addTrack: function(trackNr){
                 $('#mu-list').append('<section class="mu-controller mu-controller-red" id="mu-'+trackNr+'"><span class="mu-title">Track '+trackNr+'</span><div class="option" id="mu-op-'+trackNr+'"><img src="css/player/icons/left_controls.png" class="mu-settings" /></div></section>');
                 $('.mu-controller').css('height', F.editor.row_size);
-                $('#mu-'+trackNr).click(function(e){F.ui.editor.showTrackSettingPanel(e);});
+                $('#mu-' + trackNr).click(function (e) {
+                    if (F.editor.controls.tracks.length < 9) {
+                        // Hide the track if the tab was already open
+                        if (F.editor.trackSettings.currentSettingsIndex == trackNr) {
+                            F.ui.editor.trackSettings.hide(trackNr);
+                            F.editor.trackSettings.currentSettingsIndex = null;
+                        } else {
+                            F.editor.trackSettings.load(e);
+                            F.ui.editor.trackSettings.show(e);
+                            F.editor.trackSettings.currentSettingsIndex = trackNr;
+                        }
 
-
-                // If the setting panel is already showing than focus on that.
-                //if()
+                    } else {
+                        alert("Too many tracks.");
+                    }
+                });
             },
             /**
              * Remove an existing track
@@ -90,33 +135,6 @@ F = {
             removeTrack: function(trackNr){
                 //TODO
             },
-
-            /**
-             * Show the track panel and applies UI changes
-             * TODO -> improve the DOM querying
-             * @param event object sent by the press of the button
-             */
-            showTrackSettingPanel : function(event){
-
-                $('.mu-controller').removeClass('blueBackground');
-                $(event.currentTarget).addClass('blueBackground');
-                event = event.currentTarget.id.split('-')[1];
-                // move from the left the control panel
-                // enough pixels to still have everything showing
-                $('#mu-settings-panel').removeClass('hiddenElement');
-                $('#mu-settings-panel').css('left', $('#side-controls').css('width'));
-                // hide non usable controls (play and so)
-                $('#right-side-controls').addClass('hiddenElement');
-            },
-            /**
-             *
-             */
-            hideTrackSettingPanel : function(){
-                $('.mu-controller').removeClass('mu-controller-red');
-                $('#mu-settings-panel').removeClass('visibleElement');
-                $('#right-side-controls').removeClass('hiddenElement');
-            },
-
             /**
              * Add a new tile only if the tile was not added yet. Else it removes it.
              * @param {Event} e
@@ -144,12 +162,94 @@ F = {
                     }
                     F.editor.co.fillStyle = colorToUse;
                 }
-
                 F.editor.co.fillRect((eX * F.editor.col_size), (eY* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
             },
 
-            cursor: {
+            trackSettings: {
+                load: function (volume, balance, name, type) {
+                    $('form[name=audioTrack] input[name=vol]').val(volume);
+                    $('form[name=audioTrack] input[name=bal]').val(balance);
+                    $('form[name=audioTrack] select[name=track-selection]').val(name);
+                    this.toggleAudioType(type);
+                },
+                /***
+                 * Attempts to toggle a change in one of the following elements
+                 * @param {string} type
+                 */
+                toggleSelector: function (type) {
+                    var trackId = $('.blueBackground').attr('id').split('-')[1];
+                    console.log(trackId);
+                    switch (type) {
+                        case 'volume':
+                            var volume = document.forms["audioTrack"].elements["vol"].value;
+                            F.editor.trackSettings.setVolume(trackId, volume);
+                            break;
+                        case 'balance':
+                            var volume = document.forms["audioTrack"].elements["bal"].value;
+                            F.editor.trackSettings.setBalance(trackId, volume);
+                            break;
+                        case 'type':
+                            var type = document.forms["audioTrack"].elements["type"].value;
+                            F.editor.trackSettings.selectAudioType(trackId, type);
+                            break;
+                    }
 
+                },
+                /***
+                 *
+                 * @param {string} Audio type should be "Audio" or "Recording"
+                 */
+                toggleAudioType: function (type) {
+                    var el = "form[name=audioTrack] ";
+                    if (type === "audio") {
+                        $(el + 'input[value=audio]').prop("checked", true);
+                        $(el + 'select[name=track-selection]').removeAttr('disabled', 'disabled');
+                        $(el + 'button[name=record-choice]').attr('disabled', 'disabled');
+                        $(el + 'button[name=play-choice]').attr('disabled', 'disabled');
+                        return;
+                    }
+
+                    $(el + 'input[value=recording]').prop("checked", true);
+                    $(el + 'select[name=track-selection]').attr('disabled', 'disabled');
+                    $(el + 'button[name=record-choice]').removeAttr('disabled');
+                    $(el + 'button[name=play-choice]').removeAttr('disabled');
+
+                },
+                /**
+                 * Show the track panel and applies UI changes
+                 * @param {event} object sent by the press of the button
+                 */
+                show: function (event) {
+                    $('.mu-controller').removeClass('blueBackground');
+                    $(event.currentTarget).addClass('blueBackground');
+                    event = event.currentTarget.id.split('-')[1];
+                    // move from the left the control panel
+                    // enough pixels to still have everything showing
+                    $('#mu-settings-panel').removeClass('hiddenElement');
+                    $('#mu-settings-panel').css('left', $('#side-controls').css('width'));
+                    // hide non usable controls (play and so)
+                    $('#right-side-controls').addClass('hiddenElement');
+
+                },
+                hide: function (index) {
+                    $('#mu-' + index).removeClass('blueBackground');
+                    $('#mu-settings-panel').addClass('hiddenElement');
+                    $('#right-side-controls').removeClass('hiddenElement');
+                },
+
+                recordAudio: {
+                    start: function () {
+
+                    },
+                    end: function () {
+
+                    }
+                }
+            },
+            /**
+             * Playback cursor
+             */
+            cursor: {
                 drawNext : function(cursor, gridMatrix){
                     var columnIndexToRepaint = (cursor > 0) ? (cursor-1) : gridMatrix.length-1;
                     this.erase(columnIndexToRepaint, gridMatrix);
@@ -219,6 +319,8 @@ F = {
 
     editor: {
 
+        sdcard: null,
+
         look:{
             x : 0,
             y : 0
@@ -237,6 +339,7 @@ F = {
 
 
         init: function () {
+
 
             this.look.x = window.innerWidth;
             this.look.y = window.innerHeight;
@@ -260,8 +363,23 @@ F = {
             document.getElementById('control-play').addEventListener('click', function(){F.editor.controls.play();});
 
             F.ui.editor.refreshUI();
+            F.ui.editor.init();
             this.controls.init();
-            //this.addListener();
+
+            //TODO-> refactor this shit!
+            //var script = document.createElement('script');
+            //script.type = 'text/javascript';
+            //script.src = 'js/libs/libmp3lame.min.js';
+            //$('head').append(script);
+
+
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'js/classes/Recorder.js';
+            $('head').append(script);
+
+            this.sdcard = navigator.getDeviceStorage("sdcard");
+            // -------------------------
         },
 
         /**
@@ -318,7 +436,9 @@ F = {
                 diffBackground2 = !diffBackground2;
             }
         },
-        // Creates a new beat
+        /***
+         *  Open an existing beat
+         */
         openBeat:function(){
 
         },
@@ -355,7 +475,7 @@ F = {
                             urls: ['data/effects/bass.wav'],
                             buffer: true
                         })
-                    )
+                        , "Bass Hit")
                 );
             }
         },
@@ -448,22 +568,83 @@ F = {
          * Settings
          */
         trackSettings : {
+            currentSettingsIndex: null,
+            recorder: null,
+            recording: null,
             /**
              * Change Volume
              */
-            setVolume: function(trackId){
-
+            setVolume: function (trackId, volume) {
+                F.editor.controls.tracks[trackId].setVolume(volume);
             },
-            setBalance: function(trackId){
-
+            setBalance: function (trackId, balance) {
+                F.editor.controls.tracks[trackId].setBalance(balance);
             },
-            selectAudioType: function(trackId){
-
+            selectAudioType: function (trackId, type) {
+                F.editor.controls.tracks[trackId].setType(type);
             },
             recordAudio: function(trackId){
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
+                if (navigator.getUserMedia) {
+                    navigator.getUserMedia({audio: true},
+                        // Success!
+
+                        function (e) {
+
+
+                            F.editor.trackSettings.recorder = new Recorder(new AudioContext().createMediaStreamSource(e), {
+                                workerPath: "js/classes/workers/recorderWorker.js",
+                                numChannels: 1
+                            });
+                            F.editor.trackSettings.recorder.record();
+
+                            setTimeout(function () {
+                                console.log("done - recording");
+                                F.editor.trackSettings.recorder.stop();
+                                F.editor.trackSettings.recorder.exportWAV(function (e) {
+                                    //Recorder.forceDownload(e, "b.wav");
+                                    console.log("saving...");
+
+
+                                    // TODO - rename this file
+                                    var req = F.editor.sdcard.addNamed(e, "test/test1.wav");
+
+                                    req.onsuccess = function () {
+                                        var name = this.result;
+                                        console.log("Done" + name);
+                                    }
+                                    req.onerror = function () {
+                                        console.warn('Unable to write the file: ' + this.error);
+                                    }
+                                    // Recorder.forceDownload(e, 'hello.wav');
+                                });
+
+                            }, 2000);
+                        },
+                        function (err) {
+                            alert("The following error occured: " + err.name);
+                        }
+                    );
+                } else {
+                    console.log("getUserMedia not supported");
+                }
+
+
+            },
+            /***
+             * Loads the track settings
+             * @param event
+             */
+            load: function (event) {
+                var id = event.currentTarget.id.split('-')[1];
+                var track = F.editor.controls.tracks[parseInt(id)];
+                var volume = (track.getVolume() );
+                var balance = (track.getBalance() );
+                var name = track.getName();
+                var type = track.getType();
+                F.ui.editor.trackSettings.load(volume, balance, name, type);
             }
-
 
         },
 

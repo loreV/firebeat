@@ -24,9 +24,9 @@
     "audio-channel-content":{
         "description" : "Play sounds"
     },
-    "device-storage:sdcard":{
-        "description": "Save your beats in the sd-card"
-    },
+    "device-storage:sdcard" : { 
+	     "access": "readwrite" 
+	  },
     "browser":{
         "description": "Call out the browser to receive news" 
       }
