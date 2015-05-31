@@ -1,9 +1,10 @@
 /**
  * Created by lore on 23.05.15.
  */
-function Track(defaultAudio, name) {
+function Track(defaultAudio, name, category) {
     this.name = name;
     this.path = "";
+    this.category = category;
     this.type = "audio"; // Should be either audio or recording
     this.balance = 0.5;
     this.volume = 0.5;
@@ -36,12 +37,25 @@ Track.prototype.setType = function(type){
     }
 };
 
-Track.prototype.getType = function(){
-    return this.type;
+
+Track.prototype.setAudio = function (category, trackName, path) {
+    this.name = trackName;
+    this.category = category;
+    this.audioObj.urls([path]);
+    // the sound is not reloaded. This forces to reload it.
+    this.audioObj.stop();
+};
+
+Track.prototype.getCategory = function () {
+    return this.category;
 };
 
 Track.prototype.getAudioObj = function () {
     return this.audioObj;
+};
+
+Track.prototype.getType = function () {
+    return this.type;
 };
 
 Track.prototype.getBalance = function () {

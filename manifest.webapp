@@ -27,6 +27,7 @@
     "device-storage:sdcard" : { 
 	     "access": "readwrite" 
 	  },
+    "desktop-notification":{},
     "browser":{
         "description": "Call out the browser to receive news" 
       }

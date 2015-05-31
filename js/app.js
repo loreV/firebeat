@@ -96,6 +96,15 @@ F = {
                 balanceVolume.addEventListener("change", function () {
                     F.ui.editor.trackSettings.toggleSelector('balance');
                 });
+                var playSoundBtn = $("button[name=play-choice]")[0];
+                playSoundBtn.addEventListener("click", function () {
+                    F.editor.trackSettings.playRecordedAudio();
+                });
+                var soundSelector = document.forms["audioTrack"].elements["track-selection"];
+                soundSelector.addEventListener("change", function (e) {
+                    var catSelect = $('select[name=track-category-selection]')[0].value;
+                    F.editor.trackSettings.setupAudio(catSelect, e.target.value);
+                });
 
             },
 
@@ -169,9 +178,48 @@ F = {
             },
 
             trackSettings: {
-                load: function (volume, balance, name, type) {
+                /***
+                 * Populates the list elements for track categories
+                 * @param {object} object containing an array of categories
+                 */
+                init: function (data) {
+                    var catSelect = $('select[name=track-category-selection]');
+                    for (var i = 0; i < data.categories.length; i++) {
+                        catSelect.append("<option value='" + data.categories[i].name + "'>" + data.categories[i].name + "</option>");
+                    }
+
+                    F.ui.editor.trackSettings.loadTracks(data.categories[0].name);
+
+                    var catSelect = catSelect[0];
+                    catSelect.addEventListener("change", function (e) {
+                        F.ui.editor.trackSettings.loadTracks(e.target.value);
+                    });
+                },
+                /***
+                 * Populates the list elements for track selection
+                 * @param {string} name of the category to load the tracks
+                 */
+                loadTracks: function (category) {
+                    // clear the select list
+                    var tracksSelect = $('select[name=track-selection]');
+                    tracksSelect.html("");
+                    //var list = F.editor.trackSettings.songsListObject.categories.indexOf(category);
+                    var categories = F.editor.trackSettings.songsListObject.categories;
+                    for (var i = 0; i < categories.length; i++) {
+                        if (categories[i].name === category) {
+                            for (var z = 0; z < categories[i].tracks.length; z++) {
+                                tracksSelect.append("<option value='" + categories[i].tracks[z].name + "'>" + categories[i].tracks[z].name + "</option>")
+                            }
+                        }
+                    }
+                    console.log(category);
+
+                },
+                load: function (volume, balance, name, type, category) {
                     $('form[name=audioTrack] input[name=vol]').val(volume);
                     $('form[name=audioTrack] input[name=bal]').val(balance);
+                    $('form[name=audioTrack] select[name=track-category-selection]').val(category);
+                    this.loadTracks(category);
                     $('form[name=audioTrack] select[name=track-selection]').val(name);
                     this.toggleAudioType(type);
                 },
@@ -242,10 +290,10 @@ F = {
 
                 recordAudio: {
                     start: function () {
-
+                        $('button[name="record-choice"]').attr("disabled", "disabled");
                     },
                     end: function () {
-
+                        $('button[name="record-choice"]').removeAttr("disabled");
                     }
                 }
             },
@@ -332,6 +380,8 @@ F = {
         }
     },
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     editor: {
 
         sdcard: null,
@@ -349,8 +399,7 @@ F = {
         co: {},
         sideControls:{},
 
-
-
+        PATHTOTRACKS: 'data/effects/',
 
 
         init: function () {
@@ -482,13 +531,18 @@ F = {
             // if tracks are less than 10 -- for memory reasons
             if(this.controls.tracks.length < 10){
                 F.ui.editor.addTrack( this.controls.tracks.length );
+
+                var categoryName = this.trackSettings.songsListObject.categories[0].name;
+                var fileName = this.trackSettings.songsListObject.categories[0].tracks[0].file;
+                var trackName = this.trackSettings.songsListObject.categories[0].tracks[0].name;
+
                 this.controls.tracks.push(
                     new Track(
                         new Howl({
-                            urls: ['data/effects/bass.wav'],
+                            urls: [this.PATHTOTRACKS + categoryName + "/" + fileName],
                             buffer: true
                         })
-                        , "Bass Hit")
+                        , trackName, categoryName) // < --- Modify here
                 );
             }
         },
@@ -512,6 +566,7 @@ F = {
                 {
                     this.grid[i] = new Array(F.editor.row_number);
                 }
+                F.editor.trackSettings.init();
             },
             /**
              * Do a check before loading
@@ -581,6 +636,7 @@ F = {
          * Settings
          */
         trackSettings : {
+            songsListObject: null,
             currentSettingsIndex: null,
             recorder: null,
             recording: null,
@@ -596,16 +652,36 @@ F = {
             selectAudioType: function (trackId, type) {
                 F.editor.controls.tracks[trackId].setType(type);
             },
+            /***
+             * Look up for the audio track and set it
+             * @param category
+             * @param name
+             */
+            setupAudio: function (category, name) {
+                for (var i = 0; i < this.songsListObject.categories.length; i++) {
+                    if (this.songsListObject.categories[i].name === category) {
+                        for (var z = 0; z < this.songsListObject.categories[i].tracks.length; z++) {
+                            if (this.songsListObject.categories[i].tracks[z].name === name) {
+                                var file = this.songsListObject.categories[i].tracks[z].file;
+                                F.editor.controls.tracks[this.currentSettingsIndex].setAudio(category, name, F.editor.PATHTOTRACKS + category + "/" + file);
+                                return;
+                            }
+                        }
+                    }
+                }
+                //TODO -> write loop to get tracks and assign it sound
+
+            },
             recordAudio: function(trackId){
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
+                //
                 if (navigator.getUserMedia) {
                     navigator.getUserMedia({audio: true},
                         // Success!
 
+                        // TODO: display audio recording screen
+
                         function (e) {
-
-
                             F.editor.trackSettings.recorder = new Recorder(new AudioContext().createMediaStreamSource(e), {
                                 workerPath: "js/classes/workers/recorderWorker.js",
                                 numChannels: 1
@@ -613,26 +689,42 @@ F = {
                             F.editor.trackSettings.recorder.record();
 
                             setTimeout(function () {
-                                console.log("done - recording");
+                                // console.log("done - recording");
                                 F.editor.trackSettings.recorder.stop();
                                 F.editor.trackSettings.recorder.exportWAV(function (e) {
                                     //Recorder.forceDownload(e, "b.wav");
                                     console.log("saving...");
                                     F.utils.io.saveRecording(e, function(path){
                                         F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setPath(path);
-                                        console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
-                                    } );
 
+                                        F.ui.editor.trackSettings.recordAudio.end();
+                                        //console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
+                                    });
                                 });
 
-                            }, 2000);
+                            }, 1500);
                         },
                         function (err) {
                             alert("The following error occured: " + err.name);
                         }
                     );
                 } else {
-                    console.log("getUserMedia not supported");
+                    alert("getUserMedia not supported");
+                }
+            },
+            /***
+             * Attempts to play the last recorded track.
+             * In case that was not recorded yet, it will return false.
+             */
+            playRecordedAudio: function () {
+                var path = F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath();
+                if (path != "") {
+                    F.utils.io.loadFromSD(path, function (e) {
+                        var blob = e;
+                        var audioElement = document.getElementById('audio_preview');
+                        audioElement.src = window.URL.createObjectURL(blob);
+                        audioElement.play();
+                    });
                 }
             },
             /***
@@ -646,9 +738,28 @@ F = {
                 var balance = (track.getBalance() );
                 var name = track.getName();
                 var type = track.getType();
-                F.ui.editor.trackSettings.load(volume, balance, name, type);
+                var category = track.getCategory();
+                F.ui.editor.trackSettings.load(volume, balance, name, type, category);
+            },
+            /***
+             * Loads in the list of audio track files
+             */
+            init: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: './data/tracks.json',
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 500,
+                    success: function (data) {
+                        F.editor.trackSettings.songsListObject = data;
+                        F.ui.editor.trackSettings.init(F.editor.trackSettings.songsListObject);
+                    },
+                    error: function (xhr, type) {
+                        alert('Tracks are not loaded in!')
+                    }
+                })
             }
-
         },
         /***
          * Clean objects around and quit the editor

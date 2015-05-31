@@ -81,7 +81,11 @@ body {
 }
 
 .control-color-bg{
-    background-color: #ff8712;
+    background-color: #ff463e;
+}
+
+.control-gradient-bg {
+    background: -moz-linear-gradient(top, #ff5b18 0%, #ff463e 100%); /* FF3.6+ */
 }
 
 #editor #side-controls{
@@ -165,7 +169,7 @@ body {
 }
 
 .mu-controller-red{
-    background-color: #ff5812;
+    /*background-color: #ff5812;*/
 }
 
 
