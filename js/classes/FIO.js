@@ -13,7 +13,14 @@ function FIO() {
     this.recordingsFolder = this.baseFolder + "recordings/";
 };
 
-
+/**
+ *
+ * @param blob
+ * @param folder
+ * @param filename
+ * @param onSuccess
+ * @private
+ */
 FIO.prototype._saveToSD = function (blob, folder, filename, onSuccess) {
     var req = this.sdCard.addNamed(blob, this.recordingsFolder + filename);
     console.log(filename);
@@ -45,12 +52,32 @@ FIO.prototype.autosave = function () {
 
 };
 
-FIO.prototype.loadBeat = function (nameOfTheFile) {
+FIO.prototype.loadBeat = function (nameOfTheFile, onSuccess) {
+
+    F.utils.io.loadFromSD((F.utils.io.baseFolder + name), function (e) {
+
+        var reader = new FileReader();
+        reader.addEventListener("loadend", function () {
+            // reader.result contains the contents of blob as a typed array
+        });
+        var txt = reader.readAsText(blob);
+
+        onSuccess(txt);
+
+
+        // TODO parse text and shit
+
+        // load in an prepare the screen
+
+    });
+
 
 };
 
-FIO.prototype.saveBeat = function (name, contentOfFile) {
-
+FIO.prototype.saveBeat = function (name, contentOfFile, onSuccess) {
+    var filename = name;
+    var blob = new Blob([contentOfFile], {type: "application/json"})
+    this._saveToSD(blob, this.baseFolder, filename, onSuccess);
 };
 /***
  *
@@ -58,7 +85,6 @@ FIO.prototype.saveBeat = function (name, contentOfFile) {
  * @param {function} onSuccess
  */
 FIO.prototype.saveRecording = function (blob, onSuccess) {
-    // TODO - rename this file
     var filename = Date.now().toString() + ".wav";
     this._saveToSD(blob, this.recordingsFolder, filename, onSuccess);
 };

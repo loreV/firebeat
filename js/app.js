@@ -10,6 +10,7 @@ var F;
 
 F = {
     utils:{
+        version: "1.0",
         io : null
 
     },
@@ -397,7 +398,7 @@ F = {
 
         c: {},
         co: {},
-        sideControls:{},
+        sideControls: {},
 
         PATHTOTRACKS: 'data/effects/',
 
@@ -539,7 +540,7 @@ F = {
                 this.controls.tracks.push(
                     new Track(
                         new Howl({
-                            urls: [this.PATHTOTRACKS + categoryName + "/" + fileName],
+                            src: [this.PATHTOTRACKS + categoryName + "/" + fileName],
                             buffer: true
                         })
                         , trackName, categoryName) // < --- Modify here
@@ -693,11 +694,21 @@ F = {
                                 F.editor.trackSettings.recorder.stop();
                                 F.editor.trackSettings.recorder.exportWAV(function (e) {
                                     //Recorder.forceDownload(e, "b.wav");
+
+
                                     console.log("saving...");
                                     F.utils.io.saveRecording(e, function(path){
                                         F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setPath(path);
-
                                         F.ui.editor.trackSettings.recordAudio.end();
+
+                                        // TODO -> test
+                                        F.utils.io.loadFromSD(path, function (e) {
+                                            var blob = e;
+                                            //var audioElement = document.getElementById('audio_preview');
+                                            //audioElement.src = window.URL.createObjectURL(blob);
+                                            var src = [window.URL.createObjectURL(blob)];
+                                            F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setAudioObj(src, "wav");
+                                        });
                                         //console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
                                     });
                                 });
@@ -721,9 +732,14 @@ F = {
                 if (path != "") {
                     F.utils.io.loadFromSD(path, function (e) {
                         var blob = e;
-                        var audioElement = document.getElementById('audio_preview');
-                        audioElement.src = window.URL.createObjectURL(blob);
-                        audioElement.play();
+                        new Howl({
+                                src: [window.URL.createObjectURL(blob)],
+                                ext: ["wav"],
+                                onend: function () {
+                                    console.log("Finished playback")
+                                }
+                            }
+                        ).play();
                     });
                 }
             },
@@ -769,6 +785,81 @@ F = {
             F.ui.changeScreen("menu", "back");
             F.ui.changeOrientation();
         }
+
+    },
+    settings: {
+
+        beat: {
+            save: function (name) {
+                var test = /[\/:\*\?"<>\\|]/g.test(name);
+                if (!test) {
+                    return false;
+                }
+                if (F.editor.controls.tracks.length > 0) {
+
+                    var contentSave = '{ "grid":';
+                    contentSave += JSON.stringify(F.editor.controls.grid);
+                    contentSave += ',"tracks": [';
+
+                    for (var i = 0; i < F.editor.controls.tracks.length; i++) {
+                        contentSave += "{"
+
+                        // TODO - check if null and if so add 00
+                        contentSave += ('"name": "' + F.editor.controls.tracks[i].getName() + '",');
+                        contentSave += ('"path": "' + F.editor.controls.tracks[i].getPath() + '",');
+                        contentSave += ('"category": "' + F.editor.controls.tracks[i].getCategory() + '",');
+                        contentSave += ('"type": "' + F.editor.controls.tracks[i].getType() + '",');
+                        contentSave += ('"balance": "' + F.editor.controls.tracks[i].getBalance() + '",');
+                        contentSave += ('"volume": "' + F.editor.controls.tracks[i].getVolume() + '"');
+                        //this.audioObj = defaultAudio;
+
+                        //console.log(i, F.editor.controls.tracks.length - 1)
+                        if (i == F.editor.controls.tracks.length - 1) {
+                            // last track
+                            contentSave += "}"
+                        } else {
+
+                            contentSave += "},"
+                        }
+                    }
+                    contentSave += "],";
+                    contentSave += '"speed": ' + F.editor.controls.interval;
+                    contentSave += "}"
+                }
+
+                // Save the file
+                F.utils.io.saveBeat(name, contentSave, function () {
+                    console.log("File was saved");
+
+                });
+
+            },
+            load: function (name) {
+                F.utils.io.loadBeat(name, function (text) {
+                    console.log(text)
+
+
+                    //TODO :
+                    //
+                    //    - Test save and load
+                    //- Finish the Load function to run
+                    //- Add database functionalities
+                    //
+                    //
+                    //For future:
+                    //
+                    //    - Settings menu
+                    //- Increase number of steps in players (8 or 16)
+                    //- Browsable up to 9 tracks
+
+
+                });
+
+            }
+        },
+
+        program: {}
+
 
     },
 
