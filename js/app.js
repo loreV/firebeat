@@ -201,6 +201,17 @@ F = {
                         panel.addClass('visibleElement');
                     }
                 },
+
+                toggleNumberColumns: function(){
+
+                },
+
+                toggleInterval: function(){
+
+                },
+
+                
+
                 addListeners : function(){
                     console.log(document.querySelector('#menu-panel button'));
                     $('#menu-panel button').click(function(e){
@@ -208,19 +219,17 @@ F = {
                         switch(e.currentTarget.id)
                         {
                             // TODO - make interface work
-                            case "":
-                            break;
-                            case "":
-                            break;
-                            case "":
-                            break;
-                            case "":
-                                break;
-                            case "":
-                                break;
-                            case "":
-                                break;
+                            case "number-spaces":
 
+                            break;
+                            case "interval-toggle":
+                            break;
+                            case "save-button":
+                            break;
+                            case "export-button":
+                                break;
+                            case "exit-button":
+                                break;
                         }
 
                     });
