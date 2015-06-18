@@ -74,6 +74,10 @@ F = {
              */
             init: function () {
 
+                $('#control-menu').click(function(){
+                    F.ui.editor.beatSettings.toggleShow();
+                });
+
                 var radios = document.forms["audioTrack"].elements["type"];
                 for (var i = 0; i < radios.length; i++) {
                     radios[i].addEventListener('click', function (e) {
@@ -106,6 +110,7 @@ F = {
                     var catSelect = $('select[name=track-category-selection]')[0].value;
                     F.editor.trackSettings.setupAudio(catSelect, e.target.value);
                 });
+
 
             },
 
@@ -177,7 +182,53 @@ F = {
                 }
                 F.editor.co.fillRect((eX * F.editor.col_size), (eY* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
             },
+            /**
+             * The panel
+             */
+            beatSettings: {
+                toggleShow: function(){
+                    var panel = $('#menu-panel');
+                    var wpanel= $('#waiting-panel');
+                    if (panel.hasClass("visibleElement")){
+                        // hides it
 
+                        F.ui.editor.beatSettings.removeListeners();
+                        wpanel.removeClass('visibleElement');
+                        panel.removeClass('visibleElement');
+                    } else {
+                        F.ui.editor.beatSettings.addListeners();
+                        wpanel.addClass('visibleElement');
+                        panel.addClass('visibleElement');
+                    }
+                },
+                addListeners : function(){
+                    console.log(document.querySelector('#menu-panel button'));
+                    $('#menu-panel button').click(function(e){
+                        console.log(e.currentTarget.id);
+                        switch(e.currentTarget.id)
+                        {
+                            // TODO - make interface work
+                            case "":
+                            break;
+                            case "":
+                            break;
+                            case "":
+                            break;
+                            case "":
+                                break;
+                            case "":
+                                break;
+                            case "":
+                                break;
+
+                        }
+
+                    });
+                },
+                removeListeners : function(){
+                    $('#menu-panel button').off("click");
+                }
+            },
             trackSettings: {
                 /***
                  * Populates the list elements for track categories
@@ -405,6 +456,8 @@ F = {
 
         init: function () {
 
+            var date = new Date();
+            document.getElementById("file-name").value = "fb_" + date.getDate()+ date.getMonth() + date.getYear() + date.getMinutes();
 
             this.look.x = window.innerWidth;
             this.look.y = window.innerHeight;
@@ -448,7 +501,7 @@ F = {
         /**
          * Creates a new grid. This method should be called only on creation.
          */
-        newGrid: function () {
+        newGrid: function (minRows, minColumns) {
             this.grid = [];
 
             var x = this.c.width;
@@ -470,7 +523,7 @@ F = {
             this.row_size = parseInt(y /actualNrRows);
 
             // then count how many columns we are going to have;
-            var min_num_columns = 10;
+            var min_num_columns = 8;
             console.log(x, min_num_columns);
             this.col_size = parseInt(x / min_num_columns);
 
@@ -665,6 +718,7 @@ F = {
                             if (this.songsListObject.categories[i].tracks[z].name === name) {
                                 var file = this.songsListObject.categories[i].tracks[z].file;
                                 F.editor.controls.tracks[this.currentSettingsIndex].setAudio(category, name, F.editor.PATHTOTRACKS + category + "/" + file);
+                                this.previewAudio(category, file, F.editor.PATHTOTRACKS);
                                 return;
                             }
                         }
@@ -672,7 +726,23 @@ F = {
                 }
                 //TODO -> write loop to get tracks and assign it sound
 
+
+
             },
+            /**
+             * Preview audio files. The audio data will not preserved in the application memory.
+             * @param category
+             * @param file
+             * @param PATHTOTRACKS
+             */
+            previewAudio: function(category, file, PATHTOTRACKS){
+                new Howl({ src: [ PATHTOTRACKS + category + "/" + file] }).play();
+            },
+            /***
+             * Access the user microphone and record a sound to be played in the
+             * editor.
+             * @param trackId
+             */
             recordAudio: function(trackId){
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
                 //
@@ -788,11 +858,10 @@ F = {
 
     },
     settings: {
-
         beat: {
             save: function (name) {
                 var test = /[\/:\*\?"<>\\|]/g.test(name);
-                if (!test) {
+                if (test) {
                     return false;
                 }
                 if (F.editor.controls.tracks.length > 0) {
@@ -823,21 +892,80 @@ F = {
                         }
                     }
                     contentSave += "],";
-                    contentSave += '"speed": ' + F.editor.controls.interval;
+                    contentSave += '"interval": ' + F.editor.controls.interval;
                     contentSave += "}"
                 }
 
-                // Save the file
+                // TODO: refactor constants
+                var beat = F.utils.io.simpleLoad("beats");
+                var beatTime = F.utils.io.simpleLoad("beats_time");
+
                 F.utils.io.saveBeat(name, contentSave, function () {
                     console.log("File was saved");
-
+                //    Add to the local storage
+                    F.utils.io.simpleSave("beats", beat + ";" + name );
+                    F.utils.io.simpleSave("beats_time", beatTime + ";" + name);
                 });
-
             },
             load: function (name) {
                 F.utils.io.loadBeat(name, function (text) {
                     console.log(text)
 
+                    var j = JSON.parse(text);
+
+                    F.editor.controls.grid = j.grid;
+                    F.editor.controls.tracks = [];
+                    for(var i = 0 ; i < j.tracks.length; i++){
+                        // add to the array
+                        var currentTrack = j.tracks[i];
+
+                        var newTrack = {};
+                        var trackName = currentTrack.name;
+                        var categoryName = currentTrack.category;
+                        var volume = currentTrack.volume;
+                        var balance = currentTrack.balance;
+                        var path = currentTrack.path;
+                        var type = currentTrack.type;
+
+                        /** TODO : Refactor the below code.
+                         * The load from SD card is an ajax call! **/
+
+                        if(type == "recording"){
+
+
+                            F.utils.io.loadFromSD(path, function (e) {
+                                var blob = e;
+                                var audioObj = new Howl({
+                                        src: [window.URL.createObjectURL(blob)],
+                                        ext: ["wav"],
+                                        buffer: true
+                                    }
+                                );
+                                newTrack = new Track(audioObj, trackName, categoryName);
+                                newTrack.setType(type);
+                                newTrack.setPath(path);
+                                newTrack.setVolume(volume);
+                                newTrack.setBalance(balance);
+                                F.editor.controls.tracks[i] = newTrack;
+
+                            });
+                        } else {
+                            var path = F.editor.PATHTOTRACKS + categoryName + "/" + name;
+                            var audioObj = new Howl({
+                                src: [ path ],
+                                buffer: true
+                            });
+                            newTrack = new Track(audioObj, trackName, categoryName);
+                            newTrack.setPath(path);
+                            newTrack.setVolume(volume);
+                            newTrack.setBalance(balance);
+                            F.editor.controls.tracks[i] = newTrack;
+                        }
+                    }
+
+
+                    F.editor.controls.grid=j.grid;
+                    F.editor.controls.interval=j.interval;
 
                     //TODO :
                     //
@@ -851,11 +979,17 @@ F = {
                     //    - Settings menu
                     //- Increase number of steps in players (8 or 16)
                     //- Browsable up to 9 tracks
-
-
                 });
-
+                // TODO test that everything was loaded in.
+                // Add tracks to UI
+                for(var i=0; i < F.editor.controls.tracks.length; i++){
+                    F.ui.editor.addTrack(i);
+                }
+                document.getElementById('file-name').value = name;
             }
+
+
+
         },
 
         program: {}

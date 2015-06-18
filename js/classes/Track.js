@@ -41,14 +41,18 @@ Track.prototype.setAudioObj = function (path, format) {
     this.audioObj.unload();
     this.audioObj = new Howl({
         src: path,
-        ext: [format],
+        ext: [format]
     });
 }
 
 Track.prototype.setAudio = function (category, trackName, path) {
+    this.audioObj.unload();
+    this.audioObj = new Howl({
+        src: path,
+        ext: ['ogg']
+    });
     this.name = trackName;
     this.category = category;
-    this.audioObj.src([path]);
     // the sound is not reloaded. This forces to reload it.
     this.audioObj.stop();
 };

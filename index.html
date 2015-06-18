@@ -129,6 +129,8 @@
     <section id="results" hidden></section>
         <section role="region" id="editor" class="page right">
             <div id="app-container">
+                <!--Blocking panel-->
+                <div id="waiting-panel" class="hiddenElement"></div>
                 <!--Light blue decoration on top-->
                 <div id="timer-decor">
 
@@ -160,15 +162,37 @@
                 </div>
                 <!-- End of side controls -->
                 <!--Hidden menu-->
-                <div id="menu-panel">
-                    <input type="text" name="file-name"/>
-                    <button>Number of spaces: 8</button>
-                    <button>Play speed: 0.3</button>
+                <div id="menu-panel" class="hiddenElement">
+                    <label>File name</label>
 
-                    <button>Save</button>
-                    <button>Open</button>
-                    <button>Open</button>
+                    <div class="clear"></div>
 
+
+
+                        <input type="text" id="file-name" placeholder="Firebeat/saves/" name="file-name"/>
+                    <div class="clear"></div>
+
+                    <div>
+                        <button id="number-spaces"></button>
+                        <label>Columns</label>
+                    </div>
+                    <div>
+                        <button id="interval-toggle"></button>
+                        <label>Rhythm</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div>
+                        <button id="save-button"></button>
+                        <label>Save</label>
+                    </div>
+                    <div>
+                        <button id="export-button"></button>
+                        <label>Export</label>
+                    </div>
+                    <div>
+                        <button id="exit-button"></button>
+                        <label>Quit</label>
+                    </div>
 
                 </div>
                 <!--Tracks Setting-->
@@ -237,7 +261,6 @@
                                     </audio>
 
                                 </td>
-                            </tr>
                             </tr>
                             </tbody>
                         </table>

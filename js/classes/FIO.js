@@ -9,6 +9,7 @@ function FIO() {
     }
     this.db = null;
     this.baseFolder = "Firebeat/";
+    this.saveFolder = "save/";
     this.autosaveFolder = this.baseFolder + "autosaves/";
     this.recordingsFolder = this.baseFolder + "recordings/";
 };
@@ -77,6 +78,7 @@ FIO.prototype.loadBeat = function (nameOfTheFile, onSuccess) {
 FIO.prototype.saveBeat = function (name, contentOfFile, onSuccess) {
     var filename = name;
     var blob = new Blob([contentOfFile], {type: "application/json"})
+    //TODO check if the file already exist
     this._saveToSD(blob, this.baseFolder, filename, onSuccess);
 };
 /***
@@ -89,9 +91,19 @@ FIO.prototype.saveRecording = function (blob, onSuccess) {
     this._saveToSD(blob, this.recordingsFolder, filename, onSuccess);
 };
 
+
 FIO.prototype.openRecording = function () {
 
 };
+
+FIO.prototype.simpleSave = function(name, value){
+    localStorage.setItem(name, value);
+};
+
+FIO.prototype.simpleLoad = function(name){
+    return localStorage.getItem(name, value);
+};
+
 
 FIO.prototype.initDatabase = function () {
     var request = indexedDB.open('Firebeat', 1);
@@ -138,7 +150,6 @@ FIO.prototype.saveToDatabase = function (value, whatToStore, callback) {
     var store = transaction.objectStore('beats');
     var request = store.add(value);
     request.onsuccess = function (e) {
-
         callback();
     };
     request.onerror = function (e) {
