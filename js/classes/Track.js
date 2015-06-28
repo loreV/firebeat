@@ -38,15 +38,15 @@ Track.prototype.setType = function(type){
 };
 
 Track.prototype.setAudioObj = function (path, format) {
-    this.audioObj.unload();
     this.audioObj = new Howl({
         src: path,
         ext: [format]
     });
-}
+};
+
 
 Track.prototype.setAudio = function (category, trackName, path) {
-    this.audioObj.unload();
+    //this.audioObj.unload();
     this.audioObj = new Howl({
         src: path,
         ext: ['ogg']
@@ -54,7 +54,7 @@ Track.prototype.setAudio = function (category, trackName, path) {
     this.name = trackName;
     this.category = category;
     // the sound is not reloaded. This forces to reload it.
-    this.audioObj.stop();
+    //this.audioObj.stop();
 };
 
 Track.prototype.getCategory = function () {

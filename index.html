@@ -32,7 +32,7 @@
     <!--Libraries-->
     <script type="text/javascript" src="js/libs/howler.min.js" defer></script>
     <script type="text/javascript" src="js/libs/Zepto.js" defer></script>
-
+    <script type="text/javascript" src="js/libs/aSyncStorage.js" defer></script>
     <!--Code-->
     <script type="text/javascript" src="js/classes/FIO.js" defer></script>
     <script type="text/javascript" src="js/classes/Track.js" defer></script>
@@ -93,7 +93,7 @@
             </li>
         </ul>
         <header>Recent</header>
-        <ul>
+        <ul id="recent-files-menu">
             <li>
                 <a href="#">
                     <p>No recent files</p>
@@ -101,6 +101,16 @@
                 </a>
             </li>
         </ul>
+
+        <header>All the files</header>
+        <ul>
+            <li>
+                <a href="#">
+                    <p>Show by date</p>
+                </a>
+            </li>
+        </ul>
+
 
         <header>Share</header>
         <ul>
@@ -131,6 +141,46 @@
             <div id="app-container">
                 <!--Blocking panel-->
                 <div id="waiting-panel" class="hiddenElement"></div>
+                <div id="selector-panel" class="hiddenElement">
+                    <table>
+                        <tr>
+                            <td>
+                                <div>Velocity - set a value</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>Faster</div>
+                            </td>
+                            <td>
+                                <div>Slower</div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="range" min="200" step="100" value="500" max="1500" id="range-step"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>
+                                    500
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="button50">
+                                <button>Cancel</button>
+                            </td>
+                            <td class="button50">
+                                <button class="red">Ok</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
                 <!--Light blue decoration on top-->
                 <div id="timer-decor">
 
@@ -174,11 +224,11 @@
 
                     <div>
                         <button id="number-spaces"></button>
-                        <label>Columns</label>
+                        <label>Columns: <span id="number-columns-label">8</span></label>
                     </div>
                     <div>
                         <button id="interval-toggle"></button>
-                        <label>Rhythm</label>
+                        <label>Velocity <span id="velocity-label">0</span></label>
                     </div>
                     <div class="clear"></div>
                     <div>
@@ -197,6 +247,16 @@
                 </div>
                 <!--Tracks Setting-->
                 <div class="blueBackground hiddenElement" id="mu-settings-panel">
+                    <!-- Recording panel-->
+                    <div id="recording-panel" class="hiddenElement">
+                        <div>
+                            <div id="mic-loader">
+                                <div id="mic-icon"></div>
+                            </div>
+                            <span id="mic-title">Recording...</span>
+                        </div>
+                    </div>
+                    <!-- Audio track -->
                     <form name="audioTrack">
                         <table>
                             <tbody>
@@ -246,7 +306,7 @@
                                     <input name="type" value="recording" type="radio">
                                 </td>
                                 <td>
-                                    <button name="record-choice">Hold to record</button>
+                                    <button name="record-choice">Record sound</button>
                                 </td>
                                 <td>
                                     <button name="play-choice">Play</button>

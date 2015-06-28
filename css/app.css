@@ -145,7 +145,7 @@ body {
     border-radius:50px;
     float:left;
     padding: 35px;
-    margin: 5px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
     /*border:1px solid white;*/
 }
 
@@ -232,6 +232,60 @@ body {
     color:white;
 }
 
+/*------------Recording Panel---------------*/
+
+#recording-panel {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0px;
+    box-shadow: inset 19px 0px 90px #333;
+}
+
+#recording-panel > div {
+    margin: 0px auto;
+    width: 100px;
+    padding: 100px 0px 0px 0px;
+}
+
+#recording-panel #mic-icon {
+    background: url('../icons/controls/icon_mic.png');
+    width: 80px;
+    height: 80px;
+}
+
+#recording-panel #mic-loader {
+    background: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    box-shadow: 0px 0px 30px #333;
+}
+
+.animationPopUp {
+    animation: popUp 1s forwards;
+
+}
+
+.animationBG {
+    animation: bgChange 1s forwards;
+
+}
+
+#recording-panel #mic-title {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    color: white;
+    float: left;
+}
+
+/*--------------------------------------------*/
+
 .giant {
     font-size: 48px;
     text-align: center;
@@ -290,6 +344,74 @@ img.mu-settings {
 .visibleElement{
     display: inline;
     opacity: 1;
+}
+
+/* ----------- Value Selector ----------*/
+
+#selector-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1001;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+}
+
+#selector-panel div {
+    font-size: 18px;
+    color: white;
+}
+
+#selector-panel table {
+    width: 100%;
+}
+
+#selector-panel table td {
+    width: 100%;
+}
+
+#selector-panel table .button50 {
+    width: 45%;
+    position: absolute;
+    bottom: 0px;
+}
+
+#selector-panel table .button50:first-child {
+    left: 0px;
+}
+
+#selector-panel table .button50:last-child {
+    left: 50%;
+}
+
+#selector-panel table td * {
+    margin: 10px;
+}
+
+#selector-panel table tr:first-child div {
+    float: left;
+    margin: 10px;
+
+}
+
+#selector-panel table span {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+#selector-panel table input[type=range] {
+    width: 90%;
+}
+
+#selector-panel button {
+    width: 100%;
+}
+
+button.red {
+    background: #ff463e;
 }
 
 
