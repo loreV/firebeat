@@ -11,22 +11,6 @@ function Track(defaultAudio, name, category) {
     this.audioObj = defaultAudio;
 }
 
-Track.prototype.setName = function(name){
-    this.name = name;
-};
-
-Track.prototype.getName = function(){
-    return this.name;
-};
-
-Track.prototype.setPath = function(path){
-    this.path = path;
-};
-
-Track.prototype.getPath = function(){
-    console.log(this.path);
-    return this.path;
-};
 
 
 Track.prototype.setType = function(type){
@@ -56,6 +40,34 @@ Track.prototype.setAudio = function (category, trackName, path) {
     // the sound is not reloaded. This forces to reload it.
     //this.audioObj.stop();
 };
+/***
+ * Set the balance and assigns it to the track
+ * @param val
+ */
+Track.prototype.setBalance = function (val) {
+    this.balance = val;
+    this.audioObj.pos3d(this.balance, 0, 0);
+};
+
+
+/** BORING GETTERS AND SETTERS **/
+
+Track.prototype.setName = function (name) {
+    this.name = name;
+};
+
+Track.prototype.getName = function () {
+    return this.name;
+};
+
+Track.prototype.setPath = function (path) {
+    this.path = path;
+};
+
+Track.prototype.getPath = function () {
+    console.log(this.path);
+    return this.path;
+};
 
 Track.prototype.getCategory = function () {
     return this.category;
@@ -81,15 +93,3 @@ Track.prototype.setVolume = function (val) {
     this.audioObj.volume(val);
     this.volume = val;
 };
-
-
-/***
- * Set the balance and assigns it to the track
- * @param val
- */
-Track.prototype.setBalance = function (val) {
-    this.balance = val;
-    this.audioObj.pos3d(this.balance, 0, 0);
-};
-
-

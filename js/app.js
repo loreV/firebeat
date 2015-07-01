@@ -78,7 +78,7 @@ F = {
                     screen.lockOrientation('landscape');
                 }
             } catch (e){
-                console.warn("No firefox OS")
+                console.warn("No firefox OS");
             }
         },
 
@@ -259,6 +259,7 @@ F = {
                     console.log("Toggle Interval");
                     var panel = $('#selector-panel');
                     if (panel.hasClass('visibleElement')) {
+                        $('#velocity-label').html(F.editor.controls.interval.toString() + "ms");
                         panel.removeClass('visibleElement');
                     } else {
 
@@ -438,10 +439,11 @@ F = {
                         $('#recording-panel').addClass('visibleElement');
                         $('#mic-loader').addClass('animationPopUp');
                         $('#waiting-panel').addClass('visibleElement');
-
+                        $('#mic-title').html("About to record...");
                         setTimeout(function () {
                             $('#mic-loader').addClass('animationBG');
                         }, 1000);
+
 
                         $('button[name="record-choice"]').attr("disabled", "disabled");
                     },
@@ -531,12 +533,10 @@ F = {
         },
         menu : {
             init: function(){
-                //
+                // Loads in the beats saved so far
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
                 var beatTime = (F.utils.io.simpleLoad("beats_time")) ? F.utils.io.simpleLoad("beats_time") : '';
                 this.displaySaves(beat.split(';'));
-
-
                 $('#mainContainer').css('width', window.innerWidth);
                 $('#mainContainer').css('height', window.innerHeight);
                 $('.new-btn').click(function () {
@@ -545,6 +545,9 @@ F = {
                 });
                 $('.exit-screen').click(function () {
                     F.editor.exit();
+                });
+                $('.save-element').click(function (e) {
+                    F.settings.beat.load(e.currentTarget.id);
                 });
             },
             /***
@@ -559,18 +562,14 @@ F = {
 
                 var limit = (arrayFiles.length < 5) ? arrayFiles.length : 5;
 
-
                 for (var z = 0; z < limit; z++) {
                     if (arrayFiles[z] != "") {
-                        elem += "<li class=''><a href='#'><p>" + arrayFiles[z] + "</p></a></li>";
+                        elem += "<li class='save-element' id='" + arrayFiles[z] + "'><a href='#'><p>" + arrayFiles[z] + "</p></a></li>";
                     }
                 }
-
                 if (elem != "") {
                     $('#recent-files-menu').html(elem);
                 }
-
-
             }
         }
     },
@@ -643,6 +642,11 @@ F = {
 
         /**
          * Creates a new grid. This method should be called only on creation.
+         * If no parameters are passed, then the size of those will be decided within the
+         * method.
+         * @param minimum number of rows to be displayed
+         * @param minimum number of columns
+         *
          */
         newGrid: function (minRows, minColumns) {
 
@@ -876,18 +880,7 @@ F = {
                                 var file = this.songsListObject.categories[i].tracks[z].file;
                                 F.editor.controls.tracks[this.currentSettingsIndex].setAudio(category, name, F.editor.PATHTOTRACKS + category + "/" + file);
                                 F.editor.controls.tracks[this.currentSettingsIndex].getAudioObj().play();
-                                //this.previewAudio(category, file, F.editor.PATHTOTRACKS);
-                                /**
-                                 * TODO verify whether there is a bug at this point
-                                 * description: user first adds one track, selects some tiles,
-                                 * and adds a new track. When changing audio track on the first or secondly
-                                 * added track, the unselected track does not longer play sound.
-                                 */
-                                //if(F.editor.controls.tracks.length == 1){
-                                //    F.editor.controls.tracks[0].setAudioObjFromObj(F.editor.controls.tracks[0].getAudioObj());
-                                //    F.editor.controls.tracks[1].setAudioObjFromObj(F.editor.controls.tracks[1].getAudioObj());
-                                //}
-
+                                //this.previewAudio(category, file, F.editor.PATHTOTRACKS)
                                 return;
                             }
                         }
@@ -931,22 +924,25 @@ F = {
                                 // console.log("done - recording");
                                 F.editor.trackSettings.recorder.stop();
                                 F.editor.trackSettings.recorder.exportWAV(function (e) {
-                                    //Recorder.forceDownload(e, "b.wav");
+                                    // TODO converting it to an mp3
 
 
-                                    console.log("saving...");
-                                    F.utils.io.saveRecording(e, function(path){
-                                        F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setPath(path);
+                                    var filename = "recording/" + Date.now().toString() + ".wav";
+                                    F.utils.io.saveRecording(filename, e, function () {
+                                        F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setPath(filename);
                                         F.ui.editor.trackSettings.recordAudio.end();
 
                                         // TODO -> test
-                                        F.utils.io._loadFromSD(path, function (e) {
+                                        F.utils.io._loadFromDB(filename, function (e) {
                                             var blob = e;
                                             //var audioElement = document.getElementById('audio_preview');
                                             //audioElement.src = window.URL.createObjectURL(blob);
                                             F.utils.notify("Audio Recorded.");
                                             var src = [window.URL.createObjectURL(blob)];
                                             F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setAudioObj(src, "wav");
+                                            F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setType("recording");
+                                            // TODO enable the button
+
                                         });
                                         //console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
                                     });
@@ -969,7 +965,7 @@ F = {
             playRecordedAudio: function () {
                 var path = F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath();
                 if (path != "") {
-                    F.utils.io._loadFromSD(path, function (e) {
+                    F.utils.io._loadFromDB(path, function (e) {
                         var blob = e;
                         new Howl({
                                 src: [window.URL.createObjectURL(blob)],
@@ -1049,14 +1045,10 @@ F = {
                         contentSave += ('"type": "' + F.editor.controls.tracks[i].getType() + '",');
                         contentSave += ('"balance": "' + F.editor.controls.tracks[i].getBalance() + '",');
                         contentSave += ('"volume": "' + F.editor.controls.tracks[i].getVolume() + '"');
-                        //this.audioObj = defaultAudio;
-
-                        //console.log(i, F.editor.controls.tracks.length - 1)
                         if (i == F.editor.controls.tracks.length - 1) {
                             // last track
                             contentSave += "}"
                         } else {
-
                             contentSave += "},"
                         }
                     }
@@ -1078,12 +1070,27 @@ F = {
 
                 });
             },
+            /**
+             * Consumes a filename and loads in every data about the beat that should be loaded.
+             * @param name
+             */
             load: function (name) {
+                if (name.indexOf(".json") === -1) {
+                    name = name + ".json";
+                }
+
                 F.utils.io.loadBeat(name, function (text) {
-                    console.log(text)
+
+                    // Convert blob into a binary string
+                    var reader = new window.FileReader();
+                    reader.readAsBinaryString(text);
+
+                    // When it is done the file is parsed,
+                    // and the data added.
+                    reader.onloadend = function () {
+                        text = reader.result;
 
                     var j = JSON.parse(text);
-
                     F.editor.controls.grid = j.grid;
                     F.editor.controls.tracks = [];
                     for(var i = 0 ; i < j.tracks.length; i++){
@@ -1104,7 +1111,7 @@ F = {
                         if(type == "recording"){
 
 
-                            F.utils.io._loadFromSD(path, function (e) {
+                            F.utils.io._loadFromDB(path, function (e) {
                                 var blob = e;
                                 var audioObj = new Howl({
                                         src: [window.URL.createObjectURL(blob)],
@@ -1150,13 +1157,15 @@ F = {
                     //    - Settings menu
                     //- Increase number of steps in players (8 or 16)
                     //- Browsable up to 9 tracks
+                    }
                 });
+
                 // TODO test that everything was loaded in.
                 // Add tracks to UI
-                for(var i=0; i < F.editor.controls.tracks.length; i++){
-                    F.ui.editor.addTrack(i);
-                }
-                document.getElementById('file-name').value = name;
+                //for(var i=0; i < F.editor.controls.tracks.length; i++){
+                //    F.ui.editor.addTrack(i);
+                //}
+                //document.getElementById('file-name').value = name;
             }
 
 
