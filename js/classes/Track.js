@@ -46,7 +46,7 @@ Track.prototype.setAudio = function (category, trackName, path) {
  */
 Track.prototype.setBalance = function (val) {
     this.balance = val;
-    this.audioObj.pos3d(this.balance, 0, 0);
+    this.audioObj.pos(this.balance, 0, 0);
 };
 
 

@@ -428,6 +428,10 @@ F = {
                     $('#right-side-controls').addClass('hiddenElement');
 
                 },
+                /***
+                 * Hide the track settings
+                 * @param index
+                 */
                 hide: function (index) {
                     $('#mu-' + index).removeClass('blueBackground');
                     $('#mu-settings-panel').addClass('hiddenElement');
@@ -532,6 +536,9 @@ F = {
             }
         },
         menu : {
+            /**
+             * Initialize the user interface for the menu
+             */
             init: function(){
                 // Loads in the beats saved so far
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
@@ -541,12 +548,13 @@ F = {
                 $('#mainContainer').css('height', window.innerHeight);
                 $('.new-btn').click(function () {
                     F.ui.changeScreen("editor", "deeper");
-                    F.editor.init();
+                    F.editor.init(true);
                 });
                 $('.exit-screen').click(function () {
                     F.editor.exit();
                 });
-                $('.save-element').click(function (e) {
+
+                $('.saved-element').click(function (e) {
                     F.settings.beat.load(e.currentTarget.id);
                 });
             },
@@ -564,7 +572,7 @@ F = {
 
                 for (var z = 0; z < limit; z++) {
                     if (arrayFiles[z] != "") {
-                        elem += "<li class='save-element' id='" + arrayFiles[z] + "'><a href='#'><p>" + arrayFiles[z] + "</p></a></li>";
+                        elem += "<li class='saved-element' id='" + arrayFiles[z] + "'><a href='#'><p>" + arrayFiles[z] + "</p></a></li>";
                     }
                 }
                 if (elem != "") {
@@ -596,7 +604,7 @@ F = {
         PATHTOTRACKS: 'data/effects/',
 
 
-        init: function () {
+        init: function (isNew) {
 
             var date = new Date();
             document.getElementById("file-name").value = "fb_" + date.getDate()+ date.getMonth() + date.getYear() + date.getMinutes();
@@ -624,7 +632,11 @@ F = {
 
             F.ui.editor.refreshUI();
             F.ui.editor.init();
-            this.controls.init();
+
+            if (isNew) {
+                this.controls.init();
+            }
+
 
             //TODO-> refactor this shit!
             //var script = document.createElement('script');
@@ -632,7 +644,7 @@ F = {
             //script.src = 'js/libs/libmp3lame.min.js';
             //$('head').append(script);
 
-
+            // TODO LOAD only once
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = 'js/classes/Recorder.js';
@@ -702,8 +714,21 @@ F = {
         /***
          *  Open an existing beat
          */
-        openBeat:function(){
+        openBeat: function (grid, columns, interval) {
+            // TODO initialize the grid
+            this.init(false);
+            F.editor.controls.grid = grid;
+            // loop backward since the tracks are pushed in
+            //for(var i = tracks.length-1 ; i > 0 ; i--){
+            //    F.editor.addTrack(tracks[i].category, tracks[i].name, tracks[i].name, tracks[i].balance, tracks[i].volume, tracks[i].path, tracks[i].type);
+            //}
+            F.editor.controls.interval = interval;
 
+            if (columns === 16) {
+                F.ui.editor.beatSettings.toggleNumberColumns();
+            }
+            // TODO add elements on the side automatically
+            F.ui.editor.refresh()
         },
         /**
          * Checks a position in the grid to add a tile to it.
@@ -728,24 +753,55 @@ F = {
                 console.log(this.controls.grid);
             }
         },
-        addTrack: function(){
+        /**
+         * String, String, String -> Track
+         * Add a track to the list. If the parameters are not passed then the last
+         * @param category
+         * @type string
+         * @param filename
+         * @type string
+         * @param trackName
+         * @type string
+         * @param balance
+         * @type number
+         * @param volume
+         * @type number
+         * @param path
+         * @type string
+         * @param type
+         * @type string ("audio" or "recording")
+         */
+        addTrack: function (category, filename, trackName, balance, volume, path, type) {
             // if tracks are less than 10 -- for memory reasons
             if (this.controls.tracks.length < 8) {
                 F.ui.editor.addTrack( this.controls.tracks.length );
 
-                var categoryName = this.trackSettings.songsListObject.categories[0].name;
-                var fileName = this.trackSettings.songsListObject.categories[0].tracks[0].file;
-                var trackName = this.trackSettings.songsListObject.categories[0].tracks[0].name;
+                var categoryName = (category != undefined) ? category : this.trackSettings.songsListObject.categories[0].name;
+                var fileName = (filename != undefined) ? filename : this.trackSettings.songsListObject.categories[0].tracks[0].file;
+                var trackName = (trackName != undefined) ? trackName : this.trackSettings.songsListObject.categories[0].tracks[0].name;
+                var type = (type != undefined) ? type : "audio";
 
 
-                this.controls.tracks.push(
-                    new Track(
-                        new Howl({
-                            src: [this.PATHTOTRACKS + categoryName + "/" + fileName],
-                            buffer: true
-                        })
-                        , trackName, categoryName) // < --- Modify here
-                );
+                if (type === "audio") {
+
+                    var lastIndex = this.controls.tracks.push(
+                        new Track(
+                            new Howl({
+                                src: [this.PATHTOTRACKS + categoryName + "/" + fileName],
+                                buffer: true
+                            })
+                            , trackName, categoryName) // < --- Modify here
+                    );
+
+                } else {
+                    //    TODO recording functionalities need implementation
+
+                }
+
+                //this.controls.tracks[lastIndex-1].path = (path != undefined) ? path : this.controls.tracks[lastIndex-1].path;
+                this.controls.tracks[lastIndex - 1].volume = (volume != undefined) ? volume : this.controls.tracks[lastIndex - 1].volume;
+                this.controls.tracks[lastIndex - 1].balance = (balance != undefined) ? balance : this.controls.tracks[lastIndex - 1].balance;
+
             }
         },
         removeTrack: function(index){
@@ -780,9 +836,6 @@ F = {
                         this.grid[i][x] = 0;
                     }
                 }
-
-
-                F.editor.trackSettings.init();
             },
             /**
              * Do a check before loading
@@ -826,10 +879,15 @@ F = {
                     // Draw the cursor;
                     F.ui.editor.cursor.drawNext(F.editor.controls.cursor, F.editor.controls.grid);
 
+                    var trNr = F.editor.controls.tracks.length;
                     // Selects the right column to play for
                     for (var i = 0; i < F.editor.controls.columns; i++) {
                         if (F.editor.controls.grid[F.editor.controls.cursor][i] != 0) {
-                            F.editor.controls.tracks[i].getAudioObj().play();
+                            if (i < trNr) {
+                                F.editor.controls.tracks[i].getAudioObj().play();
+                            } else {
+                                break;
+                            }
                         }
                     }
                     // Starts back if the end is reached
@@ -1024,6 +1082,11 @@ F = {
     },
     settings: {
         beat: {
+            /**
+             * Consumes a filename and saves a json file into the indexeDB if succefull.
+             * @param name
+             * @returns {boolean}
+             */
             save: function (name) {
                 var test = /[\/:\*\?"<>\\|]/g.test(name);
                 if (test) {
@@ -1053,17 +1116,19 @@ F = {
                         }
                     }
                     contentSave += "],";
-                    contentSave += '"interval": ' + F.editor.controls.interval;
+                    contentSave += '"interval": ' + F.editor.controls.interval + ',';
+                    contentSave += '"columns": ' + F.editor.controls.columns;
                     contentSave += "}"
                 }
 
+                console.log(contentSave);
                 // TODO: refactor constants
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
                 var beatTime = (F.utils.io.simpleLoad("beats_time")) ? F.utils.io.simpleLoad("beats_time") : '';
 
                 F.utils.io.saveBeat(name, contentSave, function () {
                     console.log("File was saved");
-                //    Add to the local storage
+                    //  Add to the local storage
                     F.utils.io.simpleSave("beats", beat + ";" + name );
                     F.utils.io.simpleSave("beats_time", beatTime + ";" + name);
                     F.utils.notify(name + " firebeat has been saved.");
@@ -1073,6 +1138,8 @@ F = {
             /**
              * Consumes a filename and loads in every data about the beat that should be loaded.
              * @param name
+             * example :
+             * "{ "grid":[[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"tracks": [{"name": "Bd-01","path": "","category": "drum_machine","type": "audio","balance": "0.5","volume": "0.5"}],"interval": 500}"
              */
             load: function (name) {
                 if (name.indexOf(".json") === -1) {
@@ -1091,12 +1158,20 @@ F = {
                         text = reader.result;
 
                     var j = JSON.parse(text);
-                    F.editor.controls.grid = j.grid;
-                    F.editor.controls.tracks = [];
-                    for(var i = 0 ; i < j.tracks.length; i++){
-                        // add to the array
-                        var currentTrack = j.tracks[i];
 
+                        //console.log(j);
+                        F.editor.controls.grid = j.grid;
+                    F.editor.controls.tracks = [];
+
+                        var tracksLength = j.tracks.length;
+                        console.log("Nr tracks:" + tracksLength);
+
+                        loadStep(0);
+
+                        function loadStep(i) {
+                            //for (var i = 0; i < j.tracks.length; i++) {
+                            // add to the array
+                        var currentTrack = j.tracks[i];
                         var newTrack = {};
                         var trackName = currentTrack.name;
                         var categoryName = currentTrack.category;
@@ -1108,9 +1183,7 @@ F = {
                         /** TODO : Refactor the below code.
                          * The load from SD card is an ajax call! **/
 
-                        if(type == "recording"){
-
-
+                            if (type === "recording") {
                             F.utils.io._loadFromDB(path, function (e) {
                                 var blob = e;
                                 var audioObj = new Howl({
@@ -1125,12 +1198,35 @@ F = {
                                 newTrack.setVolume(volume);
                                 newTrack.setBalance(balance);
                                 F.editor.controls.tracks[i] = newTrack;
+                                F.ui.editor.addTrack(i);
 
+                                if (i < tracksLength - 1) {
+                                    loadStep(i + 1);
+                                }
                             });
                         } else {
+                                var name;
+                                // Find the url of the track
+                                for (var z = 0; z < F.editor.trackSettings.songsListObject.categories.length; z++) {
+                                    if (F.editor.trackSettings.songsListObject.categories[z].name === categoryName) {
+                                        for (var t = 0; t < F.editor.trackSettings.songsListObject.categories[z].tracks.length; t++) {
+                                            if (F.editor.trackSettings.songsListObject.categories[z].tracks[t].name === trackName) {
+                                                name = F.editor.trackSettings.songsListObject.categories[z].tracks[t].file;
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+
+                                }
+
                             var path = F.editor.PATHTOTRACKS + categoryName + "/" + name;
+
+                                //console.log(F.editor.trackSettings.songsListObject);
+                                //
+
                             var audioObj = new Howl({
-                                src: [ path ],
+                                src: [path],
                                 buffer: true
                             });
                             newTrack = new Track(audioObj, trackName, categoryName);
@@ -1138,13 +1234,23 @@ F = {
                             newTrack.setVolume(volume);
                             newTrack.setBalance(balance);
                             F.editor.controls.tracks[i] = newTrack;
+                                F.ui.editor.addTrack(i);
+
+                                if (i < tracksLength - 1) {
+                                    loadStep(i + 1);
+                                }
                         }
                     }
 
+                        //for(var x = 0 ; x < F.editor.controls.tracks.length; x++)
+                        //{
+
+                        //}
 
                     F.editor.controls.grid=j.grid;
                     F.editor.controls.interval=j.interval;
-
+                        F.ui.changeScreen('editor', 'deeper');
+                        F.editor.openBeat(j.grid, j.columns, j.interval);
                     //TODO :
                     //
                     //    - Test save and load
@@ -1181,6 +1287,7 @@ F = {
         init: function (IO) {
             F.utils.io = IO;
             F.ui.menu.init();
+            F.editor.trackSettings.init();
         }
 
     }
