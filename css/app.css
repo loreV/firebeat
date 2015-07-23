@@ -33,6 +33,15 @@ body {
     display: inline;
 }
 
+#menu > header, #saves > header {
+    position: fixed;
+    width: 100%;
+}
+
+section[data-type=list] {
+    margin-top: 50px;
+}
+
 .visiblePage {
     left: 0px;
     top: 0px;
@@ -125,6 +134,27 @@ body {
     opacity: 0;
 }
 
+/*---------------- Load panel -----------------*/
+#saves {
+    z-index: 1000;
+    background: white;
+}
+
+.timeModified {
+    float: left;
+    margin: 5px 0px 0px 0px;
+}
+
+#delete_track_btn {
+    background: url(../icons/controls/iconmonstr-trash-can-8-icon-24.png);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+
 /*---------------- Menu panel -----------------*/
 
 #menu-panel{
@@ -134,7 +164,7 @@ body {
     width: 85%;
     position: absolute;
     left: 7%;
-    top: 5%;
+    top: 15px;
     padding:5px;
     height:83%;
 }
@@ -148,6 +178,12 @@ body {
     margin: 0px 10px 0px 10px;
     /*border:1px solid white;*/
 }
+
+#menu-panel button:active {
+    border: 2px white solid;
+    margin: 0px 0px 0px 0px;
+}
+
 
 #file-name{
     background: white;
@@ -213,6 +249,14 @@ body {
 
 }
 
+#control-hide {
+    position: absolute;
+    top: 75px;
+    height: 20px;
+    left: 10px;
+    padding: 0px;
+    border-radius: 0px;
+}
 
 #right-side-controls #control-menu{
     /*Width is decided by JS*/
@@ -229,6 +273,7 @@ body {
     margin:10px 0px 0px 20px;
     /*font-weight: 800;*/
     float: left;
+    text-overflow: ellipsis;
     color:white;
 }
 

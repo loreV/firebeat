@@ -71,6 +71,14 @@ FIO.prototype.saveRecording = function (name, blob, onSuccess) {
     var filename = name;
     this._saveToDB(blob, filename, onSuccess);
 };
+/**
+ * Destroy a recording
+ * @param name
+ * @param callback
+ */
+FIO.prototype.deleteFromDb = function (name, callback) {
+    asyncStorage.removeItem(name, callback);
+}
 
 
 FIO.prototype.openRecording = function () {

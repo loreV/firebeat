@@ -2,7 +2,7 @@
  *  Firebeat v1.0
  *  www.themovingweb.com/firebeat/
  *
- *   2015, Lorenzo Verri
+ *  2015, Lorenzo Verri
  *
  *  MIT License
  */
@@ -14,9 +14,12 @@ F = {
         io: null,
 
         notify: function (sMessage) {
-            //TODO -> unify this code F 1.1 or F 1.0
             if ("Notification" in window) {
-                new Notification("Firebeat", {body: sMessage});
+                var notification = new Notification("Firebeat", {body: sMessage});
+                notification.onclick = function (e) {
+                    // vs1.1 load from the notification?
+                    //console.log(e.target.body);
+                };
             } else {
                 // Firefox OS 1.0
                 var notification = navigator.mozNotification.createNotification(
@@ -25,15 +28,54 @@ F = {
                 );
                 notification.show();
             }
+        },
+        conf: {
+            /** system language **/
+            lang: "",
+            /** is it First use **/
+            useF: true,
+            loadConf: function () {
+                var lang = F.utils.io.simpleLoad("conf/lang");
+                var useF = F.utils.io.simpleLoad("conf/useF");
+                this.lang = lang ? lang : "en";
+                this.useF = useF ? true : false;
+            },
+            /**
+             *
+             * @param lang
+             * @type string
+             * @param useF
+             * @type bool
+             */
+            saveConf: function (lang, useF) {
+                F.utils.io.simpleSave("conf/lang", lang);
+                F.utils.io.simpleSave("conf/useF", useF);
+            }
         }
     },
     // Everything concerning the ui
     ui: {
-
-        pages: ['menu', 'editor'],
+        pages: ['menu', 'editor', 'saves'],
         currentScreen: "menu",
+        /**
+         * Show or hide a page depending on whether it is showing
+         * @param page the page to be toggled
+         * @return true if the page is newly opened
+         * @return false if the page is now closed
+         */
+        toggleDisplay: function (page, callbackOpen, callbackClose) {
+            var elem = $('#' + page);
+            if (elem.hasClass("hiddenElement")) {
+                //show
+                elem.removeClass("hiddenElement");
+                return true;
+            }
+            //hide
+            elem.addClass("hiddenElement");
+            return false;
+        },
         /***
-         * Changes the screen on the ui
+         * Changes the screen on the ui by making it slide in
          * @param the new page that should become visible
          * @param direction of the new animation in
          */
@@ -69,18 +111,7 @@ F = {
                 throw new Error("Screen does not exist");
             }
         },
-        changeOrientation: function(){
-            try{
-                if (window.screen.mozLockOrientation('landscape')) {
-                    // orientation was locked
-                    screen.lockOrientation('portrait');
-                } else {
-                    screen.lockOrientation('landscape');
-                }
-            } catch (e){
-                console.warn("No firefox OS");
-            }
-        },
+
 
 
         editor: {
@@ -89,16 +120,11 @@ F = {
              */
             init: function () {
 
-                $('#control-menu').click(function(){
-                    F.ui.editor.beatSettings.toggleShow();
-                });
+                $('#control-menu').click(F.ui.editor.beatSettings.toggleShow);
 
                 var radios = document.forms["audioTrack"].elements["type"];
                 for (var i = 0; i < radios.length; i++) {
-                    radios[i].addEventListener('click', function (e) {
-                        F.ui.editor.trackSettings.toggleSelector("type");
-                        F.ui.editor.trackSettings.toggleAudioType(e.target.value);
-                    })
+                    radios[i].addEventListener('click', F.ui.editor.trackSettings.toggleSelector)
                 }
                 $('form button').click(function (e) {
                     e.preventDefault();
@@ -111,31 +137,100 @@ F = {
                         function () {
                             F.editor.trackSettings.recordAudio(F.editor.trackSettings.currentSettingsIndex);
                         }
-                        , 1500
+                        , 3000
                     );
 
                 });
-                var controlVolume = document.forms["audioTrack"].elements["vol"];
-                controlVolume.addEventListener("change", function (e) {
-                    F.ui.editor.trackSettings.toggleSelector('volume');
-                });
-                var balanceVolume = document.forms["audioTrack"].elements["bal"];
-                balanceVolume.addEventListener("change", function () {
-                    F.ui.editor.trackSettings.toggleSelector('balance');
-                });
-                var playSoundBtn = $("button[name=play-choice]")[0];
-                playSoundBtn.addEventListener("click", function () {
-                    F.editor.trackSettings.playRecordedAudio();
-                });
-                var soundSelector = document.forms["audioTrack"].elements["track-selection"];
-                soundSelector.addEventListener("change", function (e) {
-                    var catSelect = $('select[name=track-category-selection]')[0].value;
-                    F.editor.trackSettings.setupAudio(catSelect, e.target.value);
-                });
 
-
+                $('#control-hide').on("click", F.ui.editor.toggleControls);
+                var deleteTrack = $('#delete_track_btn');
+                deleteTrack.on("click", F.ui.editor.removeTrack);
+                var controlVolume = $('input[name=vol]');
+                controlVolume.on("change", F.ui.editor.trackSettings.toggleSelector);
+                var balanceVolume = $('input[name=bal]');
+                balanceVolume.on("change", F.ui.editor.trackSettings.toggleSelector);
+                var playSoundBtn = $("button[name=play-choice]");
+                playSoundBtn.on("click", F.editor.trackSettings.playRecordedAudio);
+                var soundSelector = $('select[name=track-selection]');
+                console.log(soundSelector);
+                soundSelector.on("change", F.editor.trackSettings.setupAudio);
             },
 
+            /**
+             *
+             */
+            toggleControls: function () {
+                var isHidden = $('').hasClass('hiddenElement');
+                if (isHidden) {
+
+                } else {
+
+
+                }
+            },
+
+            /***
+             * Returns true if the condition is positive for the editor to get extended
+             * @return bool
+             */
+            verifyIncreaseStep: function () {
+                if (F.editor.controls.tracks.length >= F.editor.row_number) {
+                    return true;
+                }
+                return false;
+            },
+            /**
+             * Returns true if the condition is positive for the editor to get reduced
+             * @return bool
+             */
+            verifyDecreaseStep: function () {
+                if (F.editor.controls.tracks.length < F.editor.row_number) {
+                    return true;
+                }
+                return false;
+            },
+            /**
+             * Increse/Decrease the size of the screen of the given pixel step
+             * @param step
+             * @type number
+             * @param increase
+             * @type bool
+             */
+            toggleIncreaseStepSize: function (step, increase) {
+                var editor = "editor-main";
+                var elements = ["side-controls"];
+
+                var editor = $('#' + editor);
+                var height = editor.attr('height');
+                var screenH = F.editor.look.y;
+
+                height = parseInt(height);
+                // decide how bigger
+                if (increase) {
+                    height += step;
+                } else {
+                    height -= step;
+                }
+                // check not to decrease less than the screen
+                if ((height < screenH) && !increase) {
+                    console.warn("Cannot reduce screen height");
+                    return false;
+                }
+
+                editor.attr("height", height);
+
+                for (var z = 0; z < elements.length; z++) {
+                    var element = $('#' + elements[z]);
+                    element.css("height", height + "px");
+                }
+                var container = $('#app-container');
+                if (height > screenH) {
+                    F.ui.editor.refresh();
+                    container.css("overflow-y", "scroll");
+                } else {
+                    container.css("overflow-y", "hidden");
+                }
+            },
             exit: function () {
                 var radios = document.forms["audioTrack"].elements["type"];
                 for (var i = 0; i < radios.length; i++) {
@@ -145,35 +240,48 @@ F = {
                 }
             },
             /**
+             * It names a track in the editor
+             * @param index
+             * @param name
+             */
+            nameTrack: function (index, name) {
+                $('#mu-' + index + ' .mu-title').html(name);
+            },
+            /**
              * Adds a new track
              * @param trackNr
              */
             addTrack: function(trackNr){
-                $('#mu-list').append('<section class="mu-controller mu-controller-red" id="mu-'+trackNr+'"><span class="mu-title">Track '+trackNr+'</span><div class="option" id="mu-op-'+trackNr+'"><img src="css/player/icons/left_controls.png" class="mu-settings" /></div></section>');
+                $('#mu-list').append('<section class="mu-controller mu-controller-red" id="mu-' + trackNr + '"><span class="mu-title">' + F.editor.trackSettings.songsListObject.categories[0].tracks[0].name + '</span><div class="option" id="mu-op-' + trackNr + '"><img src="css/player/icons/left_controls.png" class="mu-settings" /></div></section>');
                 $('.mu-controller').css('height', F.editor.row_size);
-                $('#mu-' + trackNr).click(function (e) {
-                    if (F.editor.controls.tracks.length < 9) {
-                        // Hide the track if the tab was already open
-                        if (F.editor.trackSettings.currentSettingsIndex == trackNr) {
-                            F.ui.editor.trackSettings.hide(trackNr);
-                            F.editor.trackSettings.currentSettingsIndex = null;
-                        } else {
-                            F.editor.trackSettings.load(e);
-                            F.ui.editor.trackSettings.show(e);
-                            F.editor.trackSettings.currentSettingsIndex = trackNr;
-                        }
-
-                    } else {
-                        alert("Too many tracks.");
-                    }
-                });
+                $('#mu-' + trackNr).click(F.editor.trackSettings.toggleSettings);
+                return true;
             },
             /**
              * Remove an existing track
              * @param trackNr
              */
-            removeTrack: function(trackNr){
-                //TODO
+            removeTrack: function () {
+                var trackNr = F.editor.trackSettings.currentSettingsIndex;
+                F.editor.removeTrack(trackNr, F.editor.controls.grid);
+                F.ui.editor.trackSettings.hide(trackNr);
+                F.editor.trackSettings.currentSettingsIndex = null;
+
+                var increaseSizeScreen = F.ui.editor.verifyDecreaseStep();
+                if (increaseSizeScreen) F.ui.editor.toggleIncreaseStepSize(F.editor.row_size, false);
+                F.ui.editor.refresh();
+                var mubuttons = $('.mu-controller');
+                for (var i = 0; i < mubuttons.length - 1; i++) {
+                    if (i != trackNr) {
+                        var elem = $('#mu-' + i);
+                        if (i > trackNr) {
+                            elem.attr('id', 'mu-' + (i - 1).toString());
+                        }
+                    } else {
+                        $('#mu-' + i).off("click");
+                    }
+                }
+                $('#mu-' + trackNr).remove();
             },
             /**
              * Add a new tile only if the tile was not added yet. Else it removes it.
@@ -184,21 +292,15 @@ F = {
                 if(isToAdd){
                     F.editor.co.fillStyle = '#FF3300';
                 } else {
-                    var color1 = "#fff3e0";
-                    var color2= "#f9fbe7";
+                    var color1 = "#FFFFFF";
+                    var color2 = "#fff59d";
                     var colorToUse = "";
-                    if((eY % 2) == 0){
-                        if(eX % 2 == 0){
+                    if ((eX % 4) == 0) {
+                        //colorToUse = color1;
                             colorToUse = color2;
-                        } else {
-                            colorToUse = color1;
-                        }
                     } else {
-                        if(eX % 2 == 0){
                             colorToUse = color1;
-                        } else {
-                            colorToUse = color2;
-                        }
+
                     }
                     F.editor.co.fillStyle = colorToUse;
                 }
@@ -221,15 +323,25 @@ F = {
              */
             beatSettings: {
                 toggleShow: function(){
+                    //Offset adjustments
+                    var editor = document.getElementById('app-container');
+                    var offsetY = editor.pageYOffset || editor.scrollTop;
+                    var container = $('#app-container');
+
                     var panel = $('#menu-panel');
                     var wpanel= $('#waiting-panel');
                     if (panel.hasClass("visibleElement")){
                         // hides it
 
+
+                        container.css("overflow-y", "scroll");
                         F.ui.editor.beatSettings.removeListeners();
                         wpanel.removeClass('visibleElement');
                         panel.removeClass('visibleElement');
                     } else {
+                        container.css("overflow-y", "hidden");
+                        panel.css('top', (offsetY + 15) + 'px');
+                        wpanel.css('top', offsetY + 'px');
                         F.ui.editor.beatSettings.addListeners();
                         wpanel.addClass('visibleElement');
                         panel.addClass('visibleElement');
@@ -254,19 +366,24 @@ F = {
 
                     $('#number-columns-label').html(F.editor.col_number.toString());
                 },
-
+                /**
+                 *
+                 */
                 toggleInterval: function(){
-                    console.log("Toggle Interval");
                     var panel = $('#selector-panel');
                     if (panel.hasClass('visibleElement')) {
+                        var editor = document.getElementById('app-container');
+                        var offsetY = editor.pageYOffset || editor.scrollTop;
+                        panel.css('top', offsetY + 'px');
                         $('#velocity-label').html(F.editor.controls.interval.toString() + "ms");
                         panel.removeClass('visibleElement');
                     } else {
-
                         panel.addClass('visibleElement');
                     }
                 },
-
+                /**
+                 *
+                 */
                 saveBeat: function () {
                     var fileName = $('input[name=file-name]').val();
                     if (fileName == "") alert("File name should be not empty");
@@ -282,8 +399,6 @@ F = {
                 },
 
                 addListeners : function(){
-                    //console.log(document.querySelector('#menu-panel button'));
-
                     $('#selector-panel #range-step').change(function (e) {
                         $('#selector-panel span').html(e.currentTarget.value + " ms");
                         F.editor.controls.interval = parseInt(e.currentTarget.value);
@@ -313,7 +428,6 @@ F = {
                                 F.ui.editor.beatSettings.exitBeat();
                                 break;
                         }
-
                     });
                 },
                 removeListeners : function(){
@@ -333,19 +447,20 @@ F = {
                     for (var i = 0; i < data.categories.length; i++) {
                         catSelect.append("<option value='" + data.categories[i].name + "'>" + data.categories[i].name + "</option>");
                     }
-
                     F.ui.editor.trackSettings.loadTracks(data.categories[0].name);
-
-                    var catSelect = catSelect[0];
-                    catSelect.addEventListener("change", function (e) {
-                        F.ui.editor.trackSettings.loadTracks(e.target.value);
-                    });
+                    catSelect.on("change", F.ui.editor.trackSettings.loadTracks);
                 },
                 /***
                  * Populates the list elements for track selection
                  * @param {string} name of the category to load the tracks
                  */
-                loadTracks: function (category) {
+                loadTracks: function (e) {
+                    var category = "";
+                    if (e.target === undefined) {
+                        category = e;
+                    } else {
+                        category = e.target.value;
+                    }
                     // clear the select list
                     var tracksSelect = $('select[name=track-selection]');
                     tracksSelect.html("");
@@ -358,9 +473,15 @@ F = {
                             }
                         }
                     }
-                    //console.log(category);
-
                 },
+                /**
+                 *
+                 * @param volume
+                 * @param balance
+                 * @param name
+                 * @param type
+                 * @param category
+                 */
                 load: function (volume, balance, name, type, category) {
                     $('form[name=audioTrack] input[name=vol]').val(volume);
                     $('form[name=audioTrack] input[name=bal]').val(balance);
@@ -373,30 +494,31 @@ F = {
                  * Attempts to toggle a change in one of the following elements
                  * @param {string} type
                  */
-                toggleSelector: function (type) {
+                toggleSelector: function (e) {
+                    var type = e.currentTarget.name;
                     var trackId = $('.blueBackground').attr('id').split('-')[1];
                     console.log(trackId);
-                    switch (type) {
-                        case 'volume':
-                            var volume = document.forms["audioTrack"].elements["vol"].value;
-                            F.editor.trackSettings.setVolume(trackId, volume);
-                            break;
-                        case 'balance':
-                            var volume = document.forms["audioTrack"].elements["bal"].value;
-                            F.editor.trackSettings.setBalance(trackId, volume);
-                            break;
-                        case 'type':
-                            var type = document.forms["audioTrack"].elements["type"].value;
-                            F.editor.trackSettings.selectAudioType(trackId, type);
-                            break;
-                    }
+                    if (type == 'vol') {
+                        var volume = document.forms["audioTrack"].elements["vol"].value;
+                        F.editor.trackSettings.setVolume(trackId, volume);
+                    } else if (type == 'bal') {
+                        var balance = document.forms["audioTrack"].elements["bal"].value;
+                        F.editor.trackSettings.setBalance(trackId, balance);
+                    } else {
+                        var type = document.forms["audioTrack"].elements["type"].value;
 
+                        F.editor.trackSettings.selectAudioType(trackId, type);
+
+
+                        F.ui.editor.trackSettings.toggleAudioType(type);
+                    }
                 },
                 /***
                  *
-                 * @param {string} Audio type should be "Audio" or "Recording"
+                 * @param {string} Audio type should be "audio" or "recording"
                  */
                 toggleAudioType: function (type) {
+                    //var type= type.target.value;
                     var el = "form[name=audioTrack] ";
                     if (type === "audio") {
                         $(el + 'input[value=audio]').prop("checked", true);
@@ -405,12 +527,10 @@ F = {
                         $(el + 'button[name=play-choice]').attr('disabled', 'disabled');
                         return;
                     }
-
                     $(el + 'input[value=recording]').prop("checked", true);
                     $(el + 'select[name=track-selection]').attr('disabled', 'disabled');
                     $(el + 'button[name=record-choice]').removeAttr('disabled');
                     $(el + 'button[name=play-choice]').removeAttr('disabled');
-
                 },
                 /**
                  * Show the track panel and applies UI changes
@@ -418,52 +538,71 @@ F = {
                  */
                 show: function (event) {
                     $('.mu-controller').removeClass('blueBackground');
+                    var settingPanel = $('#mu-settings-panel');
+                    var editor = document.getElementById('app-container');
+                    var offsetY = editor.pageYOffset || editor.scrollTop;
+                    var sideControl = $('#side-controls');
                     $(event.currentTarget).addClass('blueBackground');
                     event = event.currentTarget.id.split('-')[1];
+
+
+                    var container = $('#app-container');
+                    container.css("overflow-y", "hidden");
                     // move from the left the control panel
                     // enough pixels to still have everything showing
-                    $('#mu-settings-panel').removeClass('hiddenElement');
-                    $('#mu-settings-panel').css('left', $('#side-controls').css('width'));
+                    settingPanel.removeClass('hiddenElement');
+                    settingPanel.css('left', sideControl.css('width'));
+                    settingPanel.css('top', (offsetY + "px"));
                     // hide non usable controls (play and so)
                     $('#right-side-controls').addClass('hiddenElement');
-
                 },
                 /***
                  * Hide the track settings
                  * @param index
                  */
                 hide: function (index) {
+                    var container = $('#app-container');
+                    container.css("overflow-y", "scroll");
                     $('#mu-' + index).removeClass('blueBackground');
                     $('#mu-settings-panel').addClass('hiddenElement');
                     $('#right-side-controls').removeClass('hiddenElement');
                 },
-
+                /***
+                 * Records the audio and shows screens
+                 */
                 recordAudio: {
                     start: function () {
+                        var mic = $('#mic-title');
                         $('#recording-panel').addClass('visibleElement');
                         $('#mic-loader').addClass('animationPopUp');
                         $('#waiting-panel').addClass('visibleElement');
-                        $('#mic-title').html("About to record...");
+                        mic.html("About to record...");
                         setTimeout(function () {
                             $('#mic-loader').addClass('animationBG');
+                            setTimeout(function () {
+                                mic.html("Recording in 2...");
+                                setTimeout(function () {
+                                    mic.html("Recording in 1...");
+                                }, 1000)
+                            }, 1000)
                         }, 1000);
-
-
                         $('button[name="record-choice"]').attr("disabled", "disabled");
                     },
                     end: function () {
                         //TODO->hide the panel
-                        $('#mic-loader').removeClass('animationBG');
                         setTimeout(function () {
-                            $('#mic-loader').removeClass('animationBG');
+                            $('#mic-title').html("Done. Saving...");
+
                         }, 500);
                         setTimeout(function () {
                             $('#waiting-panel').removeClass('visibleElement');
                             $('#recording-panel').removeClass('visibleElement');
+                            $('#mic-loader').removeClass('animationBG');
                         }, 1500);
-
-
                         $('button[name="record-choice"]').removeAttr("disabled");
+                    },
+                    during: function () {
+                        $('#mic-title').html("Recording...");
                     }
                 }
             },
@@ -485,27 +624,20 @@ F = {
                  * @param {Array} gridMatrix
                  */
                 erase: function(columnIndexToRepaint, gridMatrix){
+                    var color1 = "#FFFFFF";
                     // the column to repaint is the previous one
-                    var color1= "#f9fbe7";
-                    var color2 = "#fff3e0";
+                    var color2 = "#fff59d";
                     var colorToFill = "";
+
                     for(var i = 0; i < gridMatrix[columnIndexToRepaint].length; i++)
                     {
                         if (gridMatrix[columnIndexToRepaint][i] != 0) {
                             colorToFill = "#FF0000";
                         } else {
-                            if (columnIndexToRepaint % 2 === 0) {
-                                if (i % 2 === 0) {
-                                    colorToFill = color1;
-                                } else {
-                                    colorToFill = color2;
-                                }
+                            if (columnIndexToRepaint % 4 == 0) {
+                                colorToFill = color2;
                             } else {
-                                if (i % 2 === 0) {
-                                    colorToFill = color2;
-                                } else {
-                                    colorToFill = color1;
-                                }
+                                colorToFill = color1;
                             }
                         }
                         F.editor.co.fillStyle = colorToFill;
@@ -513,7 +645,6 @@ F = {
                     }
                 }
             },
-
             togglePlay : function(){
                 var button = $('#control-play');
                 var p = "url('css/player/icons/"; var pe = "')";
@@ -541,43 +672,79 @@ F = {
              */
             init: function(){
                 // Loads in the beats saved so far
-                var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
-                var beatTime = (F.utils.io.simpleLoad("beats_time")) ? F.utils.io.simpleLoad("beats_time") : '';
-                this.displaySaves(beat.split(';'));
+                this.displaySaves(false, false, 'recent-files-menu', 5);
                 $('#mainContainer').css('width', window.innerWidth);
                 $('#mainContainer').css('height', window.innerHeight);
                 $('.new-btn').click(function () {
                     F.ui.changeScreen("editor", "deeper");
                     F.editor.init(true);
                 });
-                $('.exit-screen').click(function () {
-                    F.editor.exit();
-                });
+                $('.exit-screen').click(F.editor.exit);
+                $('#show-saved-list').click(F.menu.saves.toggle);
 
-                $('.saved-element').click(function (e) {
-                    F.settings.beat.load(e.currentTarget.id);
-                });
             },
             /***
              * Populates the menu with the last saves
              * @param arrayFiles
              * @type String[]
+             * @param listToAppend
+             * @type String
+             * @param number of elements to show
              */
-            displaySaves: function (arrayFiles, time) {
+            displaySaves: function (showDeleteBtn, showTime, listToAppend, limit) {
                 // last should go first in time
+                var arrayFiles = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
+                if (arrayFiles === '') return false;
+                var arrayOfTime = (F.utils.io.simpleLoad("beats_time")) ? F.utils.io.simpleLoad("beats_time") : '';
+                if (arrayFiles != "") arrayFiles = arrayFiles.split(";");
+                if (arrayOfTime != "") arrayOfTime = arrayOfTime.split(";");
+                // best would be to simply iterate through this without saving a copy of it
                 arrayFiles = arrayFiles.reverse();
+                arrayOfTime = arrayOfTime.reverse();
                 var elem = "";
-
-                var limit = (arrayFiles.length < 5) ? arrayFiles.length : 5;
-
+                var limit = (arrayFiles.length < limit) ? arrayFiles.length : limit;
+                showDeleteBtn = showDeleteBtn ? "<aside class='pack-end'><button class='danger deleteThisSave'>Delete</button></aside>" : "";
+                var time = "";
                 for (var z = 0; z < limit; z++) {
+                    var timeFormat = new Date(parseInt(arrayOfTime[z]) * 1000);
+                    var day = timeFormat.getDate();
+                    var month = timeFormat.getMonth() + 1;
+                    var years = timeFormat.getFullYear();
+                    (showTime) ? time = ("<span class='timeModified' id='time-" + arrayFiles[z] + "'>Last time modified:   " + day + "/" + month + "/" + years + "</span>") : "";
                     if (arrayFiles[z] != "") {
-                        elem += "<li class='saved-element' id='" + arrayFiles[z] + "'><a href='#'><p>" + arrayFiles[z] + "</p></a></li>";
+                        elem += time + "<div class='clear'></div><li class='saved-element' id='" + arrayFiles[z] + "'>" + showDeleteBtn + "<p>" + arrayFiles[z] + "</p></li>";
+                    }
+
+                }
+                var savesLists = ['saves-list', 'recent-files-menu'];
+                /**
+                 * Since no more than two ids can exists at the same time,
+                 * the ones of the not showing list should be erased.
+                 * If more lists are going to be present in the application,
+                 * add a string to the array above
+                 */
+                for (var z = 0; z < savesLists.length; z++) {
+                    if (savesLists[z] != listToAppend) {
+                        $('#' + savesLists[z]).html("");
+                    }
+                    $('.saved-element').off("click");
+                }
+
+                if (elem != "") {
+                    $('#' + listToAppend).html(elem);
+
+                    var btnToDelete = $('.saved-element');
+                    btnToDelete.on("click", F.settings.beat.load);
+
+                    btnToDelete = $('.deleteThisSave')
+                    if (showDeleteBtn != false) {
+                        btnToDelete.on("click", F.menu.saves.delete);
+                    } else {
+                        btnToDelete.off("click");
                     }
                 }
-                if (elem != "") {
-                    $('#recent-files-menu').html(elem);
-                }
+
+
             }
         }
     },
@@ -622,21 +789,22 @@ F = {
             this.c.width = window.innerWidth - parseInt($('#side-controls').css('width').split('px')[0]);
             this.c.height = window.innerHeight;
             this.co = F.editor.c.getContext("2d");
-            this.newGrid();
 
-            var muLast = document.getElementById('mu-last');
-            muLast.addEventListener('click', function(){ F.editor.addTrack(); });
-            this.c.addEventListener('click', function(e){F.editor.select(e); });
+            this.c = $('#editor-main');
+            var muLast = $('#mu-last');
+            muLast.on("click", F.editor.addTrack);
+            this.c.on('click', F.editor.select);
             //$('#editor-main').click(function(e){F.editor.select(e); });
-            document.getElementById('control-play').addEventListener('click', function(){F.editor.controls.play();});
+            $('#control-play').on('click', F.editor.controls.play);
+            this.c = document.getElementById("editor-main");
 
-            F.ui.editor.refreshUI();
-            F.ui.editor.init();
 
             if (isNew) {
-                this.controls.init();
+                F.editor.controls.init();
             }
-
+            F.ui.editor.init();
+            this.newGrid();
+            F.ui.editor.refreshUI();
 
             //TODO-> refactor this shit!
             //var script = document.createElement('script');
@@ -692,36 +860,35 @@ F = {
             this.row_number = actualNrRows;
             this.col_number = min_num_columns;
 
-            var color1 = "#fff3e0";
-            var color2= "#f9fbe7";
+            //console.log();
+            $('#control-hide').css('width', this.col_size + 'px');
+
+            var color1 = "#fff59d";
+            var color2 = "#FFFFFF";
 
             var diffBackground = true;
-            var diffBackground2 = true;
-            for (var i = 0; i < actualNrRows; i++) {
-                F.editor.co.fillStyle = diffBackground ? color1 : color2;
-                F.editor.co.fillRect(0, (i * this.row_size), x , this.row_size);
+            //var diffBackground2 = true;
+            for (var i = 0; i < min_num_columns; i++) {
+                //F.editor.co.fillStyle = diffBackground ? color1 : color2;
+                //F.editor.co.fillRect(0, (i * this.row_size), x , this.row_size);
+                //
+                //for(var z = 0 ; z < min_num_columns; z++){
+                //    diffBackground = (diffBackground) ? false : true;
+                //    this.co.fillStyle = diffBackground ? color1 : color2 ;
+                //    this.co.fillRect((z * this.col_size), (i*this.row_size) , this.col_size , this.row_size);
+                //}
+                F.ui.editor.cursor.erase(i, F.editor.controls.grid);
 
-                for(var z = 0 ; z < min_num_columns; z++){
-                    this.co.fillStyle = diffBackground2 ? color2 : color1 ;
-                    this.co.fillRect((z * this.col_size), (i*this.row_size) , this.col_size , this.row_size);
-                    diffBackground2 = !diffBackground2;
-                }
-                // controls
-                diffBackground = !diffBackground;
-                diffBackground2 = !diffBackground2;
+                //F.editor.co.strokeStyle="#FFFFFF";
+                //F.editor.co.strokeRect(0, (i * this.row_size), this.col_size* min_num_columns , this.row_size);
             }
         },
         /***
          *  Open an existing beat
          */
         openBeat: function (grid, columns, interval) {
-            // TODO initialize the grid
             this.init(false);
             F.editor.controls.grid = grid;
-            // loop backward since the tracks are pushed in
-            //for(var i = tracks.length-1 ; i > 0 ; i--){
-            //    F.editor.addTrack(tracks[i].category, tracks[i].name, tracks[i].name, tracks[i].balance, tracks[i].volume, tracks[i].path, tracks[i].type);
-            //}
             F.editor.controls.interval = interval;
 
             if (columns === 16) {
@@ -737,20 +904,24 @@ F = {
         select: function(e){
             // Verify whether grid already has assigned a tile
             // determine X and Y
+            var editor = document.getElementById('app-container');
+
             var offsetX = parseInt($('#side-controls').css('width').split('px')[0]);
+            var offsetY = editor.pageYOffset || editor.scrollTop;
+
+
             var x = e.clientX - offsetX;
-            var y = e.clientY;
-            //console.log(x, y);
+            var y = e.clientY + offsetY;
             var eX = parseInt(x / F.editor.col_size);
             var eY = parseInt(y / F.editor.row_size);
 
             console.log(eX, eY);
-            if(this.controls.tracks.length > eY){
-                var isToADD = (this.controls.grid[eX][eY] === 0) ? true : false;
+            if (F.editor.controls.tracks.length > eY) {
+                var isToADD = (F.editor.controls.grid[eX][eY] === 0) ? true : false;
                 F.ui.editor.addTile(eX,eY, isToADD);
                 // Add
-                this.controls.grid[eX][eY] = (isToADD) ? 1 : 0;
-                console.log(this.controls.grid);
+                F.editor.controls.grid[eX][eY] = (isToADD) ? 1 : 0;
+                //console.log(F.editor.controls.grid);
             }
         },
         /**
@@ -773,21 +944,23 @@ F = {
          */
         addTrack: function (category, filename, trackName, balance, volume, path, type) {
             // if tracks are less than 10 -- for memory reasons
-            if (this.controls.tracks.length < 8) {
-                F.ui.editor.addTrack( this.controls.tracks.length );
 
-                var categoryName = (category != undefined) ? category : this.trackSettings.songsListObject.categories[0].name;
-                var fileName = (filename != undefined) ? filename : this.trackSettings.songsListObject.categories[0].tracks[0].file;
-                var trackName = (trackName != undefined) ? trackName : this.trackSettings.songsListObject.categories[0].tracks[0].name;
-                var type = (type != undefined) ? type : "audio";
+            if (F.editor.controls.tracks.length < F.editor.controls.MAX_ROWS) {
+                F.ui.editor.addTrack(F.editor.controls.tracks.length);
+
+
+                var categoryName = F.editor.trackSettings.songsListObject.categories[0].name;
+                var fileName = F.editor.trackSettings.songsListObject.categories[0].tracks[0].file;
+                var trackName = F.editor.trackSettings.songsListObject.categories[0].tracks[0].name;
+                var type = "audio";
 
 
                 if (type === "audio") {
 
-                    var lastIndex = this.controls.tracks.push(
+                    var lastIndex = F.editor.controls.tracks.push(
                         new Track(
                             new Howl({
-                                src: [this.PATHTOTRACKS + categoryName + "/" + fileName],
+                                src: [F.editor.PATHTOTRACKS + categoryName + "/" + fileName],
                                 buffer: true
                             })
                             , trackName, categoryName) // < --- Modify here
@@ -797,15 +970,43 @@ F = {
                     //    TODO recording functionalities need implementation
 
                 }
-
-                //this.controls.tracks[lastIndex-1].path = (path != undefined) ? path : this.controls.tracks[lastIndex-1].path;
-                this.controls.tracks[lastIndex - 1].volume = (volume != undefined) ? volume : this.controls.tracks[lastIndex - 1].volume;
-                this.controls.tracks[lastIndex - 1].balance = (balance != undefined) ? balance : this.controls.tracks[lastIndex - 1].balance;
-
+                var increaseSizeScreen = F.ui.editor.verifyIncreaseStep();
+                if (increaseSizeScreen) F.ui.editor.toggleIncreaseStepSize(F.editor.row_size, true);
+            } else {
+                alert("Maximum 10 tracks are allowed");
             }
         },
-        removeTrack: function(index){
+        /***
+         * Remove
+         * @param index
+         * @type number
+         * @param array
+         * @type the grid array
+         */
+        removeTrack: function (index, array) {
+            // move all the elements after the index up
+            F.editor.trackSettings.unsetAudio(F.editor.controls.tracks[index]);
+            F.editor.controls.tracks.splice(index, 1);
 
+            var array = array;
+            // array = F.editor.controls.grid;
+
+            if (index > array.length) console.alert("Index is greater than tracks number");
+            var isFound = false
+            for (var i = 0; i < array.length; i++) {
+
+                array[i].splice(index, 1);
+                //Destroy the sound object
+            }
+            // Refactor this!
+            var max_number_track = F.editor.controls.MAX_ROWS;
+            var last_pos_array = [];
+            for (var z = 0; z < array.length; z++) {
+                array[z][max_number_track - 1] = 0;
+            }
+            //newArray[array.length - 1] = last_pos_array;
+
+            return array;
         },
         /**
          * Contains
@@ -814,7 +1015,6 @@ F = {
 
             MAX_COLUMNS: 16,
             MAX_ROWS: 10,
-
 
             columns: 8,
             stop : true,
@@ -828,6 +1028,7 @@ F = {
             init: function(){
                 this.columns = 8;
                 this.grid = [];
+                this.tracks = [];
                 for (var i = 0; i < this.MAX_COLUMNS; i++)
                 {
                     this.grid[i] = new Array(this.MAX_ROWS);
@@ -841,14 +1042,14 @@ F = {
              * Do a check before loading
              */
             play: function () {
-                if (this.tracks.length == 0) {
+                if (F.editor.controls.tracks.length == 0) {
                     alert('No tracks added');
                 } else {
-                    if(this.stop){
-                        this.stop = false;
-                        this.load();
+                    if (F.editor.controls.stop) {
+                        F.editor.controls.stop = false;
+                        F.editor.controls.load();
                     } else {
-                        this.stop = true;
+                        F.editor.controls.stop = true;
                         // TODO -> stopsTheSound
                     }
                     F.ui.editor.togglePlay();
@@ -858,14 +1059,14 @@ F = {
              * Loads all the remaining unbuffered songs.
              */
             load: function(){
-                if(this.cursor < this.tracks.length){
+                if (F.editor.controls.cursor < F.editor.controls.tracks.length) {
                     // load next sound
                     //var obj = this.tracks[this.cursor].getAudioObj();
-                    this.cursor++;
+                    F.editor.controls.cursor++;
                     F.editor.controls.load();
                 } else {
                     // play
-                    this.cursor = 0;
+                    F.editor.controls.cursor = 0;
                     F.editor.controls.playSound();
                 }
             },
@@ -913,6 +1114,21 @@ F = {
             currentSettingsIndex: null,
             recorder: null,
             recording: null,
+
+            /**
+             *
+             */
+            toggleSettings: function (e) {
+                var trackNr = e.currentTarget.id.split('-')[1];
+                if (F.editor.trackSettings.currentSettingsIndex == trackNr) {
+                    F.ui.editor.trackSettings.hide(trackNr);
+                    F.editor.trackSettings.currentSettingsIndex = null;
+                } else {
+                    F.editor.trackSettings.load(e);
+                    F.ui.editor.trackSettings.show(e);
+                    F.editor.trackSettings.currentSettingsIndex = trackNr;
+                }
+            },
             /**
              * Change Volume
              */
@@ -930,22 +1146,37 @@ F = {
              * @param category
              * @param name
              */
-            setupAudio: function (category, name) {
-                for (var i = 0; i < this.songsListObject.categories.length; i++) {
-                    if (this.songsListObject.categories[i].name === category) {
-                        for (var z = 0; z < this.songsListObject.categories[i].tracks.length; z++) {
-                            if (this.songsListObject.categories[i].tracks[z].name === name) {
-                                var file = this.songsListObject.categories[i].tracks[z].file;
-                                F.editor.controls.tracks[this.currentSettingsIndex].setAudio(category, name, F.editor.PATHTOTRACKS + category + "/" + file);
-                                F.editor.controls.tracks[this.currentSettingsIndex].getAudioObj().play();
-                                //this.previewAudio(category, file, F.editor.PATHTOTRACKS)
+            setupAudio: function (e) {
+                var category = $('select[name=track-category-selection]')[0].value;
+                var name = e.target.value;
+
+                for (var i = 0; i < F.editor.trackSettings.songsListObject.categories.length; i++) {
+                    if (F.editor.trackSettings.songsListObject.categories[i].name === category) {
+                        for (var z = 0; z < F.editor.trackSettings.songsListObject.categories[i].tracks.length; z++) {
+                            if (F.editor.trackSettings.songsListObject.categories[i].tracks[z].name === name) {
+                                var file = F.editor.trackSettings.songsListObject.categories[i].tracks[z].file;
+                                F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setAudio(category, name, F.editor.PATHTOTRACKS + category + "/" + file);
+                                F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getAudioObj().play();
+                                // Rename the track
+                                F.ui.editor.nameTrack(F.editor.trackSettings.currentSettingsIndex, name)
                                 return;
                             }
                         }
                     }
                 }
-                //TODO -> write loop to get tracks and assign it sound
-
+            },
+            /***
+             *  Destroy the audio object within the track and with it, destroy
+             *  a potential recording still in memory.
+             */
+            unsetAudio: function (track) {
+                if (track.getType() === "recording") {
+                    var trackName = track.getName();
+                    F.utils.io.deleteFromDb(trackName, function (e) {
+                        console.log("deleted");
+                    });
+                }
+                track.getAudioObj().stop();
 
             },
             /**
@@ -968,14 +1199,13 @@ F = {
                 if (navigator.getUserMedia) {
                     navigator.getUserMedia({audio: true},
                         // Success!
-
                         // TODO: display audio recording screen
-
                         function (e) {
                             F.editor.trackSettings.recorder = new Recorder(new AudioContext().createMediaStreamSource(e), {
                                 workerPath: "js/classes/workers/recorderWorker.js",
                                 numChannels: 1
                             });
+                            F.ui.editor.trackSettings.recordAudio.during();
                             F.editor.trackSettings.recorder.record();
 
                             setTimeout(function () {
@@ -995,18 +1225,15 @@ F = {
                                             var blob = e;
                                             //var audioElement = document.getElementById('audio_preview');
                                             //audioElement.src = window.URL.createObjectURL(blob);
-                                            F.utils.notify("Audio Recorded.");
                                             var src = [window.URL.createObjectURL(blob)];
                                             F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setAudioObj(src, "wav");
                                             F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setType("recording");
-                                            // TODO enable the button
-
+                                            F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].setName(filename);
                                         });
-                                        //console.log("worked..."+F.editor.controls.tracks[F.editor.trackSettings.currentSettingsIndex].getPath());
                                     });
                                 });
 
-                            }, 1500);
+                            }, 1000);
                         },
                         function (err) {
                             alert("The following error occured: " + err.name);
@@ -1074,9 +1301,62 @@ F = {
          * Clean objects around and quit the editor
          */
         exit : function(){
-            // clean
-            F.ui.changeScreen("menu", "back");
-            // save the last session
+            var safetyMessage = confirm("Are you sure you want to exit?");
+            //
+            if (safetyMessage) {
+
+                for (var i = 0; i < F.editor.controls.tracks.length; i++) {
+                    $('#mu-' + i).off("click");
+                }
+
+                $('#mu-list').html("");
+                $('#control-menu').off('click');
+                // remove all the listeners that are not needed
+                var mu = $('#mu-last');
+                mu.off('click', F.editor.addTrack);
+
+                this.c.removeEventListener('click', F.editor.select);
+
+                $('#control-play').off('click', F.editor.controls.play);
+                // Resize the editor main
+                var editor = $('#editor-main');
+                editor.css('height', F.editor.look.y);
+                editor.off('click');
+                //Resize the container
+                var container = $('#app-container');
+                var sideControls = $('#side-controls');
+                sideControls.css('height', F.editor.look.y + "px");
+
+                container.scrollTop();
+                container.css("overflow-y", "hidden");
+                // Restore the columns
+                if (F.editor.col_number === 16) {
+                    F.ui.editor.beatSettings.toggleNumberColumns();
+                }
+                var radios = document.forms["audioTrack"].elements["type"];
+                for (var i = 0; i < radios.length; i++) {
+                    radios[i].removeEventListener('click', F.ui.editor.trackSettings.toggleSelector)
+                }
+                $('form button').off('click');
+
+                $('form[name="audioTrack"] button[name=record-choice]').off('click')
+
+
+                var controlVolume = $("input[name=vol]");
+                controlVolume.off("change");
+                var balanceVolume = $("input[name=bal]");
+                balanceVolume.off("change");
+                var playSoundBtn = $("button[name=play-choice]");
+                playSoundBtn.off("click");
+
+
+                var soundSelector = $('select[name=track-selection]');
+                soundSelector.off("change");
+                // Hide
+                F.ui.editor.beatSettings.toggleShow();
+                F.ui.changeScreen("menu", "back");
+                // save the last session
+            }
         }
 
     },
@@ -1089,11 +1369,21 @@ F = {
              */
             save: function (name) {
                 var test = /[\/:\*\?"<>\\|]/g.test(name);
+                var overwrite = false;
+                var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
+
+                if (beat.indexOf(name) != -1) {
+                    var ask = confirm("A beat named: '" + name + "' already exists. By pressing OK you will overwrite it.");
+                    if (!ask) {
+                        return false;
+                    } else {
+                        overwrite = true;
+                    }
+                }
                 if (test) {
                     return false;
                 }
                 if (F.editor.controls.tracks.length > 0) {
-
                     var contentSave = '{ "grid":';
                     contentSave += JSON.stringify(F.editor.controls.grid);
                     contentSave += ',"tracks": [';
@@ -1121,19 +1411,42 @@ F = {
                     contentSave += "}"
                 }
 
-                console.log(contentSave);
+                //console.log(contentSave);
                 // TODO: refactor constants
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
                 var beatTime = (F.utils.io.simpleLoad("beats_time")) ? F.utils.io.simpleLoad("beats_time") : '';
 
                 F.utils.io.saveBeat(name, contentSave, function () {
-                    console.log("File was saved");
                     //  Add to the local storage
-                    F.utils.io.simpleSave("beats", beat + ";" + name );
-                    F.utils.io.simpleSave("beats_time", beatTime + ";" + name);
-                    F.utils.notify(name + " firebeat has been saved.");
+                    var time = Date.now() / 1000;
 
+                    if (overwrite) {
+                        var arrayBeat = beat.split(";");
+                        var index = arrayBeat.indexOf(name);
+                        var arrayBeatTime = beatTime.split(";");
+                        arrayBeat.splice(index, 1);
+                        arrayBeatTime.splice(index, 1);
+                        beat = F.settings.beat.recomposeString(arrayBeat);
+                        beatTime = F.settings.beat.recomposeString(arrayBeatTime);
+                    }
+                    F.utils.io.simpleSave("beats", beat + ";" + name);
+                    F.utils.io.simpleSave("beats_time", beatTime + ";" + time);
+                    F.utils.notify(name + " Firebeat has been saved.");
                 });
+            },
+            /**
+             * Recomposes the string after the array has been created
+             * @param array
+             * @returns {string}
+             */
+            recomposeString: function (array) {
+                var string = "";
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] != "") {
+                        string += array[i] + ";";
+                    }
+                }
+                return string;
             },
             /**
              * Consumes a filename and loads in every data about the beat that should be loaded.
@@ -1142,6 +1455,7 @@ F = {
              * "{ "grid":[[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"tracks": [{"name": "Bd-01","path": "","category": "drum_machine","type": "audio","balance": "0.5","volume": "0.5"}],"interval": 500}"
              */
             load: function (name) {
+                var name = name.currentTarget.id;
                 if (name.indexOf(".json") === -1) {
                     name = name + ".json";
                 }
@@ -1161,10 +1475,8 @@ F = {
 
                         //console.log(j);
                         F.editor.controls.grid = j.grid;
-                    F.editor.controls.tracks = [];
-
+                        F.editor.controls.tracks = [];
                         var tracksLength = j.tracks.length;
-                        console.log("Nr tracks:" + tracksLength);
 
                         loadStep(0);
 
@@ -1200,6 +1512,12 @@ F = {
                                 F.editor.controls.tracks[i] = newTrack;
                                 F.ui.editor.addTrack(i);
 
+
+                                F.ui.editor.nameTrack(i, "Recording");
+                                var increaseSizeScreen = F.ui.editor.verifyDecreaseStep();
+                                if (increaseSizeScreen) F.ui.editor.toggleIncreaseStepSize(F.editor.row_size, false);
+
+
                                 if (i < tracksLength - 1) {
                                     loadStep(i + 1);
                                 }
@@ -1221,20 +1539,20 @@ F = {
                                 }
 
                             var path = F.editor.PATHTOTRACKS + categoryName + "/" + name;
-
-                                //console.log(F.editor.trackSettings.songsListObject);
-                                //
-
                             var audioObj = new Howl({
                                 src: [path],
                                 buffer: true
                             });
-                            newTrack = new Track(audioObj, trackName, categoryName);
+
+
+                                newTrack = new Track(audioObj, trackName, categoryName);
                             newTrack.setPath(path);
                             newTrack.setVolume(volume);
                             newTrack.setBalance(balance);
                             F.editor.controls.tracks[i] = newTrack;
                                 F.ui.editor.addTrack(i);
+
+                                F.ui.editor.nameTrack(i, trackName);
 
                                 if (i < tracksLength - 1) {
                                     loadStep(i + 1);
@@ -1242,70 +1560,112 @@ F = {
                         }
                     }
 
-                        //for(var x = 0 ; x < F.editor.controls.tracks.length; x++)
-                        //{
-
-                        //}
-
                     F.editor.controls.grid=j.grid;
                     F.editor.controls.interval=j.interval;
                         F.ui.changeScreen('editor', 'deeper');
                         F.editor.openBeat(j.grid, j.columns, j.interval);
-                    //TODO :
-                    //
-                    //    - Test save and load
-                    //- Finish the Load function to run
-                    //- Add database functionalities
-                    //
-                    //
-                    //For future:
-                    //
-                    //    - Settings menu
-                    //- Increase number of steps in players (8 or 16)
-                    //- Browsable up to 9 tracks
                     }
                 });
-
-                // TODO test that everything was loaded in.
-                // Add tracks to UI
-                //for(var i=0; i < F.editor.controls.tracks.length; i++){
-                //    F.ui.editor.addTrack(i);
-                //}
-                //document.getElementById('file-name').value = name;
             }
-
-
-
-        },
-
-        program: {}
-
-
+        }
     },
 
     menu: {
         init: function (IO) {
             F.utils.io = IO;
             F.ui.menu.init();
+            // Load the track settings only once.
             F.editor.trackSettings.init();
-        }
+        },
 
+        saves: {
+            toggle: function () {
+                var elem = 'saves';
+                var isShowing = F.ui.toggleDisplay(elem);
+                if (isShowing === true) {
+                    F.menu.saves.load(elem);
+                } else {
+                    F.menu.saves.close(elem);
+                }
+            },
+            load: function (elem) {
+                $('#icon-close').click(F.menu.saves.toggle);
+                F.ui.menu.displaySaves(true, true, 'saves-list', 9999);
+            },
+            close: function (elem) {
+                $('.icon-close').off("click");
+                $('#saves-list').html("");
+                F.ui.menu.displaySaves(false, false, 'recent-files-menu', 5);
+            },
+            delete: function (e) {
+                e.stopPropagation();
+                var object = $(e.currentTarget).parent().parent()[0];
+                var id = object.id;
+                var objectTime = $('#time-' + id);
+
+                if (id != "") {
+                    var ask = confirm("Are you sure you want to delete '" + id + "', and the connected recordings, from the memory of your phone?");
+                    if (ask) {
+
+                        // delete the files
+                        object.remove();
+                        objectTime.remove();
+                        var name = id;
+                        if (id.indexOf(".json") === -1) {
+                            id = id + ".json";
+                        }
+
+                        F.utils.io.loadBeat(id, function (text) {
+
+                            // Convert blob into a binary string
+                            var reader = new window.FileReader();
+                            reader.readAsBinaryString(text);
+
+                            // When it is done the file is parsed,
+                            // and the data added.
+                            reader.onloadend = function () {
+                                text = reader.result;
+
+                                var j = JSON.parse(text);
+                                // DELETE all the tracks
+                                for (var z = 0; z < j.tracks.length; z++) {
+                                    if (j.tracks[z].type === "recording") {
+                                        F.utils.io.deleteFromDb(j.tracks[z].name, function (e) {
+                                            console.log("removing tracks");
+                                        });
+                                    }
+                                }
+                                F.utils.io.deleteFromDb(id, function (e) {
+                                    window.navigator.vibrate(200);
+                                });
+                                // splice the array
+                                var b = F.utils.io.simpleLoad("beats");
+                                b = b.split(";");
+                                var index = b.indexOf(name);
+                                b.splice(index, 1);
+                                b = F.settings.beat.recomposeString(b);
+                                F.utils.io.simpleSave("beats", b);
+
+                                var b = F.utils.io.simpleLoad("beats_time");
+                                b = b.split(";");
+                                b.splice(index, 1);
+                                b = F.settings.beat.recomposeString(b);
+                                F.utils.io.simpleSave("beats_time", b);
+                            };
+                        });
+                    }
+
+                }
+            }
+        }
     }
 };
 
 
 window.addEventListener('DOMContentLoaded', function () {
-
     // We'll ask the browser to use strict code to help us catch errors earlier.
     // https://developer.mozilla.org/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
     'use strict';
     var IO = new FIO();
     F.menu.init(IO);
-
-
-
-    //alert("das");
-    //F.ui.changeScreen("editor","left");
-
-
 });

@@ -98,8 +98,61 @@
       ]
     },
     {
-      "name": "drum",
-      "tracks": []
+      "name": "synthetic_drum",
+      "tracks": [
+        {
+          "name": "Wood Snare",
+          "file": "173086__rocknessmonster89__wood-snare-sample-2.ogg"
+        },
+        {
+          "name": "Synth Drum",
+          "file": "268114__soneproject__synthetic-drums-10.ogg"
+        },
+        {
+          "name": "Kick01",
+          "file": "269716__ianstargem__electronic-kick-drum-1.ogg"
+        },
+        {
+          "name": "Kick02",
+          "file": "271078__ianstargem__electronic-kick-drum-2.ogg"
+        },
+        {
+          "name": "Kick03",
+          "file": "271079__ianstargem__electronic-kick-drum-3.ogg"
+        },
+        {
+          "name": "Drum",
+          "file": "271282__soneproject__synthetic-drums-7.ogg"
+        },
+        {
+          "name": "Drum02",
+          "file": "271283__soneproject__synthetic-drums-6.ogg"
+        },
+        {
+          "name": "Drum03",
+          "file": "271285__soneproject__synthetic-drums-9.ogg"
+        },
+        {
+          "name": "Pipe",
+          "file": "274609__hellska__pipe-01.ogg"
+        },
+        {
+          "name": "Simple Kick",
+          "file": "274775__ianstargem__simple-kick-drum.ogg"
+        },
+        {
+          "name": "Simple Kick02",
+          "file": "kick.ogg"
+        },
+        {
+          "name": "Plate",
+          "file": "plate.ogg"
+        },
+        {
+          "name": "Tok",
+          "file": "tuc.ogg"
+        }
+      ]
     },
     {
       "name": "anime",
@@ -139,6 +192,342 @@
         {
           "name": "We did it-Girl",
           "file": "273928__lemonjolly__we-did-it-in-japanese.ogg"
+        }
+      ]
+    },
+    {
+      "name": "action",
+      "tracks": [
+        {
+          "name": "Inventory",
+          "file": "270393__littlerobotsoundfactory__inventory-open-00.ogg"
+        },
+        {
+          "name": "Choice",
+          "file": "270401__littlerobotsoundfactory__menu-select-00.ogg"
+        },
+        {
+          "name": "Pickup gold",
+          "file": "270405__littlerobotsoundfactory__pickup-gold-03.ogg"
+        },
+        {
+          "name": "Pickup gold 2",
+          "file": "270406__littlerobotsoundfactory__pickup-gold-02.ogg"
+        },
+        {
+          "name": "Pickup gold 3",
+          "file": "270407__littlerobotsoundfactory__pickup-gold-01.ogg"
+        },
+        {
+          "name": "FootStep",
+          "file": "270415__littlerobotsoundfactory__footstep-dirt-00.ogg"
+        },
+        {
+          "name": "FootStep 2",
+          "file": "270414__littlerobotsoundfactory__footstep-dirt-01.ogg"
+        },
+        {
+          "name": "FootStep 3",
+          "file": "270413__littlerobotsoundfactory__footstep-dirt-02.ogg"
+        },
+        {
+          "name": "FootStep 4",
+          "file": "270412__littlerobotsoundfactory__footstep-dirt-03.ogg"
+        }
+      ]
+    },
+    {
+      "name": "words",
+      "tracks": [
+        {
+          "name": "word 00",
+          "file": "273238__jperryhostssounds__a22223clip2w1.ogg"
+        },
+        {
+          "name": "word 01",
+          "file": "273239__jperryhostssounds__a22223clip1w4.ogg"
+        },
+        {
+          "name": "word 02",
+          "file": "273240__jperryhostssounds__a22223clip1w3.ogg"
+        },
+        {
+          "name": "word 03",
+          "file": "273241__jperryhostssounds__a22223clip1w1.ogg"
+        },
+        {
+          "name": "word 04",
+          "file": "273242__jperryhostssounds__a22223clip2w5.ogg"
+        },
+        {
+          "name": "word 05",
+          "file": "273243__jperryhostssounds__a22223clip2w4.ogg"
+        },
+        {
+          "name": "word 06",
+          "file": "273244__jperryhostssounds__a22223clip2w3.ogg"
+        },
+        {
+          "name": "word 07",
+          "file": "273245__jperryhostssounds__a22223clip2w2.ogg"
+        },
+        {
+          "name": "word 08",
+          "file": "273246__jperryhostssounds__a23323clip1w2.ogg"
+        },
+        {
+          "name": "word 09",
+          "file": "273247__jperryhostssounds__a23323clip1w1.ogg"
+        },
+        {
+          "name": "word 10",
+          "file": "273248__jperryhostssounds__m33333clip1w2.ogg"
+        },
+        {
+          "name": "word 11",
+          "file": "273249__jperryhostssounds__m23323clip2w5.ogg"
+        },
+        {
+          "name": "word 12",
+          "file": "273250__jperryhostssounds__m33333clip1w1.ogg"
+        },
+        {
+          "name": "word 13",
+          "file": "273251__jperryhostssounds__m22223clip1w3.ogg"
+        },
+        {
+          "name": "word 14",
+          "file": "273252__jperryhostssounds__m22223clip1w4.ogg"
+        },
+        {
+          "name": "word 15",
+          "file": "273253__jperryhostssounds__m33333clip1w4.ogg"
+        },
+        {
+          "name": "word 16",
+          "file": "273254__jperryhostssounds__m33333clip1w5.ogg"
+        },
+        {
+          "name": "word 17",
+          "file": "273255__jperryhostssounds__m33333clip2w1.ogg"
+        },
+        {
+          "name": "word 18",
+          "file": "273256__jperryhostssounds__m33333clip2w2.ogg"
+        },
+        {
+          "name": "word 19",
+          "file": "273257__jperryhostssounds__a33333clip2w1.ogg"
+        },
+        {
+          "name": "word 20",
+          "file": "273258__jperryhostssounds__a33333clip2w2.ogg"
+        }
+      ]
+    },
+    {
+      "name": "laser",
+      "tracks": [
+        {
+          "name": "Low",
+          "file": "273518__kwahmah-02__dll-lasertwang-dsh-low.ogg"
+        },
+        {
+          "name": "Laser Wang A",
+          "file": "273527__kwahmah-02__dll-lasertwang-a.ogg"
+        },
+        {
+          "name": "Laser Wang B",
+          "file": "273529__kwahmah-02__dll-lasertwang-b.ogg"
+        },
+        {
+          "name": "Laser Wang C",
+          "file": "273529__kwahmah-02__dll-lasertwang-z.ogg"
+        }
+      ]
+    },
+    {
+      "name": "objects",
+      "tracks": [
+        {
+          "name": "Low",
+          "file": "41241__ortaldj__resaconnnnnnnnnnnnnnnnnnnnnnn.ogg"
+        },
+        {
+          "name": "Chair 01",
+          "file": "7038__yawfle__050816-chair-02.ogg"
+        },
+        {
+          "name": "Chair 02",
+          "file": "7039__yawfle__050816-chair-03.ogg"
+        },
+        {
+          "name": "Chair 03",
+          "file": "7046__yawfle__050816-chair-10.ogg"
+        },
+        {
+          "name": "Cork",
+          "file": "cork.ogg"
+        },
+        {
+          "name": "Tic",
+          "file": "tic.ogg"
+        }
+      ]
+    },
+    {
+      "name": "piano",
+      "tracks": [
+        {
+          "name": "A",
+          "file": "piano-a.ogg"
+        },
+        {
+          "name": "B",
+          "file": "piano-b.ogg"
+        },
+        {
+          "name": "BB",
+          "file": "piano-bb.ogg"
+        },
+        {
+          "name": "C",
+          "file": "piano-c.ogg"
+        },
+        {
+          "name": "D",
+          "file": "piano-d.ogg"
+        },
+        {
+          "name": "EB",
+          "file": "piano-eb.ogg"
+        },
+        {
+          "name": "E",
+          "file": "piano-e.ogg"
+        },
+        {
+          "name": "F",
+          "file": "piano-f.ogg"
+        },
+        {
+          "name": "G",
+          "file": "piano-g.ogg"
+        }
+      ]
+    },
+    {
+      "name": "pilot",
+      "tracks": [
+        {
+          "name": "Affermative",
+          "file": "affermative.ogg"
+        },
+        {
+          "name": "Bep",
+          "file": "bep.ogg"
+        },
+        {
+          "name": "Copy That",
+          "file": "copy_that.ogg"
+        },
+        {
+          "name": "Damn it",
+          "file": "damn_it.ogg"
+        },
+        {
+          "name": "Forming up",
+          "file": "forming_up.ogg"
+        },
+        {
+          "name": "Help",
+          "file": "help.ogg"
+        },
+        {
+          "name": "Going in",
+          "file": "i_am_going_in.ogg"
+        },
+        {
+          "name": "Mayday",
+          "file": "mayday.ogg"
+        },
+        {
+          "name": "Message",
+          "file": "message.ogg"
+        },
+        {
+          "name": "Missed",
+          "file": "missed.ogg"
+        },
+        {
+          "name": "Negative",
+          "file": "negative.ogg"
+        }
+      ]
+    },
+    {
+      "name": "snaps",
+      "tracks": [
+        {
+          "name": "Snap 01",
+          "file": "snap1.ogg"
+        },
+        {
+          "name": "Snap 02",
+          "file": "snap2.ogg"
+        },
+        {
+          "name": "Snap 03",
+          "file": "snap3.ogg"
+        },
+        {
+          "name": "Snap 04",
+          "file": "snap4.ogg"
+        }
+      ]
+    },
+    {
+      "name": "drops",
+      "tracks": [
+        {
+          "name": "Drop 01",
+          "file": "149716__beskhu__goutte-1-a.ogg"
+        },
+        {
+          "name": "Drop 02",
+          "file": "149717__beskhu__goutte-1-b.ogg"
+        },
+        {
+          "name": "Drop 03",
+          "file": "149718__beskhu__goutte-2.ogg"
+        },
+        {
+          "name": "Drop 04",
+          "file": "149719__beskhu__goutte-lp.ogg"
+        },
+        {
+          "name": "Drop 05",
+          "file": "149721__beskhu__goutte-1-full.ogg"
+        },
+        {
+          "name": "Drop 06",
+          "file": "149722__beskhu__gouttes-1.ogg"
+        },
+        {
+          "name": "Drop 07",
+          "file": "149724__beskhu__goutte-clean-crt-base.ogg"
+        },
+        {
+          "name": "Drop 08",
+          "file": "149725__beskhu__gouttes-2.ogg"
+        },
+        {
+          "name": "Drop 09",
+          "file": "149726__beskhu__goutte-fake-bruit-amb.ogg"
+        },
+        {
+          "name": "Drop 10",
+          "file": "149728__beskhu__goutte-clean-w-slnc-insrt.ogg"
         }
       ]
     }

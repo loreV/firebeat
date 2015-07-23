@@ -6,7 +6,7 @@ function Track(defaultAudio, name, category) {
     this.path = "";
     this.category = category;
     this.type = "audio"; // Should be either audio or recording
-    this.balance = 0.5;
+    this.balance = 0;
     this.volume = 0.5;
     this.audioObj = defaultAudio;
 }
@@ -23,7 +23,7 @@ Track.prototype.setType = function(type){
 
 Track.prototype.setAudioObj = function (path, format) {
     this.audioObj = new Howl({
-        src: path,
+        src: [path],
         ext: [format]
     });
 };
@@ -32,7 +32,7 @@ Track.prototype.setAudioObj = function (path, format) {
 Track.prototype.setAudio = function (category, trackName, path) {
     //this.audioObj.unload();
     this.audioObj = new Howl({
-        src: path,
+        src: [path],
         ext: ['ogg']
     });
     this.name = trackName;
@@ -45,8 +45,10 @@ Track.prototype.setAudio = function (category, trackName, path) {
  * @param val
  */
 Track.prototype.setBalance = function (val) {
-    this.balance = val;
-    this.audioObj.pos(this.balance, 0, 0);
+    this.balance = parseFloat(val);
+    var balance = this.balance;
+    if (this.balance === 0) var balance = 0.0;
+    this.audioObj.pos(balance, 0, 0);
 };
 
 

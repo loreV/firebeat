@@ -31,6 +31,8 @@
     -->
     <!--Libraries-->
     <script type="text/javascript" src="js/libs/howler.min.js" defer></script>
+    <script type="text/javascript" src="js/libs/howler.core.min.js" defer></script>
+    <script type="text/javascript" src="js/libs/howler.effects.min.js" defer></script>
     <script type="text/javascript" src="js/libs/Zepto.js" defer></script>
     <script type="text/javascript" src="js/libs/aSyncStorage.js" defer></script>
     <!--Code-->
@@ -47,6 +49,7 @@
     <link rel="prefetch" type="application/l10n" href="data/locales.ini"/>
     <script type="text/javascript" src="js/libs/l10n.js" defer></script>
     <!--TODO - remember to remove element which are not needed!-->
+    <link rel="stylesheet" type="text/css" href="css/buttons.css"/>
     <link rel="stylesheet" type="text/css" href="css/base.css"/>
     <!--<link rel="stylesheet" type="text/css" href="css/drawer.css" />-->
     <link rel="stylesheet" type="text/css" href="css/headers.css"/>
@@ -54,14 +57,54 @@
     <link rel="stylesheet" type="text/css" href="css/lists.css"/>
     <link rel="stylesheet" type="text/css" href="css/seekbars.css"/>
     <link rel="stylesheet" type="text/css" href="css/input_areas.css"/>
-    <link rel="stylesheet" type="text/css" href="css/buttons.css"/>
+
     <!--<link rel="stylesheet" type="text/css" href="css/.css"/>-->
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
 
 </head>
 <body>
 <div id="mainContainer">
+
+    <!--Loading -->
+    <section role="region" id="saves" class="page hiddenElement">
+        <header>
+            <!-- Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) -->
+            <button id="icon-close"><span class="icon icon-close">close</span></button>
+            <h1 data-l10n-id="app-heading-load">
+                Firebeat - Manage savings
+            </h1>
+        </header>
+        <section data-type="list" id="">
+            <ul id="saves-list">
+                <li class="new-btn">
+                    <a href="#">
+                        <p>New</p>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+    </section>
+
+
+    <!--About-->
+
+    <section role="region" id="about" class="page hiddenElement">
+        <header>
+            <!-- Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) -->
+            <button id="icon-close-about"><span class="icon icon-close">close</span></button>
+            <h1 data-l10n-id="app-heading-load">
+                About
+            </h1>
+        </header>
+
+
+    </section>
+
+    <!-- Main Menu -->
 <section role="region" id="menu" class="page visible-page">
+
+
     <header>
         <!-- Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) -->
         <menu type="toolbar">
@@ -72,6 +115,7 @@
         </h1>
     </header>
 
+
     <section data-type="list" id="mainMenu">
 
         <ul>
@@ -80,60 +124,52 @@
                     <img alt="placeholder" src="css/headers/images/icons/back-rtl@2.25x.png">
                 </aside>
                 <a href="#">
-                    <p>New</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <aside class="pack-end">
-                        <img alt="placeholder" src="css/headers/images/icons/back-rtl@2.25x.png">
-                    </aside>
-                    <p>Open</p>
+                    <p>New Firebeat</p>
                 </a>
             </li>
         </ul>
-        <header>Recent</header>
+        <header>Recent Beats</header>
         <ul id="recent-files-menu">
             <li>
                 <a href="#">
-                    <p>No recent files</p>
+                    <p>No recent beats</p>
 
                 </a>
             </li>
         </ul>
 
-        <header>All the files</header>
+        <header>All the Firebeats</header>
         <ul>
-            <li>
-                <a href="#">
-                    <p>Show by date</p>
-                </a>
+            <li id="show-saved-list">
+                <p>Show Firebeats by date</p>
             </li>
         </ul>
 
 
-        <header>Share</header>
+        <header>Extra</header>
         <ul>
+
             <li>
                 <a href="#">
-                    <aside class="pack-end">
-                        <img alt="placeholder" src="icons/fb.png">
-                    </aside>
-                    <p>Facebook</p>
+                    <p>Settings</p>
 
                 </a>
             </li>
+
+
             <li>
-                <a href="#">
+
                     <aside class="pack-end">
-                        <img alt="placeholder" src="icons/twitter.png">
+                        <img alt="placeholder" src="icons/controls/iconmonstr-info-icon-24.png">
                     </aside>
-                    <p>Twitter</p>
-                </a>
+                <p>About</p>
+
+
             </li>
+
+
         </ul>
     </section>
-
 
 </section>
     <section id="results" hidden></section>
@@ -159,13 +195,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="range" min="200" step="100" value="500" max="1500" id="range-step"/>
+                                <input type="range" min="200" step="50" value="500" max="1200" id="range-step"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>
-                                    500
+                                    500ms
                                 </span>
                             </td>
                         </tr>
@@ -191,12 +227,7 @@
 
 
 
-                    <!--<section class="mu-controller mu-controller-red" id="mu-0">-->
-                        <!--<span class="mu-title">Track 1</span>-->
-                        <!--<div class="option" id="mu-op-0">-->
-                            <!--<img src="css/player/icons/left_controls.png" class="mu-settings" />-->
-                        <!--</div>-->
-                    <!--</section>-->
+
 
 
                     </ul>
@@ -217,8 +248,6 @@
 
                     <div class="clear"></div>
 
-
-
                         <input type="text" id="file-name" placeholder="Firebeat/saves/" name="file-name"/>
                     <div class="clear"></div>
 
@@ -235,10 +264,10 @@
                         <button id="save-button"></button>
                         <label>Save</label>
                     </div>
-                    <div>
-                        <button id="export-button"></button>
-                        <label>Export</label>
-                    </div>
+                    <!--<div>-->
+                    <!--<button id="export-button"></button>-->
+                    <!--<label>Export</label>-->
+                    <!--</div>-->
                     <div>
                         <button id="exit-button"></button>
                         <label>Quit</label>
@@ -258,6 +287,7 @@
                     </div>
                     <!-- Audio track -->
                     <form name="audioTrack">
+                        <div id="delete_track_btn"></div>
                         <table>
                             <tbody>
                             <tr>
@@ -267,24 +297,26 @@
                                 <td>
                                     <input name="vol" id="volume" step="0.1" max="1" min="0" value="0.5" type="range">
                                 </td>
-                                <td>
-                                    <button>
-                                        Mute
-                                    </button>
-                                </td>
                             </tr>
                             <tr><td>
                                 <label>Balance</label>
                             </td>
+                                <td></td>
                                 <td>
-                                    <input name="bal" step="0.1" max="1" min="-1" value="0" type="range">
+                                    <input name="bal" step="1" max="1" min="-1" value="0" type="range">
                                 </td>
+                                <td></td>
                             </tr>
 
 
                             <tr>
                                 <td>
                                     <input name="type" value="audio" type="radio">
+                                </td>
+                                <td>
+                                    <select name="track-category-selection">
+
+                                    </select>
                                 </td>
                                 <td>
                                     <select name="track-selection">
@@ -295,11 +327,7 @@
                                         <option>Sound4</option>
                                     </select>
                                 </td>
-                                <td>
-                                    <select name="track-category-selection">
 
-                                    </select>
-                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -335,6 +363,7 @@
                 <div id="right-side-controls">
                     <div class="control-color-bg round" id="control-menu"></div>
                     <div class="control-color-bg round" id="control-play"></div>
+                    <div class="control-color-bg round" id="control-hide"></div>
                 </div>
 
             </div>
