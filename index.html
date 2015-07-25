@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Privileged app</title>
+    <title>Firebeat</title>
     <meta name="description" content="Firebeat">
 
     <!--
@@ -13,10 +13,9 @@
       Read more about it here:
       https://developer.mozilla.org/Mozilla/Mobile/Viewport_meta_tag
     -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <!--320-->
     <link rel="stylesheet" href="css/app.css">
-
     <!--
     Inline JavaScript code is not allowed for privileged and certified apps,
     due to Content Security Policy restrictions.
@@ -76,10 +75,8 @@
         </header>
         <section data-type="list" id="">
             <ul id="saves-list">
-                <li class="new-btn">
-                    <a href="#">
-                        <p>New</p>
-                    </a>
+                <li>
+                    <p>No saves to display</p>
                 </li>
             </ul>
         </section>
@@ -94,11 +91,35 @@
             <!-- Icon that will indicate whether you are online or offline - enabled if you are using offline/appcache (see above) -->
             <button id="icon-close-about"><span class="icon icon-close">close</span></button>
             <h1 data-l10n-id="app-heading-load">
-                About
+                Firebeat - About
             </h1>
         </header>
+        <div class="about-text">
+            <div>
+                <img src="img/icons/icon60x60.png">
+            </div>
+            <div><span id="app-name">Firebeat</span></div>
+            <div><span class="italic">v </span><span>1.0</span></div>
+            <div class="central-box">
+                <span class="about-text">This is a software developed with</span><span class="heart-icon"></span>
+                <span class="about-text">by Lorenzo Verri.</span>
 
+                <div class="clear"></div>
+            </div>
+            <div class="icons_container">
+                <div id="github-link" class="icons_about"></div>
+                <div id="email-link" class="icons_about"></div>
+            </div>
 
+            <div class="central-box">
+                <div class="clear"></div>
+                <div class="italic cc">
+                    All the sounds were downloaded from freesound.org.
+                    Intellectual property might apply.
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <!-- Main Menu -->
@@ -133,7 +154,6 @@
             <li>
                 <a href="#">
                     <p>No recent beats</p>
-
                 </a>
             </li>
         </ul>
@@ -149,15 +169,15 @@
         <header>Extra</header>
         <ul>
 
-            <li>
-                <a href="#">
-                    <p>Settings</p>
+            <!--<li>-->
+            <!--<a href="#">-->
+            <!--<p>Settings</p>-->
 
-                </a>
-            </li>
+            <!--</a>-->
+            <!--</li>-->
 
 
-            <li>
+            <li id="about-btn">
 
                     <aside class="pack-end">
                         <img alt="placeholder" src="icons/controls/iconmonstr-info-icon-24.png">
@@ -248,7 +268,7 @@
 
                     <div class="clear"></div>
 
-                        <input type="text" id="file-name" placeholder="Firebeat/saves/" name="file-name"/>
+                    <input type="text" id="file-name" placeholder="Type the file name" name="file-name"/>
                     <div class="clear"></div>
 
                     <div>
@@ -288,70 +308,46 @@
                     <!-- Audio track -->
                     <form name="audioTrack">
                         <div id="delete_track_btn"></div>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <label>Volume</label>
-                                </td>
-                                <td>
-                                    <input name="vol" id="volume" step="0.1" max="1" min="0" value="0.5" type="range">
-                                </td>
-                            </tr>
-                            <tr><td>
-                                <label>Balance</label>
-                            </td>
-                                <td></td>
-                                <td>
-                                    <input name="bal" step="1" max="1" min="-1" value="0" type="range">
-                                </td>
-                                <td></td>
-                            </tr>
 
+                        <div class="space-track">
+                            <div class="icon_24" id="vol_down"></div>
+                            <input name="vol" id="volume" step="0.1" max="1" min="0" value="0.5" type="range">
 
-                            <tr>
-                                <td>
-                                    <input name="type" value="audio" type="radio">
-                                </td>
-                                <td>
-                                    <select name="track-category-selection">
+                            <div class="icon_24" id="vol_up"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="space-track">
+                            <div class="icon_24" id="bal_left"></div>
+                            <input name="bal" step="1" max="1" min="-1" value="0" type="range">
 
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="track-selection">
-                                        <option>Sound1</option>
-                                        <option>Bass Hit</option>
-                                        <option>Sound2</option>
-                                        <option>Sound3</option>
-                                        <option>Sound4</option>
-                                    </select>
-                                </td>
+                            <div class="icon_24" id="bal_right"></div>
+                        </div>
+                        <div class="clear"></div>
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input name="type" value="recording" type="radio">
-                                </td>
-                                <td>
-                                    <button name="record-choice">Record sound</button>
-                                </td>
-                                <td>
-                                    <button name="play-choice">Play</button>
-                                </td>
-                            <tr>
+                        <input name="type" value="audio" type="radio"><label>Select a sound</label>
 
-                                <td>
-                                    <audio name="audio_preview" id="audio_preview" width="150" id="audio">
-                                        <source src="" type="audio/wav">
-                                        <source src="" type="audio/mpeg">
-                                        Your browser does not support the audio tag.
-                                    </audio>
+                        <div class="sectionTrack" id="audio-sec">
+                            <label>Category</label>
+                            <select name="track-category-selection">
+                            </select>
+                            <label>Sound</label>
+                            <select name="track-selection">
+                            </select>
+                        </div>
 
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="clear"></div>
+
+                        <input name="type" value="recording" type="radio"><label>Record your own</label>
+
+                        <div class="hiddenElement sectionTrack" id="record-sec">
+                            <button name="record-choice">Record sound</button>
+                            <button name="play-choice">Play</button>
+                        </div>
+                        <audio name="audio_preview" id="audio_preview" width="150" id="audio">
+                            <source src="" type="audio/wav">
+                            <source src="" type="audio/mpeg">
+                            Your browser does not support the audio tag.
+                        </audio>
                     </form>
                 </div>
                 <!--Editor-->
@@ -361,8 +357,8 @@
                 </div>
                 <!--Right Controller-->
                 <div id="right-side-controls">
-                    <div class="control-color-bg round" id="control-menu"></div>
-                    <div class="control-color-bg round" id="control-play"></div>
+                    <div class="control-color-bg round hiddable" id="control-menu"></div>
+                    <div class="control-color-bg round hiddable" id="control-play"></div>
                     <div class="control-color-bg round" id="control-hide"></div>
                 </div>
 

@@ -140,6 +140,17 @@ section[data-type=list] {
     background: white;
 }
 
+form[name=audioTrack] > label {
+    color: white;
+    font-size: 16px;
+    float: left;
+    margin: 0px 0px 0px 20px;
+}
+
+form[name=audioTrack] input[type=radio] {
+    float: left;
+}
+
 .timeModified {
     float: left;
     margin: 5px 0px 0px 0px;
@@ -150,10 +161,9 @@ section[data-type=list] {
     width: 24px;
     height: 24px;
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 15px;
+    right: 15px;
 }
-
 
 /*---------------- Menu panel -----------------*/
 
@@ -236,7 +246,49 @@ section[data-type=list] {
     background: rgba(205,205,205,0.5);
 }
 
-/*-------------------------------------------*/
+/*-------Audio Track Menu -------------------*/
+.icon_24 {
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    float: left;
+    margin: 5px 10px 0px 10px;
+    background-repeat: no-repeat;
+}
+
+#vol_up {
+    background: url('../icons/controls/iconmonstr-volume-plus-icon-24.png');
+}
+
+#vol_down {
+    background: url('../icons/controls/iconmonstr-volume-minus-icon-24.png');
+}
+
+#bal_left {
+    background: transparent url("../icons/controls/speakers.png") repeat scroll 100% 0%;
+}
+
+#bal_right {
+    background: url('../icons/controls/speakers.png')
+}
+
+.space-track {
+    width: 90%;
+}
+
+.space-track input[type=range] {
+    width: 70%;
+    float: left;
+}
+
+.sectionTrack {
+    float: left;
+    margin: 10px 0px 0px 38px;
+    width: 85%;
+
+}
+
+/*------- Controls ------------------*/
 
 #right-side-controls #control-play{
     /*Width is decided by JS*/
@@ -249,13 +301,17 @@ section[data-type=list] {
 
 }
 
+
 #control-hide {
     position: absolute;
     top: 75px;
-    height: 20px;
+    height: 15px;
     left: 10px;
     padding: 0px;
     border-radius: 0px;
+    background-image: url('../icons/controls/arrow_down.png');
+    background-repeat: no-repeat;
+
 }
 
 #right-side-controls #control-menu{
@@ -367,7 +423,7 @@ section[data-type=list] {
 
 .blueBackground
 {
-    background-color: #12d0ff;
+    background-color: rgba(18, 208, 255, 0.9);
 }
 
 
@@ -379,7 +435,7 @@ section[data-type=list] {
 }
 
 form[name="audioTrack"] {
-    margin: 10% 0% 0% 15%;
+    margin: 5% 0% 0% 5%;
 }
 
 img.mu-settings {
@@ -457,6 +513,75 @@ img.mu-settings {
 
 button.red {
     background: #ff463e;
+}
+
+/** ---------------- About ------------ **/
+
+#about {
+    z-index: 1000;
+    background: white;
+}
+
+.title-coloring {
+    animation: text-coloring 1.2s forwards;
+}
+
+div.about-text {
+    padding: 10px 0px 0px 0px;
+    font-size: 14px;
+    margin: 0px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.central-box {
+    margin: 0px auto;
+    width: 350px;
+}
+
+span.about-text {
+    float: left;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.cc {
+    margin: 10px 0px 0px 0px;
+
+}
+
+.heart-icon {
+    background: url("../icons/extra/iconmonstr-favorite-5-icon-16.png");
+    width: 16px;
+    height: 16px;
+    display: inline;
+    margin: 0px 5px 0px 5px;
+    padding: 0;
+    float: left;
+}
+
+.icons_container {
+    width: 100px;
+    margin: 0 auto;
+}
+
+.icons_about {
+    float: left;
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    margin: 5px 0px 2px 0px;
+}
+
+#github-link {
+
+    background: url(../icons/extra/iconmonstr-github-9-icon-48.png);
+}
+
+#email-link {
+    background: url(../icons/extra/iconmonstr-email-9-icon-48.png);
 }
 
 

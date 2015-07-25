@@ -47,8 +47,14 @@ Track.prototype.setAudio = function (category, trackName, path) {
 Track.prototype.setBalance = function (val) {
     this.balance = parseFloat(val);
     var balance = this.balance;
-    if (this.balance === 0) var balance = 0.0;
-    this.audioObj.pos(balance, 0, 0);
+    if (this.balance === 0) {
+        // Since there seems to be a bug in Howler.js
+        // then
+        var ext = (this.type === "recording") ? 'wav' : 'ogg';
+        this.setAudioObj(this.audioObj._src, ext);
+    } else {
+        this.audioObj.pos(balance, 0, 0);
+    }
 };
 
 

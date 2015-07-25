@@ -1,215 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/app.js" line="926" mnemonic="7" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ee71bd2-17f8-4795-ac53-d4f4661625b3" name="Default" comment="FIXED approach to saving. Fixed saving. ADD more work on loading functionality.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/libs/Zepto_touch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/libs/howler.core.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/libs/howler.effects.min.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/anime/b.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/273063__niwki__butelka.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/274829__jaylew1987__whoopsie-high-pitch.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/41241__ortaldj__resaconnnnnnnnnnnnnnnnnnnnnnn.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/7038__yawfle__050816-chair-02.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/7039__yawfle__050816-chair-03.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/casual/7046__yawfle__050816-chair-10.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/173086__rocknessmonster89__wood-snare-sample-2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/268114__soneproject__synthetic-drums-10.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/268116__soneproject__syndrum-loop-128-bpm.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/269716__ianstargem__electronic-kick-drum-1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271078__ianstargem__electronic-kick-drum-2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271079__ianstargem__electronic-kick-drum-3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271281__soneproject__synthetic-drums-8.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271282__soneproject__synthetic-drums-7.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271283__soneproject__synthetic-drums-6.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271284__soneproject__synthetic-drums-5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/271285__soneproject__synthetic-drums-9.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/274609__hellska__pipe-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/274775__ianstargem__simple-kick-drum.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/41201__ortaldj__crash3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum/bass.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/drum_machine/b.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270384__littlerobotsoundfactory__goblin-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270385__littlerobotsoundfactory__dragon-growl-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270386__littlerobotsoundfactory__dragon-growl-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270387__littlerobotsoundfactory__ambience-cave-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270388__littlerobotsoundfactory__goblin-04.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270389__littlerobotsoundfactory__goblin-03.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270390__littlerobotsoundfactory__goblin-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270391__littlerobotsoundfactory__goblin-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270392__littlerobotsoundfactory__inventory-open-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270393__littlerobotsoundfactory__inventory-open-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270394__littlerobotsoundfactory__spell-03.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270395__littlerobotsoundfactory__spell-04.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270396__littlerobotsoundfactory__spell-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270397__littlerobotsoundfactory__spell-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270398__littlerobotsoundfactory__trap-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270399__littlerobotsoundfactory__trap-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270400__littlerobotsoundfactory__trap-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270401__littlerobotsoundfactory__menu-select-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270402__littlerobotsoundfactory__jingle-win-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270403__littlerobotsoundfactory__jingle-lose-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270404__littlerobotsoundfactory__jingle-achievement-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270405__littlerobotsoundfactory__pickup-gold-03.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270406__littlerobotsoundfactory__pickup-gold-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270407__littlerobotsoundfactory__pickup-gold-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270408__littlerobotsoundfactory__pickup-gold-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270409__littlerobotsoundfactory__spell-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270410__littlerobotsoundfactory__pickup-gold-04.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270412__littlerobotsoundfactory__footstep-dirt-03.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270413__littlerobotsoundfactory__footstep-dirt-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270414__littlerobotsoundfactory__footstep-dirt-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270415__littlerobotsoundfactory__footstep-dirt-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270416__littlerobotsoundfactory__footstep-dirt-07.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270417__littlerobotsoundfactory__footstep-dirt-06.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270418__littlerobotsoundfactory__footstep-dirt-05.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270419__littlerobotsoundfactory__footstep-dirt-04.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270420__littlerobotsoundfactory__footstep-dirt-09.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270421__littlerobotsoundfactory__footstep-dirt-08.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270422__littlerobotsoundfactory__footstep-water-01.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270423__littlerobotsoundfactory__footstep-water-00.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270424__littlerobotsoundfactory__footstep-water-06.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270425__littlerobotsoundfactory__footstep-water-02.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270426__littlerobotsoundfactory__footstep-water-07.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270427__littlerobotsoundfactory__footstep-water-04.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270428__littlerobotsoundfactory__footstep-water-05.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/fantasy/270429__littlerobotsoundfactory__footstep-water-03.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273238__jperryhostssounds__a22223clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273239__jperryhostssounds__a22223clip1w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273240__jperryhostssounds__a22223clip1w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273241__jperryhostssounds__a22223clip1w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273242__jperryhostssounds__a22223clip2w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273243__jperryhostssounds__a22223clip2w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273244__jperryhostssounds__a22223clip2w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273245__jperryhostssounds__a22223clip2w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273246__jperryhostssounds__a23323clip1w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273247__jperryhostssounds__a23323clip1w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273248__jperryhostssounds__m33333clip1w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273249__jperryhostssounds__m23323clip2w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273250__jperryhostssounds__m33333clip1w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273251__jperryhostssounds__m22223clip1w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273252__jperryhostssounds__m22223clip1w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273253__jperryhostssounds__m33333clip1w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273254__jperryhostssounds__m33333clip1w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273255__jperryhostssounds__m33333clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273256__jperryhostssounds__m33333clip2w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273257__jperryhostssounds__a33333clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273258__jperryhostssounds__a33333clip2w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273259__jperryhostssounds__a33333clip1w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273260__jperryhostssounds__a33333clip1w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273261__jperryhostssounds__a33333clip2w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273262__jperryhostssounds__m22223clip1w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273263__jperryhostssounds__a33333clip2w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273264__jperryhostssounds__a33333clip2w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273265__jperryhostssounds__m33333clip1w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273266__jperryhostssounds__m33333clip2w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273267__jperryhostssounds__m33333clip2w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273268__jperryhostssounds__a23323clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273269__jperryhostssounds__a23323clip1w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273270__jperryhostssounds__a23323clip1w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273271__jperryhostssounds__a23323clip1w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273272__jperryhostssounds__a23323clip2w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273273__jperryhostssounds__a23323clip2w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273274__jperryhostssounds__a23323clip2w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273275__jperryhostssounds__a23323clip2w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273276__jperryhostssounds__a33333clip1w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273277__jperryhostssounds__a33333clip1w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273278__jperryhostssounds__m23323clip2w4.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273279__jperryhostssounds__m23323clip2w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273280__jperryhostssounds__m22223clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273281__jperryhostssounds__m22223clip1w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273282__jperryhostssounds__m23323clip1w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273283__jperryhostssounds__m22223clip2w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273284__jperryhostssounds__m23323clip1w3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273285__jperryhostssounds__m23323clip1w2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273286__jperryhostssounds__m23323clip2w1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/individual_words/273287__jperryhostssounds__m23323clip1w5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273518__kwahmah-02__dll-lasertwang-dsh-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273519__kwahmah-02__dll-lasertwang-e-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273520__kwahmah-02__dll-lasertwang-csh-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273521__kwahmah-02__dll-lasertwang-d-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273522__kwahmah-02__dll-lasertwang-g.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273523__kwahmah-02__dll-lasertwang-gsh.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273524__kwahmah-02__dll-lasertwang-f-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273525__kwahmah-02__dll-lasertwang-fsh-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273526__kwahmah-02__dll-lasertwang-ash.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273527__kwahmah-02__dll-lasertwang-a.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273528__kwahmah-02__dll-lasertwang-c-low.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/laser/273529__kwahmah-02__dll-lasertwang-b.flac" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68437__pinkyfinger__piano-a.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68438__pinkyfinger__piano-b.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68439__pinkyfinger__piano-bb.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68440__pinkyfinger__piano-c.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68441__pinkyfinger__piano-c.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68442__pinkyfinger__piano-d.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68443__pinkyfinger__piano-e.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68444__pinkyfinger__piano-eb.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68445__pinkyfinger__piano-f.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68446__pinkyfinger__piano-f.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68447__pinkyfinger__piano-g.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/piano/68448__pinkyfinger__piano-g.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274318__alienxxx__copy-that-forming-up.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274319__alienxxx__breaking-to-attack.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274320__alienxxx__breaking-formation.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274321__alienxxx__afirmative.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274322__alienxxx__i-copy.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274323__alienxxx__i-m-going-in.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274324__alienxxx__direct-hit.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274325__alienxxx__damn-it-missed.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274326__alienxxx__negative.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274327__alienxxx__i-got-a-lock-on-him.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274867__alienxxx__gotta-do-better-than-that.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274872__alienxxx__nice-shooting.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274891__alienxxx__direct-hit.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274894__alienxxx__message-received.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/274980__alienxxx__help.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/275008__alienxxx__mayday-mayday.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/pilot/275009__alienxxx__i-m-hit-i-m-hit-3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177494__snapper4298__snap-3.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177496__snapper4298__snap-1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177497__snapper4298__snap-1234.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177500__snapper4298__snap-5.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177501__snapper4298__snap-12.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177502__snapper4298__snap-11.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177503__snapper4298__snap-10.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177504__snapper4298__snap-9.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/snapper/177507__snapper4298__snap-6.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149715__beskhu__bulles.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149716__beskhu__goutte-1-a.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149717__beskhu__goutte-1-b.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149718__beskhu__goutte-2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149719__beskhu__goutte-lp.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149720__beskhu__goutte-clean-w-slnc-insrt.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149721__beskhu__goutte-1-full.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149722__beskhu__gouttes-1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149723__beskhu__goutte-clean-crt-base.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149724__beskhu__goutte-clean-crt-base.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149725__beskhu__gouttes-2.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149726__beskhu__goutte-fake-bruit-amb.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149727__beskhu__goutte-fake-bruit-amb.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/149728__beskhu__goutte-clean-w-slnc-insrt.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/273868__beskhu__water-drop-3.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/273869__beskhu__water-drop-2.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/effects/water_drops/273870__beskhu__water-drop-1.aiff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/drawing.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/fb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/firebeat_logo.svg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273742__lemonjolly__attack4-eihhh.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273742__lemonjolly__attack4-eihhh.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273746__lemonjolly__attack5-ha.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273746__lemonjolly__attack5-ha.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273919__lemonjolly__hurt4-unh.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273919__lemonjolly__hurt4-unh.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273920__lemonjolly__hurt3-heeh.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273920__lemonjolly__hurt3-heeh.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273922__lemonjolly__hurt1-ahh.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273922__lemonjolly__hurt1-ahh.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273924__lemonjolly__good-yoshi-in-japanese.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273924__lemonjolly__good-yoshi-in-japanese.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/effects/anime/273928__lemonjolly__we-did-it-in-japanese.ogg" afterPath="$PROJECT_DIR$/data/effects/anime/273928__lemonjolly__we-did-it-in-japanese.ogg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/classes/FIO.js" afterPath="$PROJECT_DIR$/js/classes/FIO.js" />
+    <list default="true" id="2ee71bd2-17f8-4795-ac53-d4f4661625b3" name="Default" comment="ADD new Graphics, function, Delete track">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/confirm/content.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/confirm/content_details.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/confirm/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/confirm/long_content.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/confirm/no_title.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/icons/menu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/icons/menu@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/icons/menu@2.25x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/icons/menu@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/header.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/header/header.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/header/shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/header/shadow@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/header/shadow@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/negative.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/pattern.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/pattern_subheader.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/separator.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/separator_large.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_header.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_header@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_header@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_rtl.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_rtl@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/images/ui/shadow_rtl@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/drawer/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/headers/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/input_areas/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/object_menu.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/object_menu/images/ui/gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/object_menu/images/ui/pattern.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/object_menu/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/activity.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/activity@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/activity@2.25x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/activity@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/default@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/default@2.25x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/default@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/light@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/light@2.25x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/images/ui/light@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/progress_activity/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/switches/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/icons/checked.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/icons/checked@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/icons/checked@2.25x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/icons/checked@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/affirmative.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/gradient@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/pattern.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow-invert.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow-invert@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow-invert@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow@1.5x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/images/ui/shadow@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/value_selector/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Bold.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Bold.otf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Bold.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Bold.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Light.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Light.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Medium.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Medium.otf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Medium.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Medium.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/FiraSans/FiraSans-Regular.ttf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/player/icons/play_btn.png" afterPath="$PROJECT_DIR$/css/player/icons/play_btn.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/classes/Track.js" afterPath="$PROJECT_DIR$/js/classes/Track.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/libs/aSyncStorage.js" afterPath="$PROJECT_DIR$/js/libs/aSyncStorage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/animation.css" afterPath="$PROJECT_DIR$/css/animation.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.webapp" afterPath="$PROJECT_DIR$/manifest.webapp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/tracks.json" afterPath="$PROJECT_DIR$/data/tracks.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -237,95 +116,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6435986" vertical-offset="11763" max-vertical-offset="25275">
-              <caret line="809" column="24" selection-start-line="809" selection-start-column="24" selection-end-line="809" selection-end-column="24" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tracks.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/tracks.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-60.166668" vertical-offset="5906" max-vertical-offset="8235">
-              <caret line="490" column="4" selection-start-line="490" selection-start-column="4" selection-end-line="490" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FIO.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/classes/FIO.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="3885">
-              <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Track.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/classes/Track.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="553" max-vertical-offset="1545">
-              <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="howler.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/libs/howler.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="8040">
-              <caret line="16" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="530" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="howler.effects.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/libs/howler.effects.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-              <caret line="0" column="125" selection-start-line="0" selection-start-column="125" selection-end-line="0" selection-end-column="125" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="animation.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/animation.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="409" max-vertical-offset="1050">
-              <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/app.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3583" max-vertical-offset="7260">
-              <caret line="257" column="16" selection-start-line="257" selection-start-column="16" selection-end-line="257" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2496" max-vertical-offset="5760">
-              <caret line="179" column="41" selection-start-line="179" selection-start-column="35" selection-end-line="179" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.35978836" vertical-offset="4716" max-vertical-offset="5550">
+              <caret line="328" column="42" selection-start-line="328" selection-start-column="42" selection-end-line="328" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -349,26 +144,26 @@
         <option value="$PROJECT_DIR$/js/classes/Recorder.js" />
         <option value="$PROJECT_DIR$/js/classes/IO.js" />
         <option value="$PROJECT_DIR$/css/headers.css" />
-        <option value="$PROJECT_DIR$/manifest.webapp" />
         <option value="$PROJECT_DIR$/b.js" />
         <option value="$PROJECT_DIR$/../../../Steadlly/Backend/site/env/bin/Steadlly/public/static/base/js/main.js" />
         <option value="$PROJECT_DIR$/../../../Steadlly/Backend/site/env/bin/Steadlly/public/static/base/js/conf/contracts.json" />
-        <option value="$PROJECT_DIR$/css/animation.css" />
         <option value="$PROJECT_DIR$/js/classes/Session.js" />
         <option value="$PROJECT_DIR$/js/classes/workers/recorderWorker.js" />
         <option value="$PROJECT_DIR$/js/libs/libmp3lame.min.js" />
         <option value="$PROJECT_DIR$/../main.js" />
         <option value="$PROJECT_DIR$/js/libs/Zepto_touch.js" />
-        <option value="$PROJECT_DIR$/data/tracks.json" />
         <option value="$PROJECT_DIR$/js/libs/aSyncStorage.js" />
         <option value="$PROJECT_DIR$/js/classes/FIO.js" />
         <option value="$PROJECT_DIR$/js/libs/howler.effects.min.js" />
         <option value="$PROJECT_DIR$/js/libs/howler.core.min.js" />
         <option value="$PROJECT_DIR$/js/libs/howler.min.js" />
+        <option value="$PROJECT_DIR$/css/animation.css" />
         <option value="$PROJECT_DIR$/js/classes/Track.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/app.css" />
+        <option value="$PROJECT_DIR$/data/tracks.json" />
         <option value="$PROJECT_DIR$/js/app.js" />
+        <option value="$PROJECT_DIR$/manifest.webapp" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -434,7 +229,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="icons" />
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firebeat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Firebeat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -511,15 +324,15 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="1">
@@ -587,7 +400,13 @@
       <option name="project" value="LOCAL" />
       <updated>1436548798470</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ADD new Graphics, function, Delete track">
+      <created>1437679704130</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1437679704130</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -614,26 +433,26 @@
     <frame x="-1" y="22" width="1368" height="747" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32794118" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32662538" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296371" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.099224806" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283859" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19253294" sideWeight="0.498452" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16764276" sideWeight="0.61764705" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39795917" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16764276" sideWeight="0.38235295" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32662538" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16764276" sideWeight="0.38390094" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.099071205" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19253294" sideWeight="0.49828178" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16764276" sideWeight="0.61609906" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283859" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296371" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -664,12 +483,13 @@
     <MESSAGE value="CHANGE approach to saving. Using IndexedDB over Filesystem." />
     <MESSAGE value="FIXED approach to saving. Fixed saving. ADD more work on loading functionality." />
     <MESSAGE value="ADD Setup for Localization, ADD Load function." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD Setup for Localization, ADD Load function." />
+    <MESSAGE value="ADD new Graphics, function, Delete track" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD new Graphics, function, Delete track" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -854,16 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.webapp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1026">
-          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/icons/icon16x16.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -954,28 +764,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/libs/aSyncStorage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1378" max-vertical-offset="2775">
-          <caret line="105" column="23" selection-start-line="105" selection-start-column="13" selection-end-line="105" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/libs/howler.core.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04950495" vertical-offset="0" max-vertical-offset="606">
           <caret line="2" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/libs/howler.min.js">
+    <entry file="file://$PROJECT_DIR$/css/animation.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="8040">
-          <caret line="16" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="530" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-0.017770598" vertical-offset="431" max-vertical-offset="1140">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -987,61 +790,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/classes/FIO.js">
+    <entry file="file://$PROJECT_DIR$/js/libs/aSyncStorage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="686" max-vertical-offset="3885">
-          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+        <state vertical-scroll-proportion="2.837838" vertical-offset="0" max-vertical-offset="2775">
+          <caret line="105" column="23" selection-start-line="105" selection-start-column="13" selection-end-line="105" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/libs/howler.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0038910506" vertical-offset="253" max-vertical-offset="8040">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/classes/Track.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="553" max-vertical-offset="1545">
-          <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/animation.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="409" max-vertical-offset="1050">
-          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2496" max-vertical-offset="5760">
-          <caret line="179" column="41" selection-start-line="179" selection-start-column="35" selection-end-line="179" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.33206832" vertical-offset="650" max-vertical-offset="1650">
+          <caret line="55" column="10" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3583" max-vertical-offset="7260">
-          <caret line="257" column="16" selection-start-line="257" selection-start-column="16" selection-end-line="257" selection-end-column="16" />
+        <state vertical-scroll-proportion="-3.6527514" vertical-offset="3845" max-vertical-offset="9165">
+          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/tracks.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-60.166668" vertical-offset="5906" max-vertical-offset="8235">
-          <caret line="490" column="4" selection-start-line="490" selection-start-column="4" selection-end-line="490" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.33200794" vertical-offset="1348" max-vertical-offset="8115">
+          <caret line="101" column="6" selection-start-line="101" selection-start-column="6" selection-end-line="101" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/classes/FIO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37117118" vertical-offset="499" max-vertical-offset="3885">
+          <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6435986" vertical-offset="11763" max-vertical-offset="25275">
-          <caret line="809" column="24" selection-start-line="809" selection-start-column="24" selection-end-line="809" selection-end-column="24" />
+        <state vertical-scroll-proportion="-10.392858" vertical-offset="14754" max-vertical-offset="28020">
+          <caret line="1003" column="20" selection-start-line="1003" selection-start-column="20" selection-end-line="1003" selection-end-column="20" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.webapp">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02851711" vertical-offset="0" max-vertical-offset="735">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35978836" vertical-offset="4716" max-vertical-offset="5550">
+          <caret line="328" column="42" selection-start-line="328" selection-start-column="42" selection-end-line="328" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

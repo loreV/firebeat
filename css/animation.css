@@ -59,6 +59,15 @@
     }
 }
 
+/* ----------- TEXT -------------*/
+@keyframes text-coloring {
+    from {
+        color: #000000;
+    }
+    to {
+        color: #FF463E;
+    }
+}
 
 
 
