@@ -18,7 +18,7 @@ F = {
                 var notification = new Notification("Firebeat", {body: sMessage});
                 notification.onclick = function (e) {
                     // vs1.1 load from the notification?
-                    //console.log(e.target.body);
+                    alert(e.target.body);
                 };
             } else {
                 // Firefox OS 1.0
@@ -435,9 +435,12 @@ F = {
                 saveBeat: function () {
                     var fileName = $('input[name=file-name]').val();
                     if (fileName == "") alert("File name should be not empty");
-                    F.settings.beat.save(fileName);
+                    F.settings.beat.save(fileName, true);
                 },
 
+                /**
+                 * TODO -> next version should have an export function
+                 */
                 exportFile: function () {
 
                 },
@@ -991,7 +994,7 @@ F = {
             if (document.hidden) {
                 var date = new Date();
                 if (F.editor.controls.tracks.length > 0) {
-                    F.settings.beat.save("AutoSave_" + date.getDate() + date.getMonth() + date.getYear() + date.getMinutes());
+                    F.settings.beat.save("AutoSave_" + date.getDate() + date.getMonth() + date.getYear() + date.getMinutes(), false);
                 }
                 F.utils.cleaner.cleanUpFiles(F.editor.controls.recordings);
                 F.editor.exit(true);
@@ -1496,9 +1499,11 @@ F = {
             /**
              * Consumes a filename and saves a json file into the indexeDB if succefull.
              * @param name
+             * @returns {string}
+             * @param alert
              * @returns {boolean}
              */
-            save: function (name) {
+            save: function (name, alert) {
                 var test = /[\/:\*\?"<>\\|]/g.test(name);
                 var overwrite = false;
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
@@ -1560,7 +1565,7 @@ F = {
                     }
                     F.utils.io.simpleSave("beats", beat + ";" + name);
                     F.utils.io.simpleSave("beats_time", beatTime + ";" + time);
-                    F.utils.notify(name + " Firebeat has been saved.");
+                    if (alert != false) F.utils.notify(name + " Firebeat has been saved.");
                 });
             },
             /**
