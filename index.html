@@ -99,7 +99,7 @@
                 <img src="img/icons/icon60x60.png">
             </div>
             <div><span id="app-name">Firebeat</span></div>
-            <div><span class="italic">v </span><span>1.0</span></div>
+            <div><span class="italic">v </span><span>1.0.2</span></div>
             <div class="central-box">
                 <span class="about-text">This is a software developed with</span><span class="heart-icon"></span>
                 <span class="about-text">by Lorenzo Verri.</span>
@@ -158,37 +158,21 @@
             </li>
         </ul>
 
-        <header>All the Firebeats</header>
+        <header>Manage</header>
         <ul>
             <li id="show-saved-list">
-                <p>Show Firebeats by date</p>
+                <p>Manage Beats</p>
             </li>
         </ul>
+        <li id="about-btn">
+
+            <aside class="pack-end">
+                <img alt="placeholder" src="icons/controls/iconmonstr-info-icon-24.png">
+            </aside>
+            <p>About</p>
 
 
-        <header>Extra</header>
-        <ul>
-
-            <!--<li>-->
-            <!--<a href="#">-->
-            <!--<p>Settings</p>-->
-
-            <!--</a>-->
-            <!--</li>-->
-
-
-            <li id="about-btn">
-
-                    <aside class="pack-end">
-                        <img alt="placeholder" src="icons/controls/iconmonstr-info-icon-24.png">
-                    </aside>
-                <p>About</p>
-
-
-            </li>
-
-
-        </ul>
+        </li>
     </section>
 
 </section>
@@ -201,7 +185,7 @@
                     <table>
                         <tr>
                             <td>
-                                <div>Velocity - set a value</div>
+                                <div>Play speed - set a value</div>
                             </td>
                         </tr>
                         <tr>
@@ -220,16 +204,21 @@
                         </tr>
                         <tr>
                             <td>
-                                <span>
-                                    500ms
+                                <span id="value-bpm">
+                                    120 bpm
                                 </span>
                             </td>
                         </tr>
                         <tr>
-                            <td class="button50">
-                                <button>Cancel</button>
+                            <td><span>Actual delay in ms:</span><span id="value-delay">500</span><span>ms *</span></td>
+                        </tr>
+                        <tr>
+                            <td><span
+                                    class="smallTxt">* The above respects the formula 60,000 / BPM = one beat in ms.</span>
                             </td>
-                            <td class="button50">
+                        </tr>
+                        <tr>
+                            <td class="button100 confirmButton">
                                 <button class="red">Ok</button>
                             </td>
                         </tr>
@@ -273,24 +262,24 @@
 
                     <div>
                         <button id="number-spaces"></button>
-                        <label>Columns: <span id="number-columns-label">8</span></label>
+                        <label>Beats: <span id="number-columns-label">8</span></label>
                     </div>
                     <div>
                         <button id="interval-toggle"></button>
-                        <label>Velocity <span id="velocity-label">500ms</span></label>
+                        <label>BPM <span id="velocity-label">120bpm</span></label>
                     </div>
-                    <div class="clear"></div>
                     <div>
                         <button id="save-button"></button>
                         <label>Save</label>
                     </div>
+                    <div class="clear"></div>
                     <!--<div>-->
                     <!--<button id="export-button"></button>-->
                     <!--<label>Export</label>-->
                     <!--</div>-->
                     <div>
                         <button id="exit-button"></button>
-                        <label>Quit</label>
+                        <label>Quit Editor</label>
                     </div>
 
                 </div>

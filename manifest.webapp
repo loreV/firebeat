@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.2",
   "name": "FireBeat",
   "description": "Firebeat is a drum machine sequencer for Firefox OS",
   "launch_path": "/index.html",
@@ -38,6 +38,6 @@
   "installs_allowed_from": [
     "*"
   ],
-  "orientation":["landscape"],
+  "orientation":"landscape",
   "default_locale": "en"
 }

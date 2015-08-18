@@ -49,6 +49,7 @@ section[data-type=list] {
     z-index: 1000;
 }
 
+
 #mainContainer{
     overflow:hidden;
 }
@@ -218,8 +219,12 @@ form[name=audioTrack] input[type=radio] {
 
 #menu-panel button#save-button{
     background: url('../icons/controls/iconmonstr-save-icon-48.png') no-repeat 10px 10px;
+    margin: 0px 0px 0px 50px;
 }
 
+#menu-panel button#save-button + label {
+    margin: 0px 0px 0px 70px;
+}
 #menu-panel button#exit-button{
     background: url('../icons/controls/iconmonstr-logout-3-icon-48.png') no-repeat 10px 10px;
 }
@@ -473,10 +478,17 @@ img.mu-settings {
     width: 100%;
 }
 
-#selector-panel table .button50 {
-    width: 45%;
+#selector-panel table .confirmButton {
     position: absolute;
     bottom: 0px;
+}
+
+#selector-panel table .button50 {
+    width: 45%;
+}
+
+#selector-panel table .button100 {
+    width: 95%;
 }
 
 #selector-panel table .button50:first-child {
@@ -501,6 +513,11 @@ img.mu-settings {
     color: white;
     text-align: center;
     font-size: 14px;
+}
+
+#selector-panel table .smallTxt {
+    font-size: 11px;
+
 }
 
 #selector-panel table input[type=range] {

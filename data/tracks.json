@@ -1,107 +1,11 @@
 {
   "categories": [
-    {
-      "name": "drum_machine",
-      "tracks": [
-        {
-          "name": "Bd-01",
-          "file": "2036__twistedlemon__mattel-bd1.ogg"
-        },
-        {
-          "name": "Bd-02",
-          "file": "2037__twistedlemon__mattel-bd2.ogg"
-        },
-        {
-          "name": "Bd-03",
-          "file": "2038__twistedlemon__mattel-bd3.ogg"
-        },
-        {
-          "name": "Bd-04",
-          "file": "2039__twistedlemon__mattel-bd4.ogg"
-        },
-        {
-          "name": "Bd-05",
-          "file": "2040__twistedlemon__mattel-bd5.ogg"
-        },
-        {
-          "name": "SD-01",
-          "file": "2041__twistedlemon__mattel-sd1.ogg"
-        },
-        {
-          "name": "SD-02",
-          "file": "2042__twistedlemon__mattel-sd2.ogg"
-        },
-        {
-          "name": "SD-03",
-          "file": "2043__twistedlemon__mattel-sd3.ogg"
-        },
-        {
-          "name": "SD-04",
-          "file": "2044__twistedlemon__mattel-sd4.ogg"
-        },
-        {
-          "name": "HH1",
-          "file": "2045__twistedlemon__mattel-hh1.ogg"
-        },
-        {
-          "name": "HH2",
-          "file": "2046__twistedlemon__mattel-hh2.ogg"
-        },
-        {
-          "name": "HH3",
-          "file": "2047__twistedlemon__mattel-hh3.ogg"
-        },
-        {
-          "name": "HH4",
-          "file": "2048__twistedlemon__mattel-hh4.ogg"
-        },
-        {
-          "name": "HH5",
-          "file": "2049__twistedlemon__mattel-hh5.ogg"
-        },
-        {
-          "name": "HHo1",
-          "file": "2050__twistedlemon__mattel-hho1.ogg"
-        },
-        {
-          "name": "HHo2",
-          "file": "2051__twistedlemon__mattel-hho2.ogg"
-        },
-        {
-          "name": "HHo3",
-          "file": "2052__twistedlemon__mattel-hho3.ogg"
-        },
-        {
-          "name": "Percussion1",
-          "file": "2053__twistedlemon__mattel-per1.ogg"
-        },
-        {
-          "name": "Tom01",
-          "file": "2055__twistedlemon__mattel-tom02.ogg"
-        },
-        {
-          "name": "Tom02",
-          "file": "2057__twistedlemon__mattel-tom04.ogg"
-        },
-        {
-          "name": "Tom03",
-          "file": "2059__twistedlemon__mattel-tom06.ogg"
-        },
-        {
-          "name": "Tom04",
-          "file": "2061__twistedlemon__mattel-tom08.ogg"
-        },
-        {
-          "name": "Tom05",
-          "file": "2062__twistedlemon__mattel-tom09.ogg"
-        }
-      ]
-    },
+
     {
       "name": "synthetic_drum",
       "tracks": [
         {
-          "name": "Wood Snare",
+          "name": "Wood Sn",
           "file": "173086__rocknessmonster89__wood-snare-sample-2.ogg"
         },
         {
@@ -147,6 +51,51 @@
         {
           "name": "Tok",
           "file": "tuc.ogg"
+        }
+      ]
+    },
+    {
+      "name": "drops",
+      "tracks": [
+        {
+          "name": "Drop 01",
+          "file": "149716__beskhu__goutte-1-a.ogg"
+        },
+        {
+          "name": "Drop 02",
+          "file": "149717__beskhu__goutte-1-b.ogg"
+        },
+        {
+          "name": "Drop 03",
+          "file": "149718__beskhu__goutte-2.ogg"
+        },
+        {
+          "name": "Drop 04",
+          "file": "149719__beskhu__goutte-lp.ogg"
+        },
+        {
+          "name": "Drop 05",
+          "file": "149721__beskhu__goutte-1-full.ogg"
+        },
+        {
+          "name": "Drop 06",
+          "file": "149722__beskhu__gouttes-1.ogg"
+        },
+        {
+          "name": "Drop 07",
+          "file": "149724__beskhu__goutte-clean-crt-base.ogg"
+        },
+        {
+          "name": "Drop 08",
+          "file": "149725__beskhu__gouttes-2.ogg"
+        },
+        {
+          "name": "Drop 09",
+          "file": "149726__beskhu__goutte-fake-bruit-amb.ogg"
+        },
+        {
+          "name": "Drop 10",
+          "file": "149728__beskhu__goutte-clean-w-slnc-insrt.ogg"
         }
       ]
     },
@@ -364,10 +313,6 @@
         {
           "name": "Cork",
           "file": "cork.ogg"
-        },
-        {
-          "name": "Tic",
-          "file": "tic.ogg"
         }
       ]
     },
@@ -483,47 +428,99 @@
       ]
     },
     {
-      "name": "drops",
+      "name": "drum_machine",
       "tracks": [
         {
-          "name": "Drop 01",
-          "file": "149716__beskhu__goutte-1-a.ogg"
+          "name": "Bd-01",
+          "file": "2036__twistedlemon__mattel-bd1.ogg"
         },
         {
-          "name": "Drop 02",
-          "file": "149717__beskhu__goutte-1-b.ogg"
+          "name": "Bd-02",
+          "file": "2037__twistedlemon__mattel-bd2.ogg"
         },
         {
-          "name": "Drop 03",
-          "file": "149718__beskhu__goutte-2.ogg"
+          "name": "Bd-03",
+          "file": "2038__twistedlemon__mattel-bd3.ogg"
         },
         {
-          "name": "Drop 04",
-          "file": "149719__beskhu__goutte-lp.ogg"
+          "name": "Bd-04",
+          "file": "2039__twistedlemon__mattel-bd4.ogg"
         },
         {
-          "name": "Drop 05",
-          "file": "149721__beskhu__goutte-1-full.ogg"
+          "name": "Bd-05",
+          "file": "2040__twistedlemon__mattel-bd5.ogg"
         },
         {
-          "name": "Drop 06",
-          "file": "149722__beskhu__gouttes-1.ogg"
+          "name": "SD-01",
+          "file": "2041__twistedlemon__mattel-sd1.ogg"
         },
         {
-          "name": "Drop 07",
-          "file": "149724__beskhu__goutte-clean-crt-base.ogg"
+          "name": "SD-02",
+          "file": "2042__twistedlemon__mattel-sd2.ogg"
         },
         {
-          "name": "Drop 08",
-          "file": "149725__beskhu__gouttes-2.ogg"
+          "name": "SD-03",
+          "file": "2043__twistedlemon__mattel-sd3.ogg"
         },
         {
-          "name": "Drop 09",
-          "file": "149726__beskhu__goutte-fake-bruit-amb.ogg"
+          "name": "SD-04",
+          "file": "2044__twistedlemon__mattel-sd4.ogg"
         },
         {
-          "name": "Drop 10",
-          "file": "149728__beskhu__goutte-clean-w-slnc-insrt.ogg"
+          "name": "HH1",
+          "file": "2045__twistedlemon__mattel-hh1.ogg"
+        },
+        {
+          "name": "HH2",
+          "file": "2046__twistedlemon__mattel-hh2.ogg"
+        },
+        {
+          "name": "HH3",
+          "file": "2047__twistedlemon__mattel-hh3.ogg"
+        },
+        {
+          "name": "HH4",
+          "file": "2048__twistedlemon__mattel-hh4.ogg"
+        },
+        {
+          "name": "HH5",
+          "file": "2049__twistedlemon__mattel-hh5.ogg"
+        },
+        {
+          "name": "HHo1",
+          "file": "2050__twistedlemon__mattel-hho1.ogg"
+        },
+        {
+          "name": "HHo2",
+          "file": "2051__twistedlemon__mattel-hho2.ogg"
+        },
+        {
+          "name": "HHo3",
+          "file": "2052__twistedlemon__mattel-hho3.ogg"
+        },
+        {
+          "name": "Percussion1",
+          "file": "2053__twistedlemon__mattel-per1.ogg"
+        },
+        {
+          "name": "Tom01",
+          "file": "2055__twistedlemon__mattel-tom02.ogg"
+        },
+        {
+          "name": "Tom02",
+          "file": "2057__twistedlemon__mattel-tom04.ogg"
+        },
+        {
+          "name": "Tom03",
+          "file": "2059__twistedlemon__mattel-tom06.ogg"
+        },
+        {
+          "name": "Tom04",
+          "file": "2061__twistedlemon__mattel-tom08.ogg"
+        },
+        {
+          "name": "Tom05",
+          "file": "2062__twistedlemon__mattel-tom09.ogg"
         }
       ]
     }

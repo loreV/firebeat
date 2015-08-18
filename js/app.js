@@ -10,24 +10,28 @@ var F;
 
 F = {
     utils:{
-        version: "1.0",
+        version: "1.0.2",
         io: null,
 
+        convertMstoBpm: function (ms) {
+            var minute = 60000;
+            var bpm = parseInt(minute / ms);
+            return bpm;
+        },
+
         notify: function (sMessage) {
+            var notification;
             if ("Notification" in window) {
-                var notification = new Notification("Firebeat", {body: sMessage});
-                notification.onclick = function (e) {
-                    // vs1.1 load from the notification?
-                    alert(e.target.body);
-                };
+                notification = new Notification("Firebeat", {body: sMessage, icon: "img/icons/icon48x48.png"});
             } else {
                 // Firefox OS 1.0
-                var notification = navigator.mozNotification.createNotification(
+                notification = navigator.mozNotification.createNotification(
                     "Firebeat",
                     sMessage
                 );
                 notification.show();
             }
+            setTimeout(notification.close.bind(notification), 4000);
         },
         conf: {
             /** system language **/
@@ -50,6 +54,25 @@ F = {
             saveConf: function (lang, useF) {
                 F.utils.io.simpleSave("conf/lang", lang);
                 F.utils.io.simpleSave("conf/useF", useF);
+            }
+        },
+
+        screen: {
+
+            isScreenExtended: function () {
+                var height;
+                var screenH;
+
+                var editor = F.ui.editor.editorElem;
+                var height = editor.attr('height');
+                var screenH = F.editor.look.y;
+
+
+                if (height > screenH) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         },
 
@@ -329,6 +352,8 @@ F = {
                     }
                 }
                 $('#mu-' + trackNr).remove();
+
+
             },
             /**
              * Add a new tile only if the tile was not added yet. Else it removes it.
@@ -351,7 +376,11 @@ F = {
                     }
                     F.editor.co.fillStyle = colorToUse;
                 }
-                F.editor.co.fillRect((eX * F.editor.col_size), (eY* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
+
+                var elX = (eX * F.editor.col_size);
+                var elY = (eY * F.editor.row_size)
+                F.editor.co.fillRect(elX, elY, F.editor.col_size, F.editor.row_size);
+                F.editor.co.strokeRect(elX, elY, F.editor.col_size, F.editor.row_size);
             },
             refresh: function () {
                 var grid = F.editor.controls.grid;
@@ -380,8 +409,9 @@ F = {
                     if (panel.hasClass("visibleElement")){
                         // hides it
 
-
-                        container.css("overflow-y", "scroll");
+                        if (F.utils.screen.isScreenExtended()) {
+                            container.css("overflow-y", "scroll");
+                        }
                         F.ui.editor.beatSettings.removeListeners();
                         wpanel.removeClass('visibleElement');
                         panel.removeClass('visibleElement');
@@ -395,7 +425,7 @@ F = {
                     }
                 },
 
-                toggleNumberColumns: function(){
+                toggleNumberColumns: function (hideMenu) {
                     console.log("Toggle Columns" + F.editor.col_number);
                     if (F.editor.col_number === 16) {
                         // TODO display the number of columns
@@ -406,12 +436,17 @@ F = {
                         F.editor.col_number = 16;
                         F.editor.controls.columns = 16;
                     }
+
+                    if (hideMenu) {
+                        F.ui.editor.beatSettings.toggleShow();
+                    }
                     // redraws the grid but without drawing the occupied
                     F.editor.newGrid();
                     // draws the tiles.
                     F.ui.editor.refresh();
                     F.ui.editor.cursor.drawLines();
 
+                    //TODO-> goes to ui
                     $('#number-columns-label').html(F.editor.col_number.toString());
                 },
                 /**
@@ -419,18 +454,39 @@ F = {
                  */
                 toggleInterval: function(){
                     var panel = $('#selector-panel');
+                    var editor = F.ui.editor.editorElem;
+                    var appContainer = $('#app-container');
+                    var offsetY = appContainer[0].pageYOffset || appContainer[0].scrollTop;
                     if (panel.hasClass('visibleElement')) {
-                        var editor = document.getElementById('app-container');
-                        var offsetY = editor.pageYOffset || editor.scrollTop;
-                        panel.css('top', offsetY + 'px');
-                        $('#velocity-label').html(F.editor.controls.interval.toString() + "ms");
+                        // TODO disable scrolling
+                        if (F.utils.screen.isScreenExtended()) {
+                            editor.css("overflow-y", "scroll");
+                        } else {
+                            editor.css("overflow-y", "hidden");
+                        }
                         panel.removeClass('visibleElement');
                     } else {
+                        panel.css('top', offsetY + 'px');
+                        editor.css("overflow-y", "hidden");
                         panel.addClass('visibleElement');
                     }
                 },
+
                 /**
-                 *
+                 * It consumes an event type.
+                 * It sets speed and value to the assigned value.
+                 * @param e
+                 */
+                changePlaySpeed: function (e) {
+                    var value = (typeof(e) != "number") ? e.currentTarget.value : e;
+                    var bpm = F.utils.convertMstoBpm(value) + " bpm";
+                    $('#selector-panel #value-bpm').html(bpm);
+                    $('#selector-panel #value-delay').html(value.toString());
+                    $('#velocity-label').html(bpm);
+                    F.editor.controls.interval = parseInt(value);
+                },
+                /**
+                 * Attempts to save the beat
                  */
                 saveBeat: function () {
                     var fileName = $('input[name=file-name]').val();
@@ -450,21 +506,18 @@ F = {
                 },
 
                 addListeners : function(){
-                    $('#selector-panel #range-step').change(function (e) {
-                        $('#selector-panel span').html(e.currentTarget.value + " ms");
-                        F.editor.controls.interval = parseInt(e.currentTarget.value);
-                    });
+                    $('#selector-panel #range-step').change(F.ui.editor.beatSettings.changePlaySpeed);
 
                     $('#selector-panel button').click(function (e) {
                         F.ui.editor.beatSettings.toggleInterval();
                     })
                     $('#menu-panel button').click(function(e){
-                        console.log(e.currentTarget.id);
+                        //console.log(e.currentTarget.id);
                         switch(e.currentTarget.id)
                         {
                             // TODO - make interface work
                             case "number-spaces":
-                                F.ui.editor.beatSettings.toggleNumberColumns();
+                                F.ui.editor.beatSettings.toggleNumberColumns(true);
                             break;
                             case "interval-toggle":
                                 F.ui.editor.beatSettings.toggleInterval();
@@ -484,7 +537,7 @@ F = {
                 removeListeners : function(){
                     console.log("removing the listener");
                     $('#menu-panel button').off("click");
-                    $('#selector-panel #range-step').off("click");
+                    $('#selector-panel #range-step').off();
                     $('#selector-panel button').off("click");
                 }
             },
@@ -787,9 +840,16 @@ F = {
                 // Loads in the beats saved so far
                 this.displaySaves(false, false, 'recent-files-menu', 5);
 
+                document.addEventListener("visibilitychange", F.ui.menu.displayMainMenuSaves);
+
                 var s = setTimeout(function () {
-                    $('#mainContainer').css('width', window.innerWidth);
-                    $('#mainContainer').css('height', window.innerHeight);
+
+                    if (F.settings.general.detectScreenSizeType() === "portrait") {
+                        screen.addEventListener("orientationchange", F.settings.general.screenChange);
+                    } else {
+                        $('#mainContainer').css('width', window.innerWidth);
+                        $('#mainContainer').css('height', window.innerHeight);
+                    }
                 }, 500)
                 $('.new-btn').click(function () {
                     F.ui.changeScreen("editor", "deeper");
@@ -799,6 +859,12 @@ F = {
                 $('#show-saved-list').click(F.menu.saves.toggle);
                 $('#about-btn').click(F.menu.about.toggle);
 
+            },
+            /***
+             *
+             */
+            displayMainMenuSaves: function (e) {
+                F.ui.menu.displaySaves(false, false, 'recent-files-menu', 5);
             },
             /***
              * Populates the menu with the last saves
@@ -994,9 +1060,10 @@ F = {
             if (document.hidden) {
                 var date = new Date();
                 if (F.editor.controls.tracks.length > 0) {
-                    F.settings.beat.save("AutoSave_" + date.getDate() + date.getMonth() + date.getYear() + date.getMinutes(), false);
+                    F.settings.beat.save("AutoSave", false, true);
                 }
                 F.utils.cleaner.cleanUpFiles(F.editor.controls.recordings);
+                F.utils.notify("Your Firebeat was automatically saved.");
                 F.editor.exit(true);
             } else {
                 F.ui.menu.displaySaves(false, false, 'recent-files-menu', 5);
@@ -1008,10 +1075,10 @@ F = {
         openBeat: function (grid, columns, interval) {
             this.init(false);
             F.editor.controls.grid = grid;
-            F.editor.controls.interval = interval;
-
+            //F.editor.controls.interval = interval;
+            F.ui.editor.beatSettings.changePlaySpeed(interval);
             if (columns === 16) {
-                F.ui.editor.beatSettings.toggleNumberColumns();
+                F.ui.editor.beatSettings.toggleNumberColumns(false);
             }
 
             // nr of rows - rows to display - 1 for the extra one
@@ -1088,7 +1155,7 @@ F = {
                         new Track(
                             new Howl({
                                 src: [F.editor.PATHTOTRACKS + categoryName + "/" + fileName],
-                                buffer: true
+                                preload: true
                             })
                             , trackName, categoryName) // < --- Modify here
                     );
@@ -1152,10 +1219,14 @@ F = {
             grid: [],
             tracks : [],
             interval: 500,
+
+
+            loop: {},
             /**
              * Initiates
              */
             init: function(){
+                this.loop = null;
                 this.columns = 8;
                 this.grid = [];
                 this.tracks = [];
@@ -1171,15 +1242,16 @@ F = {
             /**
              * Do a check before loading
              */
-            play: function () {
-                if (F.editor.controls.tracks.length == 0) {
-                    alert('No tracks added');
+            play: function (forceStop) {
+                if (F.editor.controls.tracks.length == 0 && forceStop != true) {
+                    alert('To start, add a track pressing the "+" on the left hand side.');
                 } else {
-                    if (F.editor.controls.stop) {
+                    if (F.editor.controls.stop && forceStop != true) {
                         F.editor.controls.stop = false;
                         F.editor.controls.load();
                     } else {
                         F.editor.controls.stop = true;
+                        clearInterval(F.editor.controls.loop);
                         F.ui.editor.cursor.drawLines();
                     }
                     F.ui.editor.togglePlay();
@@ -1228,7 +1300,7 @@ F = {
                         F.editor.controls.cursor = 0;
                     }
                     // Recurse
-                    setTimeout(F.editor.controls.playSound, F.editor.controls.interval);
+                    this.loop = setTimeout(F.editor.controls.playSound, F.editor.controls.interval);
                 } else {
                     var columnIndexToRepaint = (F.editor.controls.cursor > 0) ? (F.editor.controls.cursor-1) : F.editor.controls.grid.length-1;
                     F.ui.editor.cursor.erase(columnIndexToRepaint, F.editor.controls.grid);
@@ -1439,7 +1511,24 @@ F = {
                     $('#mu-' + i).off("click");
                 }
 
-                F.ui.editor.beatSettings.toggleShow();
+                //TODO
+                var arrayElementsToHide = ['menu-panel', 'selector-panel'];
+
+                if ($('#' + arrayElementsToHide[0]).hasClass("visibleElement")) {
+                    F.ui.editor.beatSettings.toggleShow();
+                }
+
+                if ($('#' + arrayElementsToHide[1]).hasClass("visibleElement")) {
+                    F.ui.editor.beatSettings.toggleInterval();
+                }
+
+                var rangeStep = $('#range-step')
+                rangeStep.val(500);
+                F.ui.editor.beatSettings.changePlaySpeed(500);
+                // Hide
+                F.ui.editor.trackSettings.hide(F.editor.trackSettings.currentSettingsIndex);
+
+
                 $('#mu-list').html("");
                 $('#control-menu').off('click');
                 // remove all the listeners that are not needed
@@ -1449,6 +1538,9 @@ F = {
                 this.c.removeEventListener('click', F.editor.select);
 
                 $('#control-play').off('click', F.editor.controls.play);
+                // force stop
+                F.editor.controls.play(true);
+
                 // Resize the editor main
                 var editor = $('#editor-main');
                 editor.attr('height', F.editor.look.y);
@@ -1466,7 +1558,7 @@ F = {
                 container.css("overflow-y", "hidden");
                 // Restore the columns
                 if (F.editor.col_number === 16) {
-                    F.ui.editor.beatSettings.toggleNumberColumns();
+                    F.ui.editor.beatSettings.toggleNumberColumns(false);
                 }
                 var radios = document.forms["audioTrack"].elements["type"];
                 for (var i = 0; i < radios.length; i++) {
@@ -1483,6 +1575,7 @@ F = {
                 balanceVolume.off("change");
                 var playSoundBtn = $("button[name=play-choice]");
                 playSoundBtn.off("click");
+                // visibility
                 document.removeEventListener("visibilitychange", F.editor.suspend);
                 var soundSelector = $('select[name=track-selection]');
                 soundSelector.off("change");
@@ -1495,20 +1588,43 @@ F = {
 
     },
     settings: {
+        general: {
+            detectScreenSizeType: function () {
+                var x = window.innerWidth;
+                var y = window.innerHeight;
+
+                if (x > y) {
+                    return "landscape";
+                } else {
+                    return "portrait";
+                }
+            },
+            screenChange: function () {
+                if (this.detectScreenSizeType() == "landscape") {
+                    screen.lockOrientation('landscape');
+                }
+            }
+        },
         beat: {
             /**
              * Consumes a filename and saves a json file into the indexeDB if succefull.
              * @param name
-             * @returns {string}
+             * @type {string}
              * @param alert
-             * @returns {boolean}
+             * @type {boolean}
+             * @param forceOverwriting
+             * @type {boolean}
              */
-            save: function (name, alert) {
+            save: function (name, alert, forceOverwriting) {
                 var test = /[\/:\*\?"<>\\|]/g.test(name);
                 var overwrite = false;
+
+                if (forceOverwriting === true) {
+                    overwrite = true;
+                }
                 var beat = (F.utils.io.simpleLoad("beats")) ? F.utils.io.simpleLoad("beats") : '';
 
-                if (beat.indexOf(name) != -1) {
+                if (beat.indexOf(name) != -1 && overwrite === false) {
                     var ask = confirm("A beat named: '" + name + "' already exists. By pressing OK you will overwrite it.");
                     if (!ask) {
                         return false;
@@ -1565,7 +1681,7 @@ F = {
                     }
                     F.utils.io.simpleSave("beats", beat + ";" + name);
                     F.utils.io.simpleSave("beats_time", beatTime + ";" + time);
-                    if (alert != false) F.utils.notify(name + " Firebeat has been saved.");
+                    if (alert != false) F.utils.notify("'" + name + "' has been saved.");
                 });
             },
             /**
@@ -1594,8 +1710,7 @@ F = {
                     F.menu.saves.toggle();
                 }
 
-
-                var name = name.currentTarget.id;
+                var name = (typeof name === "string") ? name : name.currentTarget.id;
                 if (name.indexOf(".json") === -1) {
                     name = name + ".json";
                 }
@@ -1642,7 +1757,7 @@ F = {
                                 var audioObj = new Howl({
                                         src: [window.URL.createObjectURL(blob)],
                                         ext: ["wav"],
-                                        buffer: true
+                                        preload: true
                                     }
                                 );
                                 newTrack = new Track(audioObj, trackName, categoryName);
@@ -1682,7 +1797,7 @@ F = {
                             var audioObj = new Howl({
                                 src: [path],
                                 ext: ['ogg'],
-                                buffer: true
+                                preload: true
                             });
 
 
@@ -1705,6 +1820,7 @@ F = {
 
                     F.editor.controls.grid=j.grid;
                     F.editor.controls.interval=j.interval;
+
                         F.ui.changeScreen('editor', 'deeper');
                         F.editor.openBeat(j.grid, j.columns, j.interval);
                     }

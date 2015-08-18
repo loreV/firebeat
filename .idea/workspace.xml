@@ -1,108 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ee71bd2-17f8-4795-ac53-d4f4661625b3" name="Default" comment="ADD new ui, cleaning the memory, extra pages">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149716__beskhu__goutte-1-a.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149717__beskhu__goutte-1-b.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149718__beskhu__goutte-2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149719__beskhu__goutte-lp.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149721__beskhu__goutte-1-full.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149722__beskhu__gouttes-1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149724__beskhu__goutte-clean-crt-base.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149725__beskhu__gouttes-2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149726__beskhu__goutte-fake-bruit-amb.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/drops/149728__beskhu__goutte-clean-w-slnc-insrt.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/173086__rocknessmonster89__wood-snare-sample-2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/268114__soneproject__synthetic-drums-10.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/269716__ianstargem__electronic-kick-drum-1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270393__littlerobotsoundfactory__inventory-open-00.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270401__littlerobotsoundfactory__menu-select-00.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270405__littlerobotsoundfactory__pickup-gold-03.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270406__littlerobotsoundfactory__pickup-gold-02.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270407__littlerobotsoundfactory__pickup-gold-01.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270408__littlerobotsoundfactory__pickup-gold-00.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270412__littlerobotsoundfactory__footstep-dirt-03.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270413__littlerobotsoundfactory__footstep-dirt-02.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270414__littlerobotsoundfactory__footstep-dirt-01.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/action/270415__littlerobotsoundfactory__footstep-dirt-00.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/271078__ianstargem__electronic-kick-drum-2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/271079__ianstargem__electronic-kick-drum-3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/271282__soneproject__synthetic-drums-7.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/271283__soneproject__synthetic-drums-6.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/271285__soneproject__synthetic-drums-9.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273238__jperryhostssounds__a22223clip2w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273239__jperryhostssounds__a22223clip1w4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273240__jperryhostssounds__a22223clip1w3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273241__jperryhostssounds__a22223clip1w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273242__jperryhostssounds__a22223clip2w5.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273243__jperryhostssounds__a22223clip2w4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273244__jperryhostssounds__a22223clip2w3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273245__jperryhostssounds__a22223clip2w2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273246__jperryhostssounds__a23323clip1w2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273247__jperryhostssounds__a23323clip1w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273248__jperryhostssounds__m33333clip1w2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273249__jperryhostssounds__m23323clip2w5.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273250__jperryhostssounds__m33333clip1w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273251__jperryhostssounds__m22223clip1w3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273252__jperryhostssounds__m22223clip1w4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273253__jperryhostssounds__m33333clip1w4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273254__jperryhostssounds__m33333clip1w5.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273255__jperryhostssounds__m33333clip2w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273256__jperryhostssounds__m33333clip2w2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273257__jperryhostssounds__a33333clip2w1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/words/273258__jperryhostssounds__a33333clip2w2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/laser/273518__kwahmah-02__dll-lasertwang-dsh-low.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/laser/273527__kwahmah-02__dll-lasertwang-a.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/laser/273529__kwahmah-02__dll-lasertwang-b.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/laser/273529__kwahmah-02__dll-lasertwang-z.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/274609__hellska__pipe-01.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/274775__ianstargem__simple-kick-drum.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/41241__ortaldj__resaconnnnnnnnnnnnnnnnnnnnnnn.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/7038__yawfle__050816-chair-02.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/7039__yawfle__050816-chair-03.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/7046__yawfle__050816-chair-10.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/affermative.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/arrow_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/arrow_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/bep.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/copy_that.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/cork.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/damn_it.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/forming_up.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/help.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/i_am_going_in.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/icon_mic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/iconmonstr-audio-3-icon-24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/extra/iconmonstr-email-9-icon-48.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/extra/iconmonstr-favorite-5-icon-16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/extra/iconmonstr-github-9-icon-48.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/iconmonstr-info-icon-24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/iconmonstr-trash-can-8-icon-24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/iconmonstr-volume-minus-icon-24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/iconmonstr-volume-plus-icon-24.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/kick.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/mayday.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/message.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/missed.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/pilot/negative.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-a.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-b.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-bb.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-c.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-d.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-e.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-eb.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-f.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/piano/piano-g.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/plate.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/snaps/snap1.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/snaps/snap2.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/snaps/snap3.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/snaps/snap4.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/controls/speakers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/objects/tic.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/effects/synthetic_drum/tuc.ogg" />
+    <list default="true" id="2ee71bd2-17f8-4795-ac53-d4f4661625b3" name="Default" comment="ADD (forgotten) Tracks">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/libs/libmp3lame.min.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.webapp" afterPath="$PROJECT_DIR$/manifest.webapp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/tracks.json" afterPath="$PROJECT_DIR$/data/tracks.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firebeat.iws" />
@@ -129,21 +34,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4716" max-vertical-offset="5640">
-              <caret line="332" column="46" selection-start-line="332" selection-start-column="46" selection-end-line="332" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.1010101" vertical-offset="0" max-vertical-offset="5445">
+              <caret line="4" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/app.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="7514" max-vertical-offset="9345">
+              <caret line="518" column="16" selection-start-line="518" selection-start-column="16" selection-end-line="518" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="locales.ini" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/locales.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46280992" vertical-offset="6230" max-vertical-offset="27885">
-              <caret line="441" column="70" selection-start-line="441" selection-start-column="70" selection-end-line="441" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="15918" max-vertical-offset="29745">
+              <caret line="1076" column="42" selection-start-line="1076" selection-start-column="42" selection-end-line="1076" selection-end-column="42" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manifest.webapp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manifest.webapp">
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="735">
+              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -182,9 +122,9 @@
         <option value="$PROJECT_DIR$/js/libs/howler.min.js" />
         <option value="$PROJECT_DIR$/css/animation.css" />
         <option value="$PROJECT_DIR$/js/classes/Track.js" />
-        <option value="$PROJECT_DIR$/css/app.css" />
-        <option value="$PROJECT_DIR$/data/tracks.json" />
         <option value="$PROJECT_DIR$/manifest.webapp" />
+        <option value="$PROJECT_DIR$/data/tracks.json" />
+        <option value="$PROJECT_DIR$/css/app.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/app.js" />
       </list>
@@ -222,6 +162,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -286,63 +227,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="effects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="effects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="action" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Firebeat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -474,7 +360,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437813293446</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ADD (forgotten) Tracks">
+      <created>1437935326653</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1437935326653</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -499,28 +391,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="746" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32662538" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296371" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.099071205" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09767442" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19253294" sideWeight="0.49828178" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1920821" sideWeight="0.4976744" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16715543" sideWeight="0.6139535" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39795917" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16715543" sideWeight="0.3860465" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16715543" sideWeight="0.61182517" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16715543" sideWeight="0.3881748" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32662538" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283859" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39689922" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296371" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -553,7 +445,8 @@
     <MESSAGE value="ADD Setup for Localization, ADD Load function." />
     <MESSAGE value="ADD new Graphics, function, Delete track" />
     <MESSAGE value="ADD new ui, cleaning the memory, extra pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD new ui, cleaning the memory, extra pages" />
+    <MESSAGE value="ADD (forgotten) Tracks" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD (forgotten) Tracks" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -563,10 +456,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/app.js">
+    <entry file="file://$PROJECT_DIR$/manifest.webapp">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="27885">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="735">
+          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -770,13 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/libs/libmp3lame.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3261944" vertical-offset="0" max-vertical-offset="408852">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/locales/it/app.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618">
@@ -816,13 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33279485" vertical-offset="484" max-vertical-offset="1515">
           <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/libs/Zepto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="6983" max-vertical-offset="14100">
-          <caret line="479" column="8" selection-start-line="479" selection-start-column="8" selection-end-line="479" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -875,24 +757,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/app.css">
+    <entry file="file://$PROJECT_DIR$/js/classes/FIO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6527514" vertical-offset="3845" max-vertical-offset="9165">
-          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.37117118" vertical-offset="499" max-vertical-offset="3885">
+          <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/libs/Zepto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3322314" vertical-offset="6534" max-vertical-offset="14100">
+          <caret line="449" column="8" selection-start-line="449" selection-start-column="8" selection-end-line="449" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/tracks.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33200794" vertical-offset="1348" max-vertical-offset="8115">
-          <caret line="101" column="6" selection-start-line="101" selection-start-column="6" selection-end-line="101" selection-end-column="6" />
+        <state vertical-scroll-proportion="10.808081" vertical-offset="0" max-vertical-offset="8070">
+          <caret line="428" column="6" selection-start-line="428" selection-start-column="6" selection-end-line="428" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/classes/FIO.js">
+    <entry file="file://$PROJECT_DIR$/data/locales.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37117118" vertical-offset="499" max-vertical-offset="3885">
-          <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="362">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7514" max-vertical-offset="9345">
+          <caret line="518" column="16" selection-start-line="518" selection-start-column="16" selection-end-line="518" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -901,23 +799,26 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02851711" vertical-offset="0" max-vertical-offset="735">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4716" max-vertical-offset="5640">
-          <caret line="332" column="46" selection-start-line="332" selection-start-column="46" selection-end-line="332" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="735">
+          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46280992" vertical-offset="6230" max-vertical-offset="27885">
-          <caret line="441" column="70" selection-start-line="441" selection-start-column="70" selection-end-line="441" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="15918" max-vertical-offset="29745">
+          <caret line="1076" column="42" selection-start-line="1076" selection-start-column="42" selection-end-line="1076" selection-end-column="42" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1010101" vertical-offset="0" max-vertical-offset="5445">
+          <caret line="4" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
