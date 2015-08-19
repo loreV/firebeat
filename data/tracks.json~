@@ -1,0 +1,150 @@
+{
+  "categories": [
+    {
+      "name": "drum_machine",
+      "tracks": [
+        {
+          "name": "Bd-01",
+          "file": "2036__twistedlemon__mattel-bd1.ogg"
+        },
+        {
+          "name": "Bd-02",
+          "file": "2037__twistedlemon__mattel-bd2.ogg"
+        },
+        {
+          "name": "Bd-03",
+          "file": "2038__twistedlemon__mattel-bd3.ogg"
+        },
+        {
+          "name": "Bd-04",
+          "file": "2039__twistedlemon__mattel-bd4.ogg"
+        },
+        {
+          "name": "Bd-05",
+          "file": "2040__twistedlemon__mattel-bd5.ogg"
+        },
+        {
+          "name": "SD-01",
+          "file": "2041__twistedlemon__mattel-sd1.ogg"
+        },
+        {
+          "name": "SD-02",
+          "file": "2042__twistedlemon__mattel-sd2.ogg"
+        },
+        {
+          "name": "SD-03",
+          "file": "2043__twistedlemon__mattel-sd3.ogg"
+        },
+        {
+          "name": "SD-04",
+          "file": "2044__twistedlemon__mattel-sd4.ogg"
+        },
+        {
+          "name": "HH1",
+          "file": "2045__twistedlemon__mattel-hh1.ogg"
+        },
+        {
+          "name": "HH2",
+          "file": "2046__twistedlemon__mattel-hh2.ogg"
+        },
+        {
+          "name": "HH3",
+          "file": "2047__twistedlemon__mattel-hh3.ogg"
+        },
+        {
+          "name": "HH4",
+          "file": "2048__twistedlemon__mattel-hh4.ogg"
+        },
+        {
+          "name": "HH5",
+          "file": "2049__twistedlemon__mattel-hh5.ogg"
+        },
+        {
+          "name": "HHo1",
+          "file": "2050__twistedlemon__mattel-hho1.ogg"
+        },
+        {
+          "name": "HHo2",
+          "file": "2051__twistedlemon__mattel-hho2.ogg"
+        },
+        {
+          "name": "HHo3",
+          "file": "2052__twistedlemon__mattel-hho3.ogg"
+        },
+        {
+          "name": "Percussion1",
+          "file": "2053__twistedlemon__mattel-per1.ogg"
+        },
+        {
+          "name": "Tom01",
+          "file": "2055__twistedlemon__mattel-tom02.ogg"
+        },
+        {
+          "name": "Tom02",
+          "file": "2057__twistedlemon__mattel-tom04.ogg"
+        },
+        {
+          "name": "Tom03",
+          "file": "2059__twistedlemon__mattel-tom06.ogg"
+        },
+        {
+          "name": "Tom04",
+          "file": "2061__twistedlemon__mattel-tom08.ogg"
+        },
+        {
+          "name": "Tom05",
+          "file": "2062__twistedlemon__mattel-tom09.ogg"
+        }
+      ]
+    },
+    {
+      "name": "drum",
+      "tracks": []
+    },
+    {
+      "name": "Anime",
+      "tracks": [
+        {
+          "name": "Attack-Girl",
+          "file": "273742__lemonjolly__attack4-eihhh.ogg"
+        },
+        {
+          "name": "Attack-Girl-02",
+          "file": "273746__lemonjolly__attack5-ha.ogg"
+        },
+        {
+          "name": "Hurt-Girl",
+          "file": "273919__lemonjolly__hurt4-unh.ogg"
+        },
+        {
+          "name": "Hurt-Girl02",
+          "file": "273921__lemonjolly__hurt2-it-hurts.ogg"
+        },
+        {
+          "name": "Hurt-Girl03",
+          "file": "273922__lemonjolly__hurt1-ahh.ogg"
+        },
+        {
+          "name": "Heeh-Girl",
+          "file": "273920__lemonjolly__hurt3-heeh.ogg"
+        },
+        {
+          "name": "Good-Yoshi-Girl",
+          "file": "273924__lemonjolly__good-yoshi-in-japanese.ogg"
+        },
+        {
+          "name": "Hooray-Girl",
+          "file": "273925__lemonjolly__hooray-yeah.ogg"
+        },
+        {
+          "name": "We did it-Girl",
+          "file": "273928__lemonjolly__we-did-it-in-japanese.ogg"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+

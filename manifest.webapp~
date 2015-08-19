@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0",
+  "version": "1.0.1",
   "name": "FireBeat",
-  "description": "Demonstrates how to use permissions to load remote content",
+  "description": "Firebeat is a drum machine sequencer for Firefox OS",
   "launch_path": "/index.html",
   "icons": {
     "16": "/img/icons/icon16x16.png",
@@ -24,30 +24,20 @@
     "audio-channel-content":{
         "description" : "Play sounds"
     },
-    "device-storage:sdcard":{
-        "description": "Save your beats in the sd-card"
+    "device-storage:sdcard" : {
+	     "access": "readwrite",
+	     "description":"Needed to export the sounds and large files"
+	  },
+    "desktop-notification":{
+         "description":"Send save notification messages to the user"
     },
-    "storage":{
-        "description": "Save your beats in the sd-card" 
-      },
     "browser":{
-        "description": "Call out the browser to receive news" 
+        "description": "Call out the browser to browse to web pages"
       }
   },
   "installs_allowed_from": [
     "*"
   ],
-  "orientation":["landscape"],
-  "locales": {
-    "es": {
-      "name": "Aplicación privilegiada",
-      "description": "Demuestra cómo utilizar permisos para cargar contenido remoto",
-      "permissions": {
-        "systemXHR": {
-          "description": "Requerido para cargar contenido remoto"
-        }
-      }
-    }
-  },
+  "orientation":"landscape",
   "default_locale": "en"
 }
