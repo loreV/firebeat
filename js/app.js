@@ -1,5 +1,5 @@
 /*!
- *  Firebeat v1.0
+ *  Firebeat v1.0.3
  *  www.themovingweb.com/firebeat/
  *
  *  2015, Lorenzo Verri
@@ -10,12 +10,13 @@ var F;
 
 F = {
     utils:{
-        version: "1.0.2",
+        version: "1.1.0",
         io: null,
 
         convertMstoBpm: function (ms) {
             var minute = 60000;
-            var bpm = parseInt(minute / ms);
+            var bpm = parseInt(minute / ms );
+
             return bpm;
         },
 
@@ -34,6 +35,10 @@ F = {
             setTimeout(notification.close.bind(notification), 4000);
         },
         conf: {
+            const:{
+                FILENAME:"",
+                TIME: ""
+            },
             /** system language **/
             lang: "",
             /** is it First use **/
@@ -83,14 +88,12 @@ F = {
              * @param listFiles
              */
             cleanUpFiles: function (listFiles) {
-
                 var toMaintain = [];
                 for (var z = 0; z < F.editor.controls.tracks.length; z++) {
                     if (F.editor.controls.tracks[z].getType() === "recording") {
                         toMaintain.push(F.editor.controls.tracks[z].getName());
                     }
                 }
-
                 for (var i = 0; i < listFiles.length; i++) {
                     if (toMaintain.indexOf(listFiles[i]) === -1) {
                         F.utils.io.deleteFromDb(listFiles[i], function (e) {
@@ -106,6 +109,9 @@ F = {
     ui: {
         pages: ['menu', 'editor', 'saves'],
         currentScreen: "menu",
+        HTMLElements: {
+        //    TODO unify here all the elements
+        },
         /**
          * Show or hide a page depending on whether it is showing
          * @param page the page to be toggled
@@ -198,10 +204,14 @@ F = {
 
                 });
 
+
                 $('#control-hide').on("click", F.ui.editor.toggleControls);
                 var deleteTrack = $('#delete_track_btn');
                 deleteTrack.on("click", F.ui.editor.removeTrack);
                 var controlVolume = $('input[name=vol]');
+                var controlQuarter = $('input[value=value-delay-quarter]');
+                controlQuarter.prop("checked", false);
+                controlQuarter.on("change", F.ui.editor.trackSettings.toggleExtra)
                 controlVolume.on("change", F.ui.editor.trackSettings.toggleSelector);
                 var balanceVolume = $('input[name=bal]');
                 balanceVolume.on("change", F.ui.editor.trackSettings.toggleSelector);
@@ -425,13 +435,32 @@ F = {
                     }
                 },
 
+                eventsForBeatSettings: function(e) {
+                    switch(e.currentTarget.id)
+                    {
+                        case "number-spaces":
+                            F.ui.editor.beatSettings.toggleNumberColumns(true);
+                            break;
+                        case "interval-toggle":
+                            F.ui.editor.beatSettings.toggleInterval();
+                            break;
+                        case "save-button":
+                            F.ui.editor.beatSettings.saveBeat();
+                            break;
+                        case "export-button":
+                            F.ui.editor.beatSettings.exportFile();
+                            break;
+                        case "exit-button":
+                            F.ui.editor.beatSettings.exitBeat();
+                            break;
+                    }
+                },
+
                 toggleNumberColumns: function (hideMenu) {
                     console.log("Toggle Columns" + F.editor.col_number);
                     if (F.editor.col_number === 16) {
-                        // TODO display the number of columns
                         F.editor.col_number = 8;
                         F.editor.controls.columns = 8;
-                        // TODO refresh the grid
                     } else {
                         F.editor.col_number = 16;
                         F.editor.controls.columns = 16;
@@ -446,7 +475,6 @@ F = {
                     F.ui.editor.refresh();
                     F.ui.editor.cursor.drawLines();
 
-                    //TODO-> goes to ui
                     $('#number-columns-label').html(F.editor.col_number.toString());
                 },
                 /**
@@ -458,7 +486,6 @@ F = {
                     var appContainer = $('#app-container');
                     var offsetY = appContainer[0].pageYOffset || appContainer[0].scrollTop;
                     if (panel.hasClass('visibleElement')) {
-                        // TODO disable scrolling
                         if (F.utils.screen.isScreenExtended()) {
                             editor.css("overflow-y", "scroll");
                         } else {
@@ -481,7 +508,8 @@ F = {
                     var value = (typeof(e) != "number") ? e.currentTarget.value : e;
                     var bpm = F.utils.convertMstoBpm(value) + " bpm";
                     $('#selector-panel #value-bpm').html(bpm);
-                    $('#selector-panel #value-delay').html(value.toString());
+                    var valueToString = value / ((F.editor.controls.quarter) ? 4 : 1);
+                    $('#selector-panel #value-delay').html(valueToString.toString());
                     $('#velocity-label').html(bpm);
                     F.editor.controls.interval = parseInt(value);
                 },
@@ -507,35 +535,11 @@ F = {
 
                 addListeners : function(){
                     $('#selector-panel #range-step').change(F.ui.editor.beatSettings.changePlaySpeed);
-
-                    $('#selector-panel button').click(function (e) {
-                        F.ui.editor.beatSettings.toggleInterval();
-                    })
-                    $('#menu-panel button').click(function(e){
-                        //console.log(e.currentTarget.id);
-                        switch(e.currentTarget.id)
-                        {
-                            // TODO - make interface work
-                            case "number-spaces":
-                                F.ui.editor.beatSettings.toggleNumberColumns(true);
-                            break;
-                            case "interval-toggle":
-                                F.ui.editor.beatSettings.toggleInterval();
-                            break;
-                            case "save-button":
-                                F.ui.editor.beatSettings.saveBeat();
-                            break;
-                            case "export-button":
-                                F.ui.editor.beatSettings.exportFile();
-                                break;
-                            case "exit-button":
-                                F.ui.editor.beatSettings.exitBeat();
-                                break;
-                        }
-                    });
+                    $('#selector-panel button').click(F.ui.editor.beatSettings.toggleInterval);
+                    $('#menu-panel button').click(F.ui.editor.beatSettings.eventsForBeatSettings);
                 },
                 removeListeners : function(){
-                    console.log("removing the listener");
+                    //console.log("removing the listener");
                     $('#menu-panel button').off("click");
                     $('#selector-panel #range-step').off();
                     $('#selector-panel button').off("click");
@@ -593,6 +597,15 @@ F = {
                     this.loadTracks(category);
                     $('form[name=audioTrack] select[name=track-selection]').val(name);
                     this.toggleAudioType(type);
+                },
+
+                toggleExtra: function(e){
+                    var value = e.target.checked;
+                    F.editor.controls.quarter = (value) ? true : false;
+                    var tempo = parseInt($('#range-step').val());
+                    F.ui.editor.beatSettings.changePlaySpeed(
+                        tempo
+                    );
                 },
                 /***
                  * Attempts to toggle a change in one of the following elements
@@ -801,11 +814,6 @@ F = {
                             }
                         }
 
-                        if (initial) {
-
-
-                        }
-
                         F.editor.co.fillStyle = colorToFill;
                         F.editor.co.fillRect((columnIndexToRepaint * F.editor.col_size), (i* F.editor.row_size) , F.editor.col_size , F.editor.row_size);
                     }
@@ -818,7 +826,6 @@ F = {
             },
             refreshUI: function(){
                 $('.mu-controller').css("height", F.editor.row_size);
-                //todo way more should actually go in this method!
                 var play_btn = document.getElementById("control-play");
                 play_btn.style.width = F.editor.col_size/1.1 +"px";
                 play_btn.style.height = F.editor.col_size/1.1 +"px";
@@ -838,12 +845,14 @@ F = {
              */
             init: function(){
                 // Loads in the beats saved so far
-                this.displaySaves(false, false, 'recent-files-menu', 5);
 
+                this.displaySaves(false, false, 'recent-files-menu', 5);
                 document.addEventListener("visibilitychange", F.ui.menu.displayMainMenuSaves);
 
-                var s = setTimeout(function () {
 
+
+
+                var s = setTimeout(function () {
                     if (F.settings.general.detectScreenSizeType() === "portrait") {
                         screen.addEventListener("orientationchange", F.settings.general.screenChange);
                     } else {
@@ -882,6 +891,7 @@ F = {
                 if (arrayFiles != "") arrayFiles = arrayFiles.split(";");
                 if (arrayOfTime != "") arrayOfTime = arrayOfTime.split(";");
                 // best would be to simply iterate through this without saving a copy of it
+                // TODO -> let's iterate backwards so not to reverse the array necessarily
                 arrayFiles = arrayFiles.reverse();
                 arrayOfTime = arrayOfTime.reverse();
                 var elem = "";
@@ -997,16 +1007,7 @@ F = {
             this.newGrid();
 
             $('#control-hide').css('width', this.col_size + 'px');
-
             F.ui.editor.refreshUI();
-
-            //TODO-> refactor this shit!
-            //var script = document.createElement('script');
-            //script.type = 'text/javascript';
-            //script.src = 'js/libs/libmp3lame.min.js';
-            //$('head').append(script);
-
-            // TODO LOAD only once
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = 'js/classes/Recorder.js';
@@ -1072,7 +1073,7 @@ F = {
         /***
          *  Open an existing beat
          */
-        openBeat: function (grid, columns, interval) {
+        openBeat: function (grid, columns, interval, quarter) {
             this.init(false);
             F.editor.controls.grid = grid;
             //F.editor.controls.interval = interval;
@@ -1083,6 +1084,7 @@ F = {
 
             // nr of rows - rows to display - 1 for the extra one
             var nrSteps = (F.editor.controls.tracks.length) - (F.editor.row_number - 1);
+            $('input[value=value-delay-quarter]').prop('checked', (F.editor.controls.quarter));
 
 
             //var nrTracks = F.editor.controls.tracks.length;
@@ -1219,6 +1221,7 @@ F = {
             grid: [],
             tracks : [],
             interval: 500,
+            quarter: false,
 
 
             loop: {},
@@ -1300,7 +1303,7 @@ F = {
                         F.editor.controls.cursor = 0;
                     }
                     // Recurse
-                    this.loop = setTimeout(F.editor.controls.playSound, F.editor.controls.interval);
+                    this.loop = setTimeout(F.editor.controls.playSound, (F.editor.controls.interval / ((F.editor.controls.quarter) ? 4 : 1)));
                 } else {
                     var columnIndexToRepaint = (F.editor.controls.cursor > 0) ? (F.editor.controls.cursor-1) : F.editor.controls.grid.length-1;
                     F.ui.editor.cursor.erase(columnIndexToRepaint, F.editor.controls.grid);
@@ -1511,7 +1514,7 @@ F = {
                     $('#mu-' + i).off("click");
                 }
 
-                //TODO
+
                 var arrayElementsToHide = ['menu-panel', 'selector-panel'];
 
                 if ($('#' + arrayElementsToHide[0]).hasClass("visibleElement")) {
@@ -1527,7 +1530,7 @@ F = {
                 F.ui.editor.beatSettings.changePlaySpeed(500);
                 // Hide
                 F.ui.editor.trackSettings.hide(F.editor.trackSettings.currentSettingsIndex);
-
+                F.editor.controls.quarter=false;
 
                 $('#mu-list').html("");
                 $('#control-menu').off('click');
@@ -1568,6 +1571,7 @@ F = {
 
                 $('form[name="audioTrack"] button[name=record-choice]').off('click')
 
+                $('input[value=value-delay-quarter]').off("change", F.ui.editor.toggleExtra);
                 $('#control-hide').off("click", F.ui.editor.toggleControls);
                 var controlVolume = $("input[name=vol]");
                 controlVolume.off("change");
@@ -1656,6 +1660,7 @@ F = {
                         }
                     }
                     contentSave += "],";
+                    contentSave += '"quarter": ' + F.editor.controls.quarter + ',';
                     contentSave += '"interval": ' + F.editor.controls.interval + ',';
                     contentSave += '"columns": ' + F.editor.controls.columns;
                     contentSave += "}"
@@ -1729,6 +1734,7 @@ F = {
                     var j = JSON.parse(text);
 
                         //console.log(j);
+                        // TODO is this to be removed?
                         F.editor.controls.grid = j.grid;
                         F.editor.controls.tracks = [];
                         var tracksLength = j.tracks.length;
@@ -1800,8 +1806,7 @@ F = {
                                 preload: true
                             });
 
-
-                                newTrack = new Track(audioObj, trackName, categoryName);
+                            newTrack = new Track(audioObj, trackName, categoryName);
                             newTrack.setPath(path);
                             newTrack.setVolume(volume);
                             newTrack.setBalance(balance);
@@ -1818,11 +1823,13 @@ F = {
 
                         }
 
-                    F.editor.controls.grid=j.grid;
-                    F.editor.controls.interval=j.interval;
+
+                        F.editor.controls.quarter = (j.quarter) ? j.quarter : false;
+                        F.editor.controls.grid=j.grid;
+                        F.editor.controls.interval=j.interval;
 
                         F.ui.changeScreen('editor', 'deeper');
-                        F.editor.openBeat(j.grid, j.columns, j.interval);
+                        F.editor.openBeat(j.grid, j.columns, j.interval, j.quarter);
                     }
                 });
             }

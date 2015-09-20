@@ -99,7 +99,7 @@
                 <img src="img/icons/icon60x60.png">
             </div>
             <div><span id="app-name">Firebeat</span></div>
-            <div><span class="italic">v </span><span>1.0.2</span></div>
+            <div><span class="italic">v </span><span>1.1.0</span></div>
             <div class="central-box">
                 <span class="about-text">This is a software developed with</span><span class="heart-icon"></span>
                 <span class="about-text">by Lorenzo Verri.</span>
@@ -190,6 +190,13 @@
                         </tr>
                         <tr>
                             <td>
+                                <span class="smallTxt">Quarter-note</span>
+                                <input type="checkbox" value="value-delay-quarter" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
                                 <div>Faster</div>
                             </td>
                             <td>
@@ -253,11 +260,11 @@
                 <!-- End of side controls -->
                 <!--Hidden menu-->
                 <div id="menu-panel" class="hiddenElement">
-                    <label>File name</label>
 
                     <div class="clear"></div>
 
                     <input type="text" id="file-name" placeholder="Type the file name" name="file-name"/>
+                    <button id="save-button"></button>
                     <div class="clear"></div>
 
                     <div>
@@ -267,10 +274,6 @@
                     <div>
                         <button id="interval-toggle"></button>
                         <label>BPM <span id="velocity-label">120bpm</span></label>
-                    </div>
-                    <div>
-                        <button id="save-button"></button>
-                        <label>Save</label>
                     </div>
                     <div class="clear"></div>
                     <!--<div>-->

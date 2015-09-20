@@ -199,6 +199,8 @@ form[name=audioTrack] input[type=radio] {
 #file-name{
     background: white;
     float:left;
+    margin: 15px;
+    width: 80%;
 }
 
 .clear{
@@ -217,9 +219,16 @@ form[name=audioTrack] input[type=radio] {
     background: url('../icons/controls/iconmonstr-save-8-icon-48.png') no-repeat 10px 10px;
 }
 
-#menu-panel button#save-button{
-    background: url('../icons/controls/iconmonstr-save-icon-48.png') no-repeat 10px 10px;
-    margin: 0px 0px 0px 50px;
+#menu-panel #save-button{
+    background: url('../icons/controls/iconmonstr-save-icon-24.png') no-repeat;
+    width:28px;
+    height:28px;
+    float:left;
+    padding: 0px;
+    border-radius: 0px;
+    float:left;
+    margin: 20px 0px 0px 5px;
+
 }
 
 #menu-panel button#save-button + label {
@@ -500,7 +509,7 @@ img.mu-settings {
 }
 
 #selector-panel table td * {
-    margin: 10px;
+    margin: 6px;
 }
 
 #selector-panel table tr:first-child div {
