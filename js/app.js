@@ -1,5 +1,5 @@
 /*!
- *  Firebeat v1.0.3
+ *  Firebeat v1.1
  *  www.themovingweb.com/firebeat/
  *
  *  2015, Lorenzo Verri
